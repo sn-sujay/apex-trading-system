@@ -1,74 +1,74 @@
 #!/usr/bin/env bash
-# APEX Trading Intelligence System — Deploy Script
-# Usage: ./infrastructure/deploy.sh [dev|prod|stop|logs|status|migrate|clean]
-
+# APEX Trading System — Production Deployment Script
 set -euo pipefail
 
-COMPOSE_FILE="docker-compose.yml"
-PROJECT="apex"
+APP_NAME="apex-trading-system"
+IMAGE_NAME="apex-trading"
+CONTAINER_NAME="apex-trading"
+PORT_API=8000
+PORT_DASHBOARD=8501
+LOG_DIR="/var/log/apex"
 
-RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; NC='\033[0m'
-log()  { echo -e "${GREEN}[APEX]${NC} $*"; }
-warn() { echo -e "${YELLOW}[WARN]${NC} $*"; }
-err()  { echo -e "${RED}[ERROR]${NC} $*" >&2; exit 1; }
+echo "==================================================="
+echo " APEX Trading System — Deployment"
+echo " $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+echo "==================================================="
 
-check_deps() {
-    command -v docker  >/dev/null 2>&1 || err "docker not found"
-    command -v docker compose >/dev/null 2>&1 || err "docker compose not found"
-}
+# 1. Pull latest code
+echo "[1/6] Pulling latest code..."
+git pull origin main
 
-cmd="${1:-dev}"
+# 2. Build Docker image
+echo "[2/6] Building Docker image..."
+docker build -f infrastructure/Dockerfile -t ${IMAGE_NAME}:latest -t ${IMAGE_NAME}:$(git rev-parse --short HEAD) .
 
-case "$cmd" in
-  dev)
-    log "Starting APEX in DEVELOPMENT mode..."
-    check_deps
-    [ -f .env ] || { cp env.example .env; warn "Created .env from env.example — fill in your API keys!"; }
-    docker compose -p "$PROJECT" -f "$COMPOSE_FILE" up --build -d
-    log "API: http://localhost:8000 | Dashboard: http://localhost:8501"
-    ;;
-  prod)
-    log "Starting APEX in PRODUCTION mode..."
-    check_deps
-    [ -f .env ] || err ".env file required for production."
-    docker compose -p "$PROJECT" -f "$COMPOSE_FILE" up --build -d
-    log "Production deployment complete."
-    ;;
-  stop)
-    docker compose -p "$PROJECT" down
-    log "All services stopped."
-    ;;
-  restart)
-    docker compose -p "$PROJECT" down
-    docker compose -p "$PROJECT" up --build -d
-    log "Restart complete."
-    ;;
-  logs)
-    service="${2:-}"
-    if [ -n "$service" ]; then
-      docker compose -p "$PROJECT" logs -f "$service"
-    else
-      docker compose -p "$PROJECT" logs -f
+# 3. Stop existing container gracefully
+echo "[3/6] Stopping existing container..."
+if docker ps -q --filter name=${CONTAINER_NAME} | grep -q .; then
+    docker stop ${CONTAINER_NAME} --time 30
+    docker rm ${CONTAINER_NAME}
+    echo "  Stopped and removed existing container."
+else
+    echo "  No existing container found."
+fi
+
+# 4. Create log directory
+mkdir -p ${LOG_DIR}
+
+# 5. Start new container
+echo "[5/6] Starting new container..."
+docker run -d \
+    --name ${CONTAINER_NAME} \
+    --restart unless-stopped \
+    -p ${PORT_API}:8000 \
+    -p ${PORT_DASHBOARD}:8501 \
+    -p 80:80 \
+    -v ${LOG_DIR}:/var/log/apex \
+    -v $(pwd)/data:/app/data \
+    --env-file .env \
+    --memory="2g" \
+    --cpus="2" \
+    ${IMAGE_NAME}:latest
+
+# 6. Health check
+echo "[6/6] Waiting for health check..."
+for i in $(seq 1 12); do
+    if curl -sf http://localhost:${PORT_API}/health > /dev/null 2>&1; then
+        echo "  Health check passed after ${i}x5s wait."
+        break
     fi
-    ;;
-  status)
-    docker compose -p "$PROJECT" ps
-    ;;
-  migrate)
-    log "Running TimescaleDB migrations..."
-    docker compose -p "$PROJECT" exec timescaledb \
-      psql -U apex_user -d apex_trading -f /docker-entrypoint-initdb.d/db_schema.sql
-    log "Migrations complete."
-    ;;
-  clean)
-    warn "This will remove all containers, volumes, and images. Are you sure? (y/N)"
-    read -r confirm
-    [ "$confirm" = "y" ] || exit 0
-    docker compose -p "$PROJECT" down -v --rmi all
-    log "Clean complete."
-    ;;
-  *)
-    echo "Usage: $0 [dev|prod|stop|restart|logs [service]|status|migrate|clean]"
-    exit 1
-    ;;
-esac
+    if [ $i -eq 12 ]; then
+        echo "  ERROR: Health check failed after 60s. Rolling back..."
+        docker stop ${CONTAINER_NAME}
+        docker rm ${CONTAINER_NAME}
+        exit 1
+    fi
+    echo "  Waiting... (${i}/12)"
+    sleep 5
+done
+
+echo "==================================================="
+echo " Deployment successful!"
+echo " API:       http://localhost:${PORT_API}/docs"
+echo " Dashboard: http://localhost:${PORT_DASHBOARD}"
+echo "==================================================="
