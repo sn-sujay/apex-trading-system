@@ -1,37 +1,21 @@
 """
 FastAPI server factory for the APEX Trading System REST API.
-Provides system status, signal feed, portfolio state, and manual override endpoints.
+Exposes endpoints for signals, positions, orders, backtests, and system health.
 """
 from __future__ import annotations
-from contextlib import asynccontextmanager
 from typing import Any
-
-try:
-    from fastapi import FastAPI
-    from fastapi.middleware.cors import CORSMiddleware
-    import uvicorn
-    HAS_FASTAPI = True
-except ImportError:
-    HAS_FASTAPI = False
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from .routes import router
 
 
-def create_app(trading_system: Any = None) -> Any:
-    if not HAS_FASTAPI:
-        raise ImportError("fastapi and uvicorn are required: pip install fastapi uvicorn")
-
-    @asynccontextmanager
-    async def lifespan(app: FastAPI):
-        app.state.trading_system = trading_system
-        yield
-        # Cleanup on shutdown
-        if trading_system and hasattr(trading_system, 'shutdown'):
-            await trading_system.shutdown()
-
+def create_app(title: str = "APEX Trading System API", version: str = "1.0.0") -> FastAPI:
     app = FastAPI(
-        title="APEX Trading System API",
-        description="20-agent autonomous Indian equity trading system",
-        version="1.0.0",
-        lifespan=lifespan,
+        title=title,
+        version=version,
+        description="Multi-agent AI trading system for Indian equity F&O markets",
+        docs_url="/docs",
+        redoc_url="/redoc",
     )
 
     app.add_middleware(
@@ -42,13 +26,13 @@ def create_app(trading_system: Any = None) -> Any:
         allow_headers=["*"],
     )
 
-    from .routes import register_routes
-    register_routes(app)
+    app.include_router(router, prefix="/api/v1")
+
+    @app.get("/health")
+    async def health() -> dict:
+        return {"status": "ok", "version": version}
 
     return app
 
 
-def run_server(app: Any, host: str = "0.0.0.0", port: int = 8000):
-    if not HAS_FASTAPI:
-        raise ImportError("fastapi and uvicorn required")
-    uvicorn.run(app, host=host, port=port, log_level="info")
+app = create_app()
