@@ -69,7 +69,7 @@ class APEXBaseAgent(ABC):
             self.logger.addHandler(handler)
         self.logger.setLevel(getattr(logging, self.config.log_level, logging.INFO))
 
-    # ── Abstract Interface ──────────────────────────────────────────────────────────────────
+    # ── Abstract Interface ──────────────────────────────────────────────────────────
 
     @abstractmethod
     async def analyze(self) -> AgentSignal:
@@ -86,10 +86,10 @@ class APEXBaseAgent(ABC):
         """
         ...
 
-    # ── Run Cycle ──────────────────────────────────────────────────────────────────────────
+    # ── Run Cycle ─────────────────────────────────────────────────────────────────
 
     async def run_cycle(self) -> Optional[AgentSignal]:
-        """Execute one full analysis cycle: fetch -> analyze -> publish."""
+        """Execute one full analysis cycle: fetch → analyze → publish."""
         start = time.time()
         try:
             self._run_count += 1
@@ -125,7 +125,7 @@ class APEXBaseAgent(ABC):
             await self.run_cycle()
             await asyncio.sleep(interval_seconds)
 
-    # ── Signal Publishing ───────────────────────────────────────────────────────────────────────
+    # ── Signal Publishing ──────────────────────────────────────────────────────────
 
     async def _publish_signal(self, signal: AgentSignal):
         """Publish signal to Redis and Kafka."""
@@ -167,7 +167,7 @@ class APEXBaseAgent(ABC):
         except Exception as e:
             self.logger.warning(f"Kafka publish failed: {e}")
 
-    # ── Signal Factories ────────────────────────────────────────────────────────────────────────
+    # ── Signal Factories ─────────────────────────────────────────────────────────────
 
     def _make_signal(
         self,
@@ -198,7 +198,7 @@ class APEXBaseAgent(ABC):
             reasoning=reason,
         )
 
-    # ── Health & Diagnostics ──────────────────────────────────────────────────────────────────
+    # ── Health & Diagnostics ───────────────────────────────────────────────────────
 
     def health_status(self) -> Dict[str, Any]:
         return {
