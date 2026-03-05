@@ -1,4 +1,4 @@
-# APEX Trading Intelligence System -- root package
+# APEX Trading Intelligence System — root package
 __version__ = "1.0.0"
 __author__ = "APEX Trading"
 __description__ = "Indian & Global AI Trading Intelligence System"
