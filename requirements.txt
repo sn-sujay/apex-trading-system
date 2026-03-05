@@ -1,5 +1,5 @@
 # ============================================================
-# APEX Trading Intelligence System -- Python Dependencies
+# APEX Trading Intelligence System — Python Dependencies
 # ============================================================
 
 # --- Agent Framework ---
