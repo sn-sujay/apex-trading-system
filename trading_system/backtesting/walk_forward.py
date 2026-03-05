@@ -1,132 +1,106 @@
 """
-WalkForwardOptimizer — runs rolling in-sample optimisation + out-of-sample
-validation to prevent overfitting on NSE historical data.
+WalkForwardOptimizer — splits data into in-sample (IS) and out-of-sample (OOS)
+windows, optimises strategy parameters on IS, validates on OOS.
 """
 from __future__ import annotations
-from dataclasses import dataclass, field
+import itertools
+from dataclasses import dataclass
 from typing import Any, Callable, Dict, List, Optional, Tuple
 import pandas as pd
 from .engine import BacktestEngine, BacktestConfig
-from .metrics import PerformanceMetrics
 
 
 @dataclass
-class WalkForwardConfig:
-    in_sample_days: int = 252       # 1 year in-sample
-    out_of_sample_days: int = 63    # 3 months out-of-sample
-    step_days: int = 21             # Re-optimise every month
-    min_sharpe: float = 1.0         # Reject if OOS Sharpe < 1.0
-    min_profit_factor: float = 1.3  # Reject if OOS PF < 1.3
-    max_drawdown_pct: float = 20.0  # Reject if OOS MDD > 20%
+class WFOConfig:
+    n_splits: int = 5
+    train_ratio: float = 0.70
+    param_grid: Dict[str, List[Any]] = None
 
-
-@dataclass
-class WalkForwardResult:
-    windows: List[Dict] = field(default_factory=list)
-    approved_params: Optional[Dict] = None
-    combined_oos_sharpe: float = 0.0
-    combined_oos_pf: float = 0.0
-    combined_max_dd: float = 0.0
-    passed: bool = False
-    rejection_reason: str = ""
+    def __post_init__(self):
+        if self.param_grid is None:
+            self.param_grid = {}
 
 
 class WalkForwardOptimizer:
-    """
-    Walk-forward validation engine.
-    Ensures strategy parameters generalise out-of-sample before live deployment.
-    """
+    """Anchored walk-forward optimisation."""
 
-    def __init__(self, wf_config: Optional[WalkForwardConfig] = None):
-        self.config = wf_config or WalkForwardConfig()
-        self.engine = BacktestEngine()
+    def __init__(self, config: Optional[WFOConfig] = None):
+        self.config = config or WFOConfig()
 
     def run(
         self,
-        data: pd.DataFrame,
-        strategy_fn: Callable,
-        param_grid: List[Dict],
-        bt_config: Optional[BacktestConfig] = None,
-    ) -> WalkForwardResult:
-        result = WalkForwardResult()
-        n = len(data)
-        is_days = self.config.in_sample_days
-        oos_days = self.config.out_of_sample_days
-        step = self.config.step_days
+        ohlcv: pd.DataFrame,
+        signal_fn_factory: Callable[[Dict], Callable],
+        metric: str = "sharpe_ratio",
+    ) -> Dict[str, Any]:
+        windows = self._create_windows(ohlcv)
+        results = []
 
-        start = 0
-        oos_sharpes, oos_pfs, oos_mdds = [], [], []
-
-        while start + is_days + oos_days <= n:
-            is_data = data.iloc[start: start + is_days]
-            oos_data = data.iloc[start + is_days: start + is_days + oos_days]
-
-            # Optimise on in-sample
-            best_params, best_is_sharpe = self._optimise(is_data, strategy_fn, param_grid, bt_config)
-
-            # Validate on out-of-sample
-            cfg = bt_config or BacktestConfig()
-            oos_result = self.engine.run(oos_data, strategy_fn, best_params)
-            oos_metrics = PerformanceMetrics.compute_all(
-                oos_result.equity_curve, oos_result.trade_log, cfg.initial_capital
-            )
-
-            window_rec = {
-                "window_start": str(data.index[start]),
-                "is_end": str(data.index[start + is_days - 1]),
-                "oos_end": str(data.index[min(start + is_days + oos_days - 1, n - 1)]),
+        for i, (train_df, test_df) in enumerate(windows):
+            best_params, best_score = self._optimise(train_df, signal_fn_factory, metric)
+            signal_fn = signal_fn_factory(best_params)
+            engine = BacktestEngine(BacktestConfig())
+            oos_result = engine.run(test_df, signal_fn)
+            results.append({
+                "fold": i + 1,
                 "best_params": best_params,
-                "is_sharpe": best_is_sharpe,
-                "oos_sharpe": oos_metrics["sharpe_ratio"],
-                "oos_pf": oos_metrics["profit_factor"],
-                "oos_mdd": oos_metrics["max_drawdown_pct"],
-            }
-            result.windows.append(window_rec)
-            oos_sharpes.append(oos_metrics["sharpe_ratio"])
-            oos_pfs.append(oos_metrics["profit_factor"])
-            oos_mdds.append(oos_metrics["max_drawdown_pct"])
-            start += step
+                "is_score": best_score,
+                "oos_sharpe": oos_result.sharpe_ratio,
+                "oos_return_pct": oos_result.total_return_pct,
+                "oos_drawdown_pct": oos_result.max_drawdown_pct,
+                "oos_trades": oos_result.total_trades,
+            })
 
-        if not oos_sharpes:
-            result.rejection_reason = "Insufficient data for walk-forward"
-            return result
+        return {
+            "folds": results,
+            "avg_oos_sharpe": sum(r["oos_sharpe"] for r in results) / len(results),
+            "avg_oos_return": sum(r["oos_return_pct"] for r in results) / len(results),
+            "is_oos_correlation": self._is_oos_correlation(results),
+        }
 
-        result.combined_oos_sharpe = sum(oos_sharpes) / len(oos_sharpes)
-        result.combined_oos_pf = sum(oos_pfs) / len(oos_pfs)
-        result.combined_max_dd = max(oos_mdds) if oos_mdds else 0
-
-        if result.combined_oos_sharpe < self.config.min_sharpe:
-            result.rejection_reason = f"OOS Sharpe {result.combined_oos_sharpe:.2f} < {self.config.min_sharpe}"
-        elif result.combined_oos_pf < self.config.min_profit_factor:
-            result.rejection_reason = f"OOS PF {result.combined_oos_pf:.2f} < {self.config.min_profit_factor}"
-        elif result.combined_max_dd > self.config.max_drawdown_pct:
-            result.rejection_reason = f"OOS MDD {result.combined_max_dd:.1f}% > {self.config.max_drawdown_pct}%"
-        else:
-            result.passed = True
-            # Use last window's best params as live params
-            result.approved_params = result.windows[-1]["best_params"] if result.windows else {}
-
-        return result
+    def _create_windows(self, df: pd.DataFrame) -> List[Tuple[pd.DataFrame, pd.DataFrame]]:
+        n = len(df)
+        window_size = n // self.config.n_splits
+        windows = []
+        for i in range(self.config.n_splits):
+            end = (i + 1) * window_size
+            start = 0  # anchored
+            train_end = int(start + (end - start) * self.config.train_ratio)
+            train_df = df.iloc[start:train_end]
+            test_df = df.iloc[train_end:end]
+            if len(test_df) > 10:
+                windows.append((train_df, test_df))
+        return windows
 
     def _optimise(
-        self,
-        data: pd.DataFrame,
-        strategy_fn: Callable,
-        param_grid: List[Dict],
-        bt_config: Optional[BacktestConfig],
+        self, df: pd.DataFrame, factory: Callable, metric: str
     ) -> Tuple[Dict, float]:
-        cfg = bt_config or BacktestConfig()
-        best_sharpe = float("-inf")
-        best_params: Dict = {}
-        for params in param_grid:
+        if not self.config.param_grid:
+            return {}, 0.0
+        keys = list(self.config.param_grid.keys())
+        vals = list(self.config.param_grid.values())
+        best_params = {}
+        best_score = float("-inf")
+        for combo in itertools.product(*vals):
+            params = dict(zip(keys, combo))
             try:
-                res = self.engine.run(data, strategy_fn, params)
-                metrics = PerformanceMetrics.compute_all(
-                    res.equity_curve, res.trade_log, cfg.initial_capital
-                )
-                if metrics["sharpe_ratio"] > best_sharpe:
-                    best_sharpe = metrics["sharpe_ratio"]
+                signal_fn = factory(params)
+                engine = BacktestEngine(BacktestConfig())
+                result = engine.run(df, signal_fn)
+                score = getattr(result, metric, 0)
+                if score > best_score:
+                    best_score = score
                     best_params = params
             except Exception:
                 continue
-        return best_params, best_sharpe
+        return best_params, best_score
+
+    def _is_oos_correlation(self, results: List[Dict]) -> float:
+        if len(results) < 2:
+            return 0.0
+        is_scores = [r["is_score"] for r in results]
+        oos_scores = [r["oos_sharpe"] for r in results]
+        import numpy as np
+        if np.std(is_scores) == 0 or np.std(oos_scores) == 0:
+            return 0.0
+        return float(np.corrcoef(is_scores, oos_scores)[0, 1])
