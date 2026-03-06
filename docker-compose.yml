@@ -1,213 +1,144 @@
 version: "3.9"
 
-# ============================================================
-# APEX Trading Intelligence System — Full Stack
-# Services: TimescaleDB, Kafka, Zookeeper, Redis, FastAPI
-# ============================================================
+x-logging: &default-logging
+  driver: "json-file"
+  options:
+    max-size: "50m"
+    max-file: "5"
 
 networks:
   apex-net:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
 
 volumes:
-  timescaledb_data:
-  kafka_data:
-  zookeeper_data:
-  redis_data:
+  redis-data:
+  kafka-data:
+  zookeeper-data:
+  zookeeper-log:
+  apex-logs:
+  apex-data:
 
 services:
 
-  # ----------------------------------------------------------
-  # TimescaleDB — Time-series market data store
-  # ----------------------------------------------------------
-  timescaledb:
-    image: timescale/timescaledb:latest-pg16
-    container_name: apex-timescaledb
-    restart: unless-stopped
-    environment:
-      POSTGRES_DB: ${TIMESCALEDB_DB:-apex_trading}
-      POSTGRES_USER: ${TIMESCALEDB_USER:-apex_user}
-      POSTGRES_PASSWORD: ${TIMESCALEDB_PASSWORD:-apex_password}
-      TIMESCALEDB_TELEMETRY: "off"
-    ports:
-      - "5432:5432"
-    volumes:
-      - timescaledb_data:/var/lib/postgresql/data
-      - ./data/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
-    networks:
-      - apex-net
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${TIMESCALEDB_USER:-apex_user} -d ${TIMESCALEDB_DB:-apex_trading}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  # ----------------------------------------------------------
-  # Zookeeper — Required by Kafka
-  # ----------------------------------------------------------
   zookeeper:
-    image: confluentinc/cp-zookeeper:7.6.0
+    image: bitnami/zookeeper:3.9
     container_name: apex-zookeeper
     restart: unless-stopped
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-    volumes:
-      - zookeeper_data:/var/lib/zookeeper/data
     networks:
       - apex-net
+    environment:
+      ALLOW_ANONYMOUS_LOGIN: "yes"
+      ZOO_LOG_LEVEL: WARN
+    volumes:
+      - zookeeper-data:/bitnami/zookeeper/data
+      - zookeeper-log:/bitnami/zookeeper/log
     healthcheck:
-      test: ["CMD", "nc", "-z", "localhost", "2181"]
-      interval: 10s
-      timeout: 5s
+      test: ["CMD", "zkServer.sh", "status"]
+      interval: 15s
+      timeout: 10s
       retries: 5
+      start_period: 30s
+    logging: *default-logging
 
-  # ----------------------------------------------------------
-  # Kafka — Agent signal message bus
-  # Topics: market.ticks, agent.signals, decisions.output,
-  #         risk.alerts, execution.orders
-  # ----------------------------------------------------------
   kafka:
-    image: confluentinc/cp-kafka:7.6.0
+    image: bitnami/kafka:3.6
     container_name: apex-kafka
     restart: unless-stopped
+    networks:
+      - apex-net
     depends_on:
       zookeeper:
         condition: service_healthy
     environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
-      KAFKA_LOG_RETENTION_HOURS: 168
-      KAFKA_LOG_SEGMENT_BYTES: 1073741824
-    ports:
-      - "9092:9092"
+      KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CFG_LISTENERS: PLAINTEXT://:9092
+      KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_CFG_NUM_PARTITIONS: 3
+      KAFKA_CFG_DEFAULT_REPLICATION_FACTOR: 1
+      KAFKA_CFG_LOG_RETENTION_HOURS: 48
+      KAFKA_CFG_LOG_SEGMENT_BYTES: 536870912
+      ALLOW_PLAINTEXT_LISTENER: "yes"
     volumes:
-      - kafka_data:/var/lib/kafka/data
-    networks:
-      - apex-net
+      - kafka-data:/bitnami/kafka/data
     healthcheck:
-      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9092"]
-      interval: 15s
+      test: ["CMD", "kafka-broker-api-versions.sh", "--bootstrap-server", "kafka:9092"]
+      interval: 20s
       timeout: 10s
-      retries: 5
+      retries: 6
+      start_period: 60s
+    logging: *default-logging
 
-  # ----------------------------------------------------------
-  # Kafka UI — Topic monitoring and message inspection
-  # ----------------------------------------------------------
-  kafka-ui:
-    image: provectuslabs/kafka-ui:latest
-    container_name: apex-kafka-ui
-    restart: unless-stopped
-    depends_on:
-      kafka:
-        condition: service_healthy
-    environment:
-      KAFKA_CLUSTERS_0_NAME: apex-cluster
-      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
-      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
-    ports:
-      - "9090:8080"
-    networks:
-      - apex-net
-
-  # ----------------------------------------------------------
-  # Redis — Hot cache for prices, signals, order book
-  # ----------------------------------------------------------
   redis:
-    image: redis:7.2-alpine
+    image: redis:7-alpine
     container_name: apex-redis
     restart: unless-stopped
-    command: >
-      redis-server
-      --requirepass ${REDIS_PASSWORD:-apex_redis_password}
-      --maxmemory 2gb
-      --maxmemory-policy allkeys-lru
-      --save 900 1
-      --save 300 10
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
     networks:
       - apex-net
+    command: >
+      redis-server
+        --maxmemory 512mb
+        --maxmemory-policy allkeys-lru
+        --save 900 1
+        --save 300 10
+        --save 60 10000
+        --appendonly yes
+        --appendfsync everysec
+        --loglevel warning
+    volumes:
+      - redis-data:/data
     healthcheck:
-      test: ["CMD", "redis-cli", "--no-auth-warning", "-a", "${REDIS_PASSWORD:-apex_redis_password}", "ping"]
+      test: ["CMD", "redis-cli", "ping"]
       interval: 10s
       timeout: 5s
       retries: 5
+      start_period: 15s
+    logging: *default-logging
 
-  # ----------------------------------------------------------
-  # APEX FastAPI App — Control plane + Dashboard
-  # ----------------------------------------------------------
-  apex-app:
+  app:
     build:
       context: .
       dockerfile: infrastructure/Dockerfile
+    image: apex-trading:latest
     container_name: apex-app
     restart: unless-stopped
+    networks:
+      - apex-net
     depends_on:
-      timescaledb:
+      redis:
         condition: service_healthy
       kafka:
         condition: service_healthy
-      redis:
-        condition: service_healthy
     env_file:
       - .env
     environment:
-      TIMESCALEDB_HOST: timescaledb
-      KAFKA_BOOTSTRAP_SERVERS: kafka:29092
       REDIS_HOST: redis
+      REDIS_PORT: "6379"
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      PYTHONUNBUFFERED: "1"
+      PYTHONPATH: /app
     ports:
-      - "${DASHBOARD_PORT:-8080}:8080"
+      - "8000:8000"
+      - "8501:8501"
+      - "80:80"
     volumes:
-      - .:/app
-    networks:
-      - apex-net
-    command: uvicorn dashboard.app:app --host 0.0.0.0 --port 8080 --reload
-
-  # ----------------------------------------------------------
-  # APEX Agent Runner — Runs all 20 agents
-  # ----------------------------------------------------------
-  apex-agents:
-    build:
-      context: .
-      dockerfile: infrastructure/Dockerfile
-    container_name: apex-agents
-    restart: unless-stopped
-    depends_on:
-      apex-app:
-        condition: service_started
-    env_file:
-      - .env
-    environment:
-      TIMESCALEDB_HOST: timescaledb
-      KAFKA_BOOTSTRAP_SERVERS: kafka:29092
-      REDIS_HOST: redis
-    volumes:
-      - .:/app
-    networks:
-      - apex-net
-    command: python -m core.agent_runner
-
-  # ----------------------------------------------------------
-  # Grafana — Optional metrics dashboard
-  # ----------------------------------------------------------
-  grafana:
-    image: grafana/grafana:10.4.0
-    container_name: apex-grafana
-    restart: unless-stopped
-    environment:
-      GF_SECURITY_ADMIN_PASSWORD: ${DASHBOARD_PASSWORD:-admin}
-      GF_USERS_ALLOW_SIGN_UP: "false"
-    ports:
-      - "3000:3000"
-    networks:
-      - apex-net
-    profiles:
-      - monitoring
+      - apex-logs:/app/logs
+      - apex-data:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-fsSL", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 90s
+    deploy:
+      resources:
+        limits:
+          memory: 4g
+          cpus: "2.0"
+        reservations:
+          memory: 1g
+          cpus: "0.5"
+    logging: *default-logging
