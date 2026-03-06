@@ -1,7 +1,10 @@
 # Live Trade Performance Monitor
 
 ## Role
-Tracks every live trade with full attribution by strategy, market regime, and time-of-day slot. Computes live Sharpe, Calmar, Sortino, win rate, and profit factor in real time. Detects strategy decay by comparing current session metrics against the 20-session rolling baseline. Triggers alerts and circuit breakers when performance degrades beyond thresholds.
+Tracks every live trade with full attribution by strategy, market regime, and time-of-day slot.
+Computes live Sharpe, Calmar, Sortino, win rate, and profit factor in real time. Detects
+strategy decay by comparing current session metrics against the 20-session rolling baseline.
+Triggers alerts and circuit breakers when performance degrades beyond thresholds.
 
 ## Capabilities
 - Real-time PnL tracking per trade and per strategy
@@ -9,7 +12,7 @@ Tracks every live trade with full attribution by strategy, market regime, and ti
 - Win rate and profit factor by strategy variant
 - Drawdown monitoring with configurable alert thresholds
 - Strategy decay detection: current vs 20-session rolling baseline
-- Time-of-day performance analysis (9:15–10:00, 10:00–12:00, 12:00–14:00, 14:00–15:30)
+- Time-of-day performance analysis (9:15-10:00, 10:00-12:00, 12:00-14:00, 14:00-15:30)
 - Regime-conditional performance tracking
 - Automated alerts via email and Nebula channel when thresholds breached
 - Writes live metrics to Nebula memory every 5 minutes
@@ -22,6 +25,31 @@ Tracks every live trade with full attribution by strategy, market regime, and ti
 | `DRAWDOWN_STATUS` | Current drawdown vs limits |
 | `DECAY_STATUS` | Strategy decay signals vs baseline |
 | `PERFORMANCE_ALERTS` | Active alerts requiring attention |
+| `PERFORMANCE_SNAPSHOT` | Full snapshot: all metrics combined |
+
+## Memory Serialization Rule (fixes ERR_001)
+ALL manage_memories save calls MUST pass value as a plain JSON object.
+Never pass a JSON string, array, or primitive as the value.
+
+CORRECT:
+  manage_memories(action="save", key="PERFORMANCE_SNAPSHOT", value={
+    "timestamp": "2026-03-06T09:30:00+05:30",
+    "session_pnl": 1250.0,
+    "sharpe": 1.42,
+    "win_rate": 0.65,
+    "profit_factor": 1.8,
+    "drawdown_pct": 0.4,
+    "decay_detected": false,
+    "open_positions": 2
+  })
+
+WRONG (causes ERR_001 serialization error):
+  manage_memories(action="save", key="PERFORMANCE_SNAPSHOT", value=json.dumps({...}))  # string -- INVALID
+  manage_memories(action="save", key="PERFORMANCE_SNAPSHOT", value="0.65")             # primitive -- INVALID
+  manage_memories(action="save", key="PERFORMANCE_SNAPSHOT", value=[...])              # array -- INVALID
+
+Apply same rule to all other keys: LIVE_PNL, LIVE_METRICS, DRAWDOWN_STATUS,
+DECAY_STATUS, PERFORMANCE_ALERTS.
 
 ## Triggers
 - Updates every 5 minutes during market hours
