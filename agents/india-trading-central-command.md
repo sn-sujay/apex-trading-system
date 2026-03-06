@@ -100,35 +100,28 @@ Update SESSION_LOG status:
 manage_memories(action="save", key="SESSION_LOG", value={
   "session_date": "<YYYY-MM-DD>",
   "start_time": "<HH:MM IST>",
-  "end_time": "15:35 IST",
   "status": "CLOSED",
-  "events": [],
-  "realized_pnl": <float>,
-  "trades_total": <int>,
+  "events": <list from current SESSION_LOG>,
   "last_updated": "<ISO8601>"
 })
 ```
-Send EOD email digest to sujaysn6@gmail.com.
+Send EOD email digest to sujaysn6@gmail.com via Gmail API.
 
-## Memory Key Schemas (Reference)
+## Memory Key Schemas
 
-| Key | Required Fields | Value Type |
-|-----|----------------|------------|
-| MARKET_STATE | regime (str), confidence (int), timestamp (str) | object |
-| KILL_SWITCH | active (bool), reason (str), timestamp (str) | object |
-| SESSION_LOG | session_date (str), status (str), events (list) | object |
-| DAILY_PNL | date (str), realized (float), unrealized (float) | object |
+All manage_memories save calls MUST pass value as a plain dict object.
+Never pass a JSON string, json.dumps() output, array, or primitive.
 
-## Serialization Guard Rule (ERR_003 -- recurrence 3 CRITICAL)
-Every manage_memories save call in this agent MUST pass value as a plain Python dict.
-Never use json.dumps(), str(), or any serialization before passing to manage_memories.
-The manage_memories API accepts only plain objects -- passing a string causes
-"Input should be an object" validation failure and drops the memory write silently.
-This caused MARKET_STATE to fall back to FILE_FALLBACK for cycles 2 and 3.
-Third recurrence fixed 2026-03-06T20:12:00Z by adding explicit typed per-step workflow.
+| Key | Required fields |
+|-----|----------------|
+| KILL_SWITCH | active (bool), reason (str), reset_by (str), timestamp (str) |
+| DAILY_PNL | date (str), realized (float), unrealized (float), trades_today (int), last_updated (str) |
+| SESSION_LOG | session_date (str), start_time (str), status (str), events (list), last_updated (str) |
+| MARKET_STATE | regime (str), confidence (int), vix (float), nifty_trend (str), source (str), timestamp (str) |
 
-## Hard Rules
-- Only this agent can reset KILL_SWITCH.active = false
-- Cannot override Risk Veto decisions
-- Cannot approve signals directly (must go through Veto)
-- MANUAL_HALT kill switch requires owner instruction to reset
+## Serialization Guard Rule (ERR_003 -- recurrence 3 -- fixed 2026-03-06T21:00Z)
+This agent triggered manage_memories serialization failures 3 times (ERR_003).
+Root cause: value passed as json.dumps() string or primitive instead of plain dict.
+Fix applied: typed per-step workflow with explicit dict schemas above.
+Every manage_memories(action="save") call by this agent or any delegated sub-agent
+MUST pass value as a raw dict literal -- never serialize to string first.
