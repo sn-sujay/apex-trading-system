@@ -47,72 +47,53 @@
       "recurrence": 3,
       "fix_status": "RESOLVED",
       "timestamp": "2026-03-06T20:49:00Z",
-      "fix_description": "Rewrote india-trading-central-command with full 7-step typed Workflow. Step 4 enforces MARKET_STATE plain dict schema. Root cause: prior fix (93e8b2e1) added prose only - insufficient for recurrence 3.",
+      "fix_description": "Execution #4: Full clean rewrite of india-trading-central-command.md. Fixed binary corruption in Steps 1/2/5 from prior commit 846ff62. Fixed DAILY_PNL key typo. Restored truncated Steps 6/7. All 7 steps clean with typed dict schemas. Root cause: prior fix wrote corrupted base64 causing garbled text in agent prompt.",
       "commit_hashes": [
-        "846ff6247b910a7bd086d86bf396a0e473387874"
+        "846ff6247b910a7bd086d86bf396a0e473387874",
+        "a0519370711aa46c54bbb4f598439a78733ed1da"
       ],
-      "fix_timestamp": "2026-03-06T20:18:23Z"
+      "fix_commit": "a0519370711aa46c54bbb4f598439a78733ed1da",
+      "fix_timestamp": "2026-03-06T21:10:37Z"
     }
   },
   "HEALTH_STATUS": {
     "overall": "RECOVERING",
     "agents": {
       "india-trading-central-command": "RECOVERING",
-      "live-trade-performance-monitor": "RECOVERING",
-      "apex-risk-veto": "OK",
-      "apex-signal-generator": "OK",
-      "apex-portfolio-manager": "OK"
+      "live-trade-performance-monitor": "HEALTHY",
+      "signal-generator": "HEALTHY",
+      "risk-veto": "HEALTHY",
+      "dhan-executor": "HEALTHY"
     },
-    "last_updated": "2026-03-06T20:18:23Z"
-  },
-  "MARKET_STATE": {
-    "regime": "FLAT_RANGEBOUND",
-    "confidence": 65,
-    "timestamp": "2026-03-06T08:30:00Z",
-    "source": "FILE_FALLBACK",
-    "note": "Memory write failed (ERR_003) - fallback to file"
-  },
-  "PAPER_LEDGER": {
-    "mode": "PAPER",
-    "trades": [],
-    "pnl": 0,
-    "last_updated": "2026-03-06T08:00:00Z"
-  },
-  "DAILY_PNL": {
-    "date": "2026-03-06",
-    "realized": 0,
-    "unrealized": 0,
-    "trades_today": 0,
-    "last_updated": "2026-03-06T08:00:00Z"
-  },
-  "SESSION_LOG": {
-    "session_date": "2026-03-06",
-    "start_time": "08:00 IST",
-    "status": "ACTIVE",
-    "events": [],
-    "last_updated": "2026-03-06T08:00:00Z"
+    "last_updated": "2026-03-06T21:10:37Z"
   },
   "FIX_HISTORY": [
     {
-      "error_id": "ERR_003",
-      "fix_timestamp": "2026-03-06T18:18:26Z",
-      "fix_description": "Added TASK.md for apex-15-min-regime-signal-loop + updated india-trading-central-command agent prompt. Commits: d2fec90, 93e8b2e1.",
-      "fix_status": "RESOLVED",
-      "pr_or_commit": "https://github.com/sn-sujay/apex-trading-system/commit/d2fec9076509d48f71c36c9de95ca0d7477a1771"
+      "fix_id": "FIX_001",
+      "error_id": "ERL_001",
+      "agent": "live-trade-performance-monitor",
+      "timestamp": "2026-03-06T20:08:13Z",
+      "commit": "5e98a50d4258982c2df7e5920a40690a56a62e80",
+      "description": "Fixed PERFORMANCE_SNAPSHOT key typo and object-only manage_memories enforcement.",
+      "status": "VERIFIED"
     },
     {
-      "error_id": "ERR_001",
-      "fix_timestamp": "2026-03-06T20:08:13Z",
-      "fix_description": "Added Workflow section to live-trade-performance-monitor. Enforces object-only manage_memories values. Fixed key typos. Enforced Gmail API email standard.",
-      "fix_status": "RESOLVED",
-      "pr_or_commit": "https://github.com/sn-sujay/apex-trading-system/commit/ac23e457486548bc98aa44845f75d8de08f26b87"
+      "fix_id": "FIX_002",
+      "error_id": "ERR_003",
+      "agent": "india-trading-central-command",
+      "timestamp": "2026-03-06T20:18:23Z",
+      "commit": "846ff6247b910a7bd086d86bf396a0e473387874",
+      "description": "Added 7-step typed workflow to india-trading-central-command. Commit introduced binary corruption in steps 1/2/5 and DAILY_PNL key typo -- superseded by FIX_003.",
+      "status": "SUPERSEDED"
     },
     {
+      "fix_id": "FIX_003",
       "error_id": "ERR_003",
-      "fix_timestamp": "2026-03-06T20:18:23Z",
-      "fix_description": "RECURRENCE 3 CRITICAL. Rewrote india-trading-central-command with full 7-step typed Workflow. Step 4 enforces MARKET_STATE plain dict schema. Step 5 adds SESSION_LOG read-append-write pattern. Replaces insufficient prose-only warning from prior fix (93e8b2e1). All manage_memories calls now use plain dict objects.",
-      "fix_status": "RESOLVED",
-      "pr_or_commit": "https://github.com/sn-sujay/apex-trading-system/commit/846ff6247b910a7bd086d86bf396a0e473387874"
+      "agent": "india-trading-central-command",
+      "timestamp": "2026-03-06T21:10:37Z",
+      "commit": "a0519370711aa46c54bbb4f598439a78733ed1da",
+      "description": "Full clean rewrite: fixed binary corruption in Steps 1/2/5, fixed DAILY_PNL typo, restored Steps 6/7, clean Memory Key Schemas table, updated Serialization Guard Rule. All 9 content checks pass.",
+      "status": "APPLIED"
     }
   ]
 }
