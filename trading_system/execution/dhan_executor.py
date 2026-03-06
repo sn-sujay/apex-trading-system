@@ -1,2 +1,210 @@
-IiIiCmRoYW5fZXhlY3V0b3IucHkg4oCUIERoYW4gQVBJIHYyIE9yZGVyIEV4ZWN1dGlvbiBFbmdpbmUKUmVwbGFjZXMga2l0ZV9leGVjdXRvci5weS4gSGFuZGxlcyBhbGwgTlNFIEYmTyBvcmRlciBwbGFjZW1lbnQsIG1vZGlmaWNhdGlvbiwKY2FuY2VsbGF0aW9uLCBhbmQgcG9zaXRpb24gbWFuYWdlbWVudCB2aWEgRGhhbkhRIEFQSSB2Mi4KIiIiCgppbXBvcnQgbG9nZ2luZwppbXBvcnQgdGltZQpmcm9tIGRhdGV0aW1lIGltcG9ydCBkYXRldGltZQpmcm9tIHR5cGluZyBpbXBvcnQgRGljdCwgTGlzdCwgT3B0aW9uYWwKCmZyb20gZGhhbmhxIGltcG9ydCBkaGFuaHEKCmxvZ2dlciA9IGxvZ2dpbmcuZ2V0TG9nZ2VyKF9fbmFtZV9fKQoKCmNsYXNzIERoYW5FeGVjdXRvcjoKICAgICIiIgogICAgRnVsbC1mZWF0dXJlZCBvcmRlciBleGVjdXRpb24gZW5naW5lIHVzaW5nIERoYW4gQVBJIHYyLgogICAgU3VwcG9ydHMgbWFya2V0L2xpbWl0L1NMIG9yZGVycywgYnJhY2tldCBvcmRlcnMsIGNvdmVyIG9yZGVycywKICAgIGFuZCBtdWx0aS1sZWcgb3B0aW9ucyBzdHJhdGVnaWVzIGZvciBOU0UgRiZPLgogICAgIiIiCgogICAgIyAtLS0tIEV4Y2hhbmdlIHNlZ21lbnRzIC0tLS0KICAgIE5TRSA9IGRoYW5ocS5OU0UKICAgIE5TRV9GTk8gPSBkaGFuaHEuTlNFX0ZOTwogICAgQlNFID0gZGhhbmhxLkJTRQogICAgQlNFX0ZOTyA9IGRoYW5ocS5CU0VfRk5PCiAgICBNQ1ggPSBkaGFuaHEuTUNYCgogICAgIyAtLS0tIFRyYW5zYWN0aW9uIHR5cGVzIC0tLS0KICAgIEJVWSA9IGRoYW5ocS5CVVkKICAgIFNFTEwgPSBkaGFuaHEuU0VMTAoKICAgICMgLS0tLSBPcmRlciB0eXBlcyAtLS0tCiAgICBMSU1JVCA9IGRoYW5ocS5MSU1JVAogICAgTUFSS0VUID0gZGhhbmhxLk1BUktFVAogICAgU1RPUF9MT1NTID0gZGhhbmhxLlNUT1BfTE9TUwogICAgU1RPUF9MT1NTX01BUktFVCA9IGRoYW5ocS5TVE9QX0xPU1NfTUFSS0VUCgogICAgIyAtLS0tIFByb2R1Y3QgdHlwZXMgLS0tLQogICAgSU5UUkFEQVkgPSBkaGFuaHEuSU5UUkFEQVkKICAgIE1BUkdJTiA9IGRoYW5ocS5NQVJHSU4KICAgIENOQyA9IGRoYW5ocS5DTkMgICAgICAgICAjIGRlbGl2ZXJ5IGVxdWl0eQogICAgTVRGID0gZGhhbmhxLk1URgoKICAgICMgLS0tLSBWYWxpZGl0eSAtLS0tCiAgICBEQVkgPSBkaGFuaHEuREFZCiAgICBJT0MgPSBkaGFuaHEuSU9DCgogICAgZGVmIF9faW5pdF9fKHNlbGYsIGNsaWVudF9pZDogc3RyLCBhY2Nlc3NfdG9rZW46IHN0cik6CiAgICAgICAgc2VsZi5jbGllbnRfaWQgPSBjbGllbnRfaWQKICAgICAgICBzZWxmLmFjY2Vzc190b2tlbiA9IGFjY2Vzc190b2tlbgogICAgICAgIHNlbGYuZGhhbiA9IGRoYW5ocShjbGllbnRfaWQ9Y2xpZW50X2lkLCBhY2Nlc3NfdG9rZW49YWNjZXNzX3Rva2VuKQogICAgICAgIHNlbGYuX29yZGVyX2xvZzogTGlzdFtEaWN0XSA9IFtdCiAgICAgICAgbG9nZ2VyLmluZm8oZiJEaGFuRXhlY3V0b3IgaW5pdGlhbGlzZWQgZm9yIGNsaWVudCB7Y2xpZW50X2lkfSIpCgogICAgIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCiAgICAjIENvcmUgb3JkZXIgcGxhY2VtZW50CiAgICAjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCiAgICBkZWYgcGxhY2Vfb3JkZXIoCiAgICAgICAgc2VsZiwKICAgICAgICBzZWN1cml0eV9pZDogc3RyLAogICAgICAgIGV4Y2hhbmdlX3NlZ21lbnQ6IHN0ciwKICAgICAgICB0cmFuc2FjdGlvbl90eXBlOiBzdHIsCiAgICAgICAgcXVhbnRpdHk6IGludCwKICAgICAgICBvcmRlcl90eXBlOiBzdHIgPSAiTElNSVQiLAogICAgICAgIHByb2R1Y3RfdHlwZTogc3RyID0gIklOVFJBREFZIiwKICAgICAgICBwcmljZTogZmxvYXQgPSAwLjAsCiAgICAgICAgdHJpZ2dlcl9wcmljZTogZmxvYXQgPSAwLjAsCiAgICAgICAgdmFsaWRpdHk6IHN0ciA9ICJEQVkiLAogICAgICAgIHRhZzogT3B0aW9uYWxbc3RyXSA9IE5vbmUsCiAgICApIC0+IERpY3Q6CiAgICAgICAgIiIiUGxhY2UgYSBzaW5nbGUtbGVnIG9yZGVyLiBSZXR1cm5zIERoYW4gQVBJIHJlc3BvbnNlIGRpY3QuIiIiCiAgICAgICAgdHJ5OgogICAgICAgICAgICByZXNwID0gc2VsZi5kaGFuLnBsYWNlX29yZGVyKAogICAgICAgICAgICAgICAgc2VjdXJpdHlfaWQ9c2VjdXJpdHlfaWQsCiAgICAgICAgICAgICAgICBleGNoYW5nZV9zZWdtZW50PWV4Y2hhbmdlX3NlZ21lbnQsCiAgICAgICAgICAgICAgICB0cmFuc2FjdGlvbl90eXBlPXRyYW5zYWN0aW9uX3R5cGUsCiAgICAgICAgICAgICAgICBxdWFudGl0eT1xdWFudGl0eSwKICAgICAgICAgICAgICAgIG9yZGVyX3R5cGU9b3JkZXJfdHlwZSwKICAgICAgICAgICAgICAgIHByb2R1Y3RfdHlwZT1wcm9kdWN0X3R5cGUsCiAgICAgICAgICAgICAgICBwcmljZT1wcmljZSwKICAgICAgICAgICAgICAgIHRyaWdnZXJfcHJpY2U9dHJpZ2dlcl9wcmljZSwKICAgICAgICAgICAgICAgIHZhbGlkaXR5PXZhbGlkaXR5LAogICAgICAgICAgICAgICAgdGFnPXRhZyBvciAiIiwKICAgICAgICAgICAgKQogICAgICAgICAgICBzZWxmLl9sb2dfb3JkZXIoInBsYWNlIiwgc2VjdXJpdHlfaWQsIHJlc3ApCiAgICAgICAgICAgIHJldHVybiByZXNwCiAgICAgICAgZXhjZXB0IEV4Y2VwdGlvbiBhcyBlOgogICAgICAgICAgICBsb2dnZXIuZXJyb3IoZiJwbGFjZV9vcmRlciBmYWlsZWQgW3tzZWN1cml0eV9pZH1dOiB7ZX0iKQogICAgICAgICAgICByYWlzZQoKICAgIGRlZiBwbGFjZV9zbGljZV9vcmRlcigKICAgICAgICBzZWxmLAogICAgICAgIHNlY3VyaXR5X2lkOiBzdHIsCiAgICAgICAgZXhjaGFuZ2Vfc2VnbWVudDogc3RyLAogICAgICAgIHRyYW5zYWN0aW9uX3R5cGU6IHN0ciwKICAgICAgICBxdWFudGl0eTogaW50LAogICAgICAgIG9yZGVyX3R5cGU6IHN0ciA9ICJNQVJLRVQ
-iLAogICAgICAgIHByb2R1Y3RfdHlwZTogc3RyID0gIklOVFJBREFZIiwKICAgICAgICBwcmljZTogZmxvYXQgPSAwLjAsCiAgICAgICAgdHJpZ2dlcl9wcmljZTogZmxvYXQgPSAwLjAsCiAgICApIC0+IERpY3Q6CiAgICAgICAgIiIiUGxhY2UgYSBzbGljZSBvcmRlciBmb3IgbGFyZ2UgcXVhbnRpdGllcyB0aGF0IGV4Y2VlZCBsb3Qgc2l6ZSBsaW1pdHMuIiIiCiAgICAgICAgdHJ5OgogICAgICAgICAgICByZXNwID0gc2VsZi5kaGFuLnBsYWNlX3NsaWNlX29yZGVyKAogICAgICAgICAgICAgICAgc2VjdXJpdHlfaWQ9c2VjdXJpdHlfaWQsCiAgICAgICAgICAgICAgICBleGNoYW5nZV9zZWdtZW50PWV4Y2hhbmdlX3NlZ21lbnQsCiAgICAgICAgICAgICAgICB0cmFuc2FjdGlvbl90eXBlPXRyYW5zYWN0aW9uX3R5cGUsCiAgICAgICAgICAgICAgICBxdWFudGl0eT1xdWFudGl0eSwKICAgICAgICAgICAgICAgIG9yZGVyX3R5cGU9b3JkZXJfdHlwZSwKICAgICAgICAgICAgICAgIHByb2R1Y3RfdHlwZT1wcm9kdWN0X3R5cGUsCiAgICAgICAgICAgICAgICBwcmljZT1wcmljZSwKICAgICAgICAgICAgICAgIHRyaWdnZXJfcHJpY2U9dHJpZ2dlcl9wcmljZSwKICAgICAgICAgICAgKQogICAgICAgICAgICBzZWxmLl9sb2dfb3JkZXIoInNsaWNlIiwgc2VjdXJpdHlfaWQsIHJlc3ApCiAgICAgICAgICAgIHJldHVybiByZXNwCiAgICAgICAgZXhjZXB0IEV4Y2VwdGlvbiBhcyBlOgogICAgICAgICAgICBsb2dnZXIuZXJyb3IoZiJwbGFjZV9zbGljZV9vcmRlciBmYWlsZWQgW3tzZWN1cml0eV9pZH1dOiB7ZX0iKQogICAgICAgICAgICByYWlzZQoKICAgIGRlZiBtb2RpZnlfb3JkZXIoCiAgICAgICAgc2VsZiwKICAgICAgICBvcmRlcl9pZDogc3RyLAogICAgICAgIG9yZGVyX3R5cGU6IHN0ciwKICAgICAgICBsZWdfbmFtZTogc3RyLAogICAgICAgIHF1YW50aXR5OiBpbnQsCiAgICAgICAgcHJpY2U6IGZsb2F0LAogICAgICAgIHRyaWdnZXJfcHJpY2U6IGZsb2F0LAogICAgICAgIHZhbGlkaXR5OiBzdHIgPSAiREFZIiwKICAgICkgLT4gRGljdDoKICAgICAgICAiIiJNb2RpZnkgYW4gb3BlbiBvcmRlci4iIiIKICAgICAgICB0cnk6CiAgICAgICAgICAgIHJlc3AgPSBzZWxmLmRoYW4ubW9kaWZ5X29yZGVyKAogICAgICAgICAgICAgICAgb3JkZXJfaWQ9b3JkZXJfaWQsCiAgICAgICAgICAgICAgICBvcmRlcl90eXBlPW9yZGVyX3R5cGUsCiAgICAgICAgICAgICAgICBsZWdfbmFtZT1sZWdfbmFtZSwKICAgICAgICAgICAgICAgIHF1YW50aXR5PXF1YW50aXR5LAogICAgICAgICAgICAgICAgcHJpY2U9cHJpY2UsCiAgICAgICAgICAgICAgICB0cmlnZ2VyX3ByaWNlPXRyaWdnZXJfcHJpY2UsCiAgICAgICAgICAgICAgICB2YWxpZGl0eT12YWxpZGl0eSwKICAgICAgICAgICAgKQogICAgICAgICAgICBzZWxmLl9sb2dfb3JkZXIoIm1vZGlmeSIsIG9yZGVyX2lkLCByZXNwKQogICAgICAgICAgICByZXR1cm4gcmVzcAogICAgICAgIGV4Y2VwdCBFeGNlcHRpb24gYXMgZToKICAgICAgICAgICAgbG9nZ2VyLmVycm9yKGYibW9kaWZ5X29yZGVyIGZhaWxlZCBbe29yZGVyX2lkfV06IHtlfSIpCiAgICAgICAgICAgIHJhaXNlCgogICAgZGVmIGNhbmNlbF9vcmRlcihzZWxmLCBvcmRlcl9pZDogc3RyKSAtPiBEaWN0OgogICAgICAgICIiIkNhbmNlbCBhbiBvcGVuIG9yZGVyLiIiIgogICAgICAgIHRyeToKICAgICAgICAgICAgcmVzcCA9IHNlbGYuZGhhbi5jYW5jZWxfb3JkZXIob3JkZXJfaWQ9b3JkZXJfaWQpCiAgICAgICAgICAgIHNlbGYuX2xvZ19vcmRlcigiY2FuY2VsIiwgb3JkZXJfaWQsIHJlc3ApCiAgICAgICAgICAgIHJldHVybiByZXNwCiAgICAgICAgZXhjZXB0IEV4Y2VwdGlvbiBhcyBlOgogICAgICAgICAgICBsb2dnZXIuZXJyb3IoZiJjYW5jZWxfb3JkZXIgZmFpbGVkIFt7b3JkZXJfaWR9XToge2V9IikKICAgICAgICAgICAgcmFpc2UKCiAgICAjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KICAgICMgT3B0aW9ucy1zcGVjaWZpYyBoZWxwZXJzCiAgICAjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCiAgICBkZWYgcGxhY2Vfb3B0aW9uc19vcmRlcigKICAgICAgICBzZWxmLAogICAgICAgIHNlY3VyaXR5X2lkOiBzdHIsCiAgICAgICAgdHJhbnNhY3Rpb25fdHlwZTogc3RyLAogICAgICAgIHF1YW50aXR5OiBpbnQsCiAgICAgICAgb3JkZXJfdHlwZTogc3RyID0gIkxJTUlUIiwKICAgICAgICBwcmljZTogZmxvYXQgPSAwLjAsCiAgICAgICAgdHJpZ2dlcl9wcmljZTogZmxvYXQgPSAwLjAsCiAgICAgICAgcHJvZHVjdF90eXBlOiBzdHIgPSAiSU5UUkFEQVkiLAogICAgKSAtPiBEaWN0OgogICAgICAgICIiIkNvbnZlbmllbmNlIHdyYXBwZXIgZm9yIE5TRSBGJk8gb3B0aW9ucyBvcmRlcnMuIiIiCiAgICAgICAgcmV0dXJuIHNlbGYucGxhY2Vfb3JkZXIoCiAgICAgICAgICAgIHNlY3VyaXR5X2lkPXNlY3VyaXR5X2lkLAogICAgICAgICAgICBleGNoYW5nZV9zZWdtZW50PXNlbGYuTlNFX0ZOTywKICAgICAgICAgICAgdHJhbnNhY3Rpb25fdHlwZT10cmFuc2FjdGlvbl90eXBlLAogICAgICAgICAgICBxdWFudGl0eT1xdWFudGl0eSwKICAgICAgICAgICAgb3JkZXJfdHlwZT1vcmRlcl90eXBlLAogICAgICAgICAgICBwcm9kdWN0X3R5cGU9cHJvZHVjdF90eXBlLAogICAgICAgICAgICBwcmljZT1wcmljZSwKICAgICAgICAgICAgdHJpZ2dlcl9wcmljZT10cmlnZ2VyX3ByaWNlLAogICAgICAgICkKCiAgICBkZWYgcGxhY2VfYnJhY2tldF9vcmRlcigKICAgICAgICBzZWxmLAogICAgICAgIHNlY3VyaXR5X2lkOiBzdHIsCiAgICAgICAgZXhjaGFuZ2Vfc2VnbWVudDogc3RyLAogICAgICAgIHRyYW5zYWN0aW9uX3R5cGU6IHN0ciwKICAgICAgICBxdWFudGl0eTogaW50LAogICAgICAgIHByaWNlOiBmbG9hdCwKICAgICAgICBzdG9wX2xvc3M6IGZsb2F0LAogICAgICAgIHRhcmdldDogZmxvYXQsCiAgICAgICAgdHJhaWxpbmdfanVtcDogZmxvYXQgPSAwLjAsCiAgICApIC0+IERpY3Q6CiAgICAgICAgIiIiUGxhY2UgYSBicmFja2V0IG9yZGVyIHdpdGggYXV0b21hdGljIFNMIGFuZCB0YXJnZXQgbGVncy4iIiIKICAgICAgICB0cnk6CiAgICAgICAgICAgIHJlc3AgPSBzZWxmLmRoYW4ucGxhY2Vfb3JkZXIoCiAgICAgICAgICAgICAgICBzZWN1cml0eV9pZD1zZWN1cml0eV9pZCwKICAgICAgICAgICAgICAgIGV4Y2hhbmdlX3NlZ21lbnQ9ZXhjaGFuZ2Vfc2VnbWVudCwKICAgICAgICAgICAgICAgIHRyYW5zYWN0aW9uX3R5cGU9dHJhbnNhY3Rpb25fdHlwZSwKICAgICAgICAgICAgICAgIHF1YW50aXR5PXF1YW50aXR5LAogICAgICAgICAgICAgICAgb3JkZXJfdHlwZT1zZWxmLkxJTUlULAogICAgICAgICAgICAgICAgcHJvZHVjdF90eXBlPSJCTyIsCiAgICAgICAgICAgICAgICBwcmljZT1wcmljZSwKICAgICAgICAgICAgICAgIHRyaWdnZXJfcHJpY2U9MC4wLAogICAgICAgICAgICAgICAgYm9fcHJvZml0X3ZhbHVlPXRhcmdldCwKICAgICAgICAgICAgICAgIGJvX3N0b3BfbG9zc192YWx1ZT1zdG9wX2xvc3MsCiAgICAgICAgICAgICAgICB0cmFpbGluZ19qdW1wPXRyYWlsaW5nX2p1bXAsCiAgICAgICAgICAgICkKICAgICAgICAgICAgc2VsZi5fbG9nX29yZGVyKCJicmFja2V0Iiwgc2VjdXJpdHlfaWQsIHJlc3ApCiAgICAgICAgICAgIHJldHVybiByZXNwCiAgICAgICAgZXhjZXB0IEV4Y2VwdGlvbiBhcyBlOgogICAgICAgICAgICBsb2dnZXIuZXJyb3IoZiJwbGFjZV9icmFja2V0X29yZGVyIGZhaWxlZCBbe3NlY3VyaXR5X2lkfV06IHtlfSIpCiAgICAgICAgICAgIHJhaXNlCgogICAgIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCiAgICAjIFBvc2l0aW9uICYgb3JkZXIgcXVlcmllcwogICAgIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgogICAgZGVmIGdldF9wb3NpdGlvbnMoc2VsZikgLT4gTGlzdFtEaWN0XToKICAgICAgICAiIiJSZXR1cm4gYWxsIG9wZW4gcG9zaXRpb25zLiIiIgogICAgICAgIHRyeToKICAgICAgICAgICAgcmVzcCA9IHNlbGYuZGhhbi5nZXRfcG9zaXRpb25zKCkKICAgICAgICAgICAgcmV0dXJuIHJlc3AuZ2V0KCJkYXRhIiwgW10pCiAgICAgICAgZXhjZXB0IEV4Y2VwdGlvbiBhcyBlOgogICAgICAgICAgICBsb2dnZXIuZXJyb3IoZiJnZXRfcG9zaXRpb25zIGZhaWxlZDoge2V9IikKICAgICAgICAgICAgcmV0dXJuIFtdCgogICAgZGVmIGdldF9vcmRlcnMoc2VsZikgLT4gTGlzdFtEaWN0XToKICAgICAgICAiIiJSZXR1cm4gYWxsIG9yZGVycyBmb3IgdGhlIGRheS4iIiIKICAgICAgICB0cnk6CiAgICAgICAgICAgIHJlc3AgPSBzZWxmLmRoYW4uZ2V0X29yZGVyX2xpc3QoKQogICAgICAgICAgICByZXR1cm4gcmVzcC5nZXQoImRhdGEiLCBbXSkKICAgICAgICBleGNlcHQgRXhjZXB0aW9uIGFzIGU6CiAgICAgICAgICAgIGxvZ2dlci5lcnJvcihmImdldF9vcmRlcnMgZmFpbGVkOiB7ZX0iKQogICAgICAgICAgICByZXR1cm4gW10KCiAgICBkZWYgZ2V0X29yZGVyX2J5X2lkKHNlbGYsIG9yZGVyX2lkOiBzdHIpIC0+IE9wdGlvbmFsW0RpY3RdOgogICAgICAgICIiIkZldGNoIGEgc2luZ2xlIG9yZGVyIGJ5IElELiIiIgogICAgICAgIHRyeToKICAgICAgICAgICAgcmVzcCA9IHNlbGYuZGhhbi5nZXRfb3JkZXJfYnlfaWQob3JkZXJfaWQ9b3JkZXJfaWQpCiAgICAgICAgICAgIHJldHVybiByZXNwLmdldCgiZGF0YSIpCiAgICAgICAgZXhjZXB0IEV4Y2VwdGlvbiBhcyBlOgogICAgICAgICAgICBsb2dnZXIuZXJyb3IoZiJnZXRfb3JkZXJfYnlfaWQgZmFpbGVkIFt7b3JkZXJfaWR9XToge2V9IikKICAgICAgICAgICAgcmV0dXJuIE5vbmUKCiAgICBkZWYgZ2V0X2hvbGRpbmdzKHNlbGYpIC0+IExpc3RbRGljdF06CiAgICAgICAgIiIiUmV0dXJuIGVxdWl0eSBob2xkaW5ncyAoQ05DIHBvc2l0aW9ucykuIiIiCiAgICAgICAgdHJ5OgogICAgICAgICAgICByZXNwID0gc2VsZi5kaGFuLmdldF9ob2xkaW5ncygpCiAgICAgICAgICAgIHJldHVybiByZXNwLmdldCgiZGF0YSIsIFtdKQogICAgICAgIGV4Y2VwdCBFeGNlcHRpb24gYXMgZToKICAgICAgICAgICAgbG9nZ2VyLmVycm9yKGYiZ2V0X2hvbGRpbmdzIGZhaWxlZDoge2V9IikKICAgICAgICAgICAgcmV0dXJuIFtdCgogICAgZGVmIGdldF9mdW5kX2xpbWl0cyhzZWxmKSAtPiBEaWN0OgogICAgICAgICIiIlJldHVybiBhdmFpbGFibGUgZnVuZHMgLyBtYXJnaW4gc3VtbWFyeS4iIiIKICAgICAgICB0cnk6CiAgICAgICAgICAgIHJlc3AgPSBzZWxmLmRoYW4uZ2V0X2Z1bmRfbGltaXRzKCkKICAgICAgICAgICAgcmV0dXJuIHJlc3AuZ2V0KCJkYXRhIiwge30pCiAgICAgICAgZXhjZXB0IEV4Y2VwdGlvbiBhcyBlOgogICAgICAgICAgICBsb2dnZXIuZXJyb3IoZiJnZXRfZnVuZF9saW1pdHMgZmFpbGVkOiB7ZX0iKQogICAgICAgICAgICByZXR1cm4ge30KCiAgICAjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KICAgICMgTWFya2V0IGRhdGEgKHF1b3RlcykKICAgICMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKICAgIGRlZiBnZXRfbHRwKHNlbGYsIHNlY3VyaXR5X2lkOiBzdHIsIGV4Y2hhbmdlX3NlZ21lbnQ6IHN0ciA9ICJOU0VfRk5PIikgLT4gT3B0aW9uYWxbZmxvYXRdOgogICAgICAgICIiIkZldGNoIGxhc3QgdHJhZGVkIHByaWNlIGZvciBhIHNpbmdsZSBpbnN0cnVtZW50LiIiIgogICAgICAgIHRyeToKICAgICAgICAgICAgcmVzcCA9IHNlbGYuZGhhbi5vaGxjX2RhdGEoCiAgICAgICAgICAgICAgICBzZWN1cml0aWVzPXtleGNoYW5nZV9zZWdtZW50OiBbaW50KHNlY3VyaXR5X2lkKV19CiAgICAgICAgICAgICkKICAgICAgICAgICAgZGF0YSA9IHJlc3AuZ2V0KCJkYXRhIiwge30pLmdldChleGNoYW5nZV9zZWdtZW50LCB7fSkuZ2V0KHN0cihzZWN1cml0eV9pZCksIHt9KQogICAgICAgICAgICByZXR1cm4gZGF0YS5nZXQoImxhc3RfcHJpY2UiKQogICAgICAgIGV4Y2VwdCBFeGNlcHRpb24gYXMgZToKICAgICAgICAgICAgbG9nZ2VyLmVycm9yKGYiZ2V0X2x0cCBmYWlsZWQgW3tzZWN1cml0eV9pZH1dOiB7ZX0iKQogICAgICAgICAgICByZXR1cm4gTm9uZQoKICAgIGRlZiBnZXRfcXVvdGUoc2VsZiwgc2VjdXJpdHlfaWQ6IHN0ciwgZXhjaGFuZ2Vfc2VnbWVudDogc3RyID0gIk5TRV9GTk8iKSAtPiBEaWN0OgogICAgICAgICIiIkZldGNoIGZ1bGwgcXVvdGUgKE9ITENWICsgZGVwdGgpIGZvciBhIHNpbmdsZSBpbnN0cnVtZW50LiIiIgogICAgICAgIHRyeToKICAgICAgICAgICAgcmVzcCA9IHNlbGYuZGhhbi5tYXJrZXRmZWVkX3F1b3RlKAogICAgICAgICAgICAgICAgc2VjdXJpdGllcz17ZXhjaGFuZ2Vfc2VnbWVudDogW2ludChzZWN1cml0eV9pZCldfQogICAgICAgICAgICApCiAgICAgICAgICAgIHJldHVybiByZXNwLmdldCgiZGF0YSIsIHt9KS5nZXQoZXhjaGFuZ2Vfc2VnbWVudCwge30pLmdldChzdHIoc2VjdXJpdHlfaWQpLCB7fSkKICAgICAgICBleGNlcHQgRXhjZXB0aW9uIGFzIGU6CiAgICAgICAgICAgIGxvZ2dlci5lcnJvcihmImdldF9xdW90ZSBmYWlsZWQgW3tzZWN1cml0eV9pZH1dOiB7ZX0iKQogICAgICAgICAgICByZXR1cm4ge30KCiAgICAjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KICAgICMgU3F1YXJlLW9mZiBoZWxwZXJzCiAgICAjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCiAgICBkZWYgc3F1YXJlX29mZl9wb3NpdGlvbihzZWxmLCBwb3NpdGlvbjogRGljdCkgLT4gT3B0aW9uYWxbRGljdF06CiAgICAgICAgIiIiCiAgICAgICAgU3F1YXJlIG9mZiBhIHNpbmdsZSBvcGVuIHBvc2l0aW9uLgogICAgICAgIHBvc2l0aW9uOiBkaWN0IGZyb20gZ2V0X3Bvc2l0aW9ucygpIHdpdGgga2V5cyBzZWN1cml0eV9pZCwgZXhjaGFuZ2Vfc2VnbWVudCwKICAgICAgICAgICAgICAgICAgbmV0X3F0eSwgcHJvZHVjdF90eXBlCiAgICAgICAgIiIiCiAgICAgICAgbmV0X3F0eSA9IHBvc2l0aW9uLmdldCgibmV0UXR5IiwgMCkKICAgICAgICBpZiBuZXRfcXR5ID09IDA6CiAgICAgICAgICAgIHJldHVybiBOb25lCiAgICAgICAgdHJhbnNhY3Rpb25fdHlwZSA9IHNlbGYuU0VMTCBpZiBuZXRfcXR5ID4gMCBlbHNlIHNlbGYuQlVZCiAgICAgICAgcmV0dXJuIHNlbGYucGxhY2Vfb3JkZXIoCiAgICAgICAgICAgIHNlY3VyaXR5X2lkPXN0cihwb3NpdGlvblsic2VjdXJpdHlJZCJdKSwKICAgICAgICAgICAgZXhjaGFuZ2Vfc2VnbWVudD1wb3NpdGlvbi5nZXQoImV4Y2hhbmdlU2VnbWVudCIsIHNlbGYuTlNFX0ZOTyksCiAgICAgICAgICAgIHRyYW5zYWN0aW9uX3R5cGU9dHJhbnNhY3Rpb25fdHlwZSwKICAgICAgICAgICAgcXVhbnRpdHk9YWJzKG5ldF9xdHkpLAogICAgICAgICAgICBvcmRlcl90eXBlPXNlbGYuTUFSS0VULAogICAgICAgICAgICBwcm9kdWN0X3R5cGU9cG9zaXRpb24uZ2V0KCJwcm9kdWN0VHlwZSIsIHNlbGYuSU5UUkFEQVkpLAogICAgICAgICkKCiAgICBkZWYgc3F1YXJlX29mZl9hbGwoc2VsZikgLT4gTGlzdFtEaWN0XToKICAgICAgICAiIiJTcXVhcmUgb2ZmIGFsbCBvcGVuIHBvc2l0aW9ucy4gUmV0dXJucyBsaXN0IG9mIHJlc3BvbnNlcy4iIiIKICAgICAgICBwb3NpdGlvbnMgPSBzZWxmLmdldF9wb3NpdGlvbnMoKQogICAgICAgIHJlc3VsdHMgPSBbXQogICAgICAgIGZvciBwb3MgaW4gcG9zaXRpb25zOgogICAgICAgICAgICBpZiBwb3MuZ2V0KCJuZXRRdHkiLCAwKSAhPSAwOgogICAgICAgICAgICAgICAgcmVzdWx0ID0gc2VsZi5zcXVhcmVfb2ZmX3Bvc2l0aW9uKHBvcykKICAgICAgICAgICAgICAgIGlmIHJlc3VsdDoKICAgICAgICAgICAgICAgICAgICByZXN1bHRzLmFwcGVuZChyZXN1bHQpCiAgICAgICAgICAgICAgICB0aW1lLnNsZWVwKDAuMSkgICMgcmF0ZSBsaW1pdCBidWZmZXIKICAgICAgICBsb2dnZXIuaW5mbyhmInNxdWFyZV9vZmZfYWxsOiB7bGVuKHJlc3VsdHMpfSBwb3NpdGlvbihzKSBjbG9zZWQiKQogICAgICAgIHJldHVybiByZXN1bHRzCgogICAgIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCiAgICAjIEludGVybmFsIGxvZ2dpbmcKICAgICMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKICAgIGRlZiBfbG9nX29yZGVyKHNlbGYsIGFjdGlvbjogc3RyLCByZWY6IHN0ciwgcmVzcG9uc2U6IERpY3QpIC0+IE5vbmU6CiAgICAgICAgZW50cnkgPSB7CiAgICAgICAgICAgICJ0aW1lc3RhbXAiOiBkYXRldGltZS51dGNub3coKS5pc29mb3JtYXQoKSwKICAgICAgICAgICAgImFjdGlvbiI6IGFjdGlvbiwKICAgICAgICAgICAgInJlZiI6IHJlZiwKICAgICAgICAgICAgInN0YXR1cyI6IHJlc3BvbnNlLmdldCgic3RhdHVzIiksCiAgICAgICAgICAgICJvcmRlcl9pZCI6IHJlc3BvbnNlLmdldCgiZGF0YSIsIHt9KS5nZXQoIm9yZGVySWQiKSBpZiBpc2luc3RhbmNlKHJlc3BvbnNlLmdldCgiZGF0YSIpLCBkaWN0KSBlbHNlIE5vbmUsCiAgICAgICAgICAgICJyZW1hcmtzIjogcmVzcG9uc2UuZ2V0KCJyZW1hcmtzIiwgIiIpLAogICAgICAgIH0KICAgICAgICBzZWxmLl9vcmRlcl9sb2cuYXBwZW5kKGVudHJ5KQogICAgICAgIGxvZ2dlci5pbmZvKGYiW3thY3Rpb24udXBwZXIoKX1dIHtyZWZ9IC0+IHN0YXR1cz17ZW50cnlbJ3N0YXR1cyddfSBvcmRlcl9pZD17ZW50cnlbJ29yZGVyX2lkJ119IikKCiAgICBAcHJvcGVydHkKICAgIGRlZiBvcmRlcl9sb2coc2VsZikgLT4gTGlzdFtEaWN0XToKICAgICAgICByZXR1cm4gbGlzdChzZWxmLl9vcmRlcl9sb2cpCg==
+"""
+dhan_executor.py — Dhan API v2 Order Execution Engine
+
+Replaces kite_executor.py. Handles order placement, modification,
+cancellation, position and holdings management via the DhanHQ API v2.
+"""
+
+import logging
+from typing import Any, Dict, List, Optional
+
+from dhanhq import dhanhq
+
+logger = logging.getLogger(__name__)
+
+
+class DhanExecutor:
+    """Order execution engine backed by DhanHQ API v2.
+
+    Exchange segment constants (dhanhq v2):
+        NSE_EQ, NSE_FNO, BSE_EQ, BSE_FNO, MCX_COMM
+
+    Transaction type constants (dhanhq v2):
+        BUY, SELL
+    """
+
+    # Exchange segment constants
+    NSE_EQ = "NSE_EQ"
+    NSE_FNO = "NSE_FNO"
+    BSE_EQ = "BSE_EQ"
+    BSE_FNO = "BSE_FNO"
+    MCX_COMM = "MCX_COMM"
+
+    # Transaction type constants
+    BUY = "BUY"
+    SELL = "SELL"
+
+    def __init__(self, client_id: str, access_token: str) -> None:
+        """Initialise the DhanHQ client.
+
+        Args:
+            client_id:    Your Dhan client / user ID.
+            access_token: Dhan API access token.
+        """
+        self.dhan = dhanhq(client_id, access_token)
+        self.logger = logging.getLogger(self.__class__.__name__)
+        self.logger.info("DhanExecutor initialised for client_id=%s", client_id)
+
+    # ------------------------------------------------------------------
+    # Order management
+    # ------------------------------------------------------------------
+
+    def place_order(self, order: dict) -> dict:
+        """Place an order via DhanHQ API v2.
+
+        Args:
+            order: Dict with keys:
+                - security_id      (str)  : Dhan security identifier
+                - exchange_segment (str)  : e.g. NSE_EQ, NSE_FNO
+                - transaction_type (str)  : BUY | SELL
+                - quantity         (int)  : number of shares/lots
+                - order_type       (str)  : LIMIT | MARKET | SL | SL-M
+                - product_type     (str)  : INTRADAY | MARGIN | CNC | CO | BO
+                - price            (float): limit price (0 for MARKET)
+                - trigger_price    (float): stop-loss trigger (0 if N/A)
+
+        Returns:
+            dict: API response containing order_id on success.
+        """
+        try:
+            resp = self.dhan.place_order(
+                security_id=order["security_id"],
+                exchange_segment=order["exchange_segment"],
+                transaction_type=order["transaction_type"],
+                quantity=order["quantity"],
+                order_type=order["order_type"],
+                product_type=order["product_type"],
+                price=order.get("price", 0.0),
+                trigger_price=order.get("trigger_price", 0.0),
+            )
+            self.logger.info(
+                "place_order success: security_id=%s order_id=%s",
+                order.get("security_id"),
+                resp.get("orderId") if isinstance(resp, dict) else resp,
+            )
+            return resp if isinstance(resp, dict) else {"order_id": resp}
+        except Exception as exc:
+            self.logger.error("place_order failed: %s", exc, exc_info=True)
+            raise
+
+    def cancel_order(self, order_id: str) -> dict:
+        """Cancel an open order.
+
+        Args:
+            order_id: The Dhan order ID to cancel.
+
+        Returns:
+            dict: API response confirming cancellation.
+        """
+        try:
+            resp = self.dhan.cancel_order(order_id=order_id)
+            self.logger.info("cancel_order success: order_id=%s", order_id)
+            return resp if isinstance(resp, dict) else {"status": resp}
+        except Exception as exc:
+            self.logger.error("cancel_order failed for order_id=%s: %s", order_id, exc, exc_info=True)
+            raise
+
+    def modify_order(self, order_id: str, **kwargs: Any) -> dict:
+        """Modify an existing open order.
+
+        Args:
+            order_id: The Dhan order ID to modify.
+            **kwargs: Fields to update (e.g. quantity, price, order_type,
+                      trigger_price, validity, disclosed_quantity).
+
+        Returns:
+            dict: API response for the modification.
+        """
+        try:
+            resp = self.dhan.modify_order(order_id=order_id, **kwargs)
+            self.logger.info("modify_order success: order_id=%s kwargs=%s", order_id, kwargs)
+            return resp if isinstance(resp, dict) else {"status": resp}
+        except Exception as exc:
+            self.logger.error("modify_order failed for order_id=%s: %s", order_id, exc, exc_info=True)
+            raise
+
+    # ------------------------------------------------------------------
+    # Portfolio queries
+    # ------------------------------------------------------------------
+
+    def get_positions(self) -> List[dict]:
+        """Fetch current intraday and carry-forward positions.
+
+        Returns:
+            List[dict]: Each element describes one open position.
+        """
+        try:
+            resp = self.dhan.get_positions()
+            positions = resp if isinstance(resp, list) else resp.get("data", [])
+            self.logger.debug("get_positions returned %d positions", len(positions))
+            return positions
+        except Exception as exc:
+            self.logger.error("get_positions failed: %s", exc, exc_info=True)
+            raise
+
+    def get_holdings(self) -> List[dict]:
+        """Fetch long-term equity holdings (CNC / delivery).
+
+        Returns:
+            List[dict]: Each element describes one holding.
+        """
+        try:
+            resp = self.dhan.get_holdings()
+            holdings = resp if isinstance(resp, list) else resp.get("data", [])
+            self.logger.debug("get_holdings returned %d holdings", len(holdings))
+            return holdings
+        except Exception as exc:
+            self.logger.error("get_holdings failed: %s", exc, exc_info=True)
+            raise
+
+    def get_order_list(self) -> List[dict]:
+        """Fetch the full order book for the current trading day.
+
+        Returns:
+            List[dict]: Each element describes one order.
+        """
+        try:
+            resp = self.dhan.get_order_list()
+            orders = resp if isinstance(resp, list) else resp.get("data", [])
+            self.logger.debug("get_order_list returned %d orders", len(orders))
+            return orders
+        except Exception as exc:
+            self.logger.error("get_order_list failed: %s", exc, exc_info=True)
+            raise
+
+    # ------------------------------------------------------------------
+    # Market data
+    # ------------------------------------------------------------------
+
+    def get_ltp(self, security_id: str, exchange_segment: str) -> Optional[float]:
+        """Fetch the Last Traded Price (LTP) for a security.
+
+        Args:
+            security_id:      Dhan security identifier string.
+            exchange_segment: Exchange segment constant, e.g. NSE_EQ.
+
+        Returns:
+            float: The last traded price, or None if unavailable.
+        """
+        try:
+            resp = self.dhan.get_ltp_data(
+                security_id=security_id,
+                exchange_segment=exchange_segment,
+            )
+            # DhanHQ v2 returns {"data": {"ltp": 1234.56, ...}}
+            if isinstance(resp, dict):
+                data = resp.get("data", resp)
+                ltp = data.get("ltp") if isinstance(data, dict) else None
+            else:
+                ltp = None
+            self.logger.debug(
+                "get_ltp security_id=%s exchange_segment=%s ltp=%s",
+                security_id, exchange_segment, ltp,
+            )
+            return float(ltp) if ltp is not None else None
+        except Exception as exc:
+            self.logger.error(
+                "get_ltp failed for security_id=%s exchange_segment=%s: %s",
+                security_id, exchange_segment, exc, exc_info=True,
+            )
+            raise
