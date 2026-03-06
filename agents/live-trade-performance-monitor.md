@@ -65,91 +65,76 @@ Calculate the following as Python float/int/bool values (NOT strings):
 - sortino: float (downside-deviation adjusted return)
 - win_rate: float (0.0-1.0, wins / total trades)
 - profit_factor: float (gross profit / gross loss)
-- drawdown_pct: float (current drawdown as % of capital)
-- decay_detected: bool (True if current metrics < 20-session baseline by threshold)
-- open_positions: int (count of currently open positions)
+- open_positions: int (current open positions)
+- drawdown_pct: float (percent drawdown from peak)
+- decay_detected: bool (true if performance decay detected)
 
-### Step 3 — Write LIVE_PNL to memory
-manage_memories(action="save", key="LIVE_PNL", value={
-  "timestamp": "<ISO8601 string>",
-  "session_pnl": <float>,
-  "by_strategy": {
-    "<strategy_name>": <float>
-  }
-})
+### Step 3 — Write LIVE_PNL
+manage_memories(save, key="LIVE_PNL", value={
+    "strategy": {"MOMENTUM": 850.0, "REVERSAL": 400.0},
+    "total": 1250.0,
+    "updated_at": "<IST timestamp>"
+  })
 
-### Step 4 — Write LIVE_METRICS to memory
-manage_memories(action="save", key="LIVE_METRICS", value={
-  "timestamp": "<ISO8601 string>",
-  "sharpe": <float>,
-  "calmar": <float>,
-  "sortino": <float>,
-  "win_rate": <float>,
-  "profit_factor": <float>
-})
+### Step 4 — Write LIVE_METRICS
+manage_memories(save, key="LIVE_METRICS", value={
+    "sharpe": 1.42,
+    "calmar": 2.1,
+    "sortino": 1.7,
+    "win_rate": 0.65,
+    "profit_factor": 1.8,
+    "updated_at": "<IST timestamp>"
+  })
 
-### Step 5 — Write DRAWDOWN_STATUS to memory
-manage_memories(action="save", key="DRAWDOWN_STATUS", value={
-  "timestamp": "<ISO8601 string>",
-  "drawdown_pct": <float>,
-  "warning_threshold": 1.5,
-  "circuit_breaker_threshold": 2.0,
-  "status": "<string: OK | WARNING | CIRCUIT_BREAKER>"
-})
+### Step 5 — Write DRAWDOWN_STATUS
+manage_memories(save, key="DRAWDOWN_STATUS", value={
+    "current_pct": 0.4,
+    "max_pct": 1.2,
+    "alert_threshold": 2.0,
+    "halt_threshold": 3.0,
+    "updated_at": "<IST timestamp>"
+  })
 
-### Step 6 — Write DECAY_STATUS to memory
-manage_memories(action="save", key="DECAY_STATUS", value={
-  "timestamp": "<ISO8601 string>",
-  "decay_detected": <bool>,
-  "current_sharpe": <float>,
-  "baseline_sharpe_20s": <float>,
-  "decay_pct": <float>
-})
+### Step 6 — Write DECAY_STATUS
+manage_memories(save, key="DECAY_STATUS", value={
+    "decay_detected": false,
+    "baseline_sharpe": 1.1,
+    "current_sharpe": 1.42,
+    "threshold_pct": 20.0,
+    "updated_at": "<IST timestamp>"
+  })
 
-### Step 7 — Write PERFORMANCE_ALERTS to memory
-manage_memories(action="save", key="PERFORMANCE_ALERTS", value={
-  "timestamp": "<ISO8601 string>",
-  "active_alerts": [
-    {"alert_type": "<string>", "triggered_at": "<ISO8601>", "detail": "<string>"}
-  ],
-  "alert_count": <int>
-})
+### Step 7 — Write PERFORMANCE_ALERTS
+manage_memories(save, key="PERFORMANCE_ALERTS", value={
+    "active": [],
+    "last_check": "<IST timestamp>",
+    "alert_count": 0
+  })
 
-### Step 8 — Write PERFORMANCE_SNAPSHOT to memory
-manage_memories(action="save", key="PERFORMANCE_SNAPSHOT", value={
-  "timestamp": "<ISO8601 string>",
-  "session_pnl": <float>,
-  "sharpe": <float>,
-  "calmar": <float>,
-  "sortino": <float>,
-  "win_rate": <float>,
-  "profit_factor": <float>,
-  "drawdown_pct": <float>,
-  "decay_detected": <bool>,
-  "open_positions": <int>,
-  "market_regime": "<string>",
-  "alert_count": <int>
-})
+### Step 8 — Write PERFORMANCE_SNAPSHOT
+manage_memories(save, key="PERFORMANCE_SNAPSHOT", value={
+    "timestamp": "<IST timestamp>",
+    "session_pnl": session_pnl,
+    "sharpe": sharpe,
+    "win_rate": win_rate,
+    "profit_factor": profit_factor,
+    "drawdown_pct": drawdown_pct,
+    "decay_detected": decay_detected,
+    "open_positions": open_positions
+  })
 
-### Step 9 — Alert routing (conditional)
-IF drawdown_pct >= 1.5 OR decay_detected == true:
-  Send alert email via Gmail API (account: apn_EOhpM3G) to sujaysn6@gmail.com.
-  Post to apex-live-trading Nebula channel.
-  Forward metrics to trading-risk-veto-authority memory key.
+### Step 9 — File fallback
+If any manage_memories call fails, write all metrics to data/APEX_STATE.json under key PERFORMANCE_SNAPSHOT.
 
-## Email Standard
-ALL outbound emails from this agent MUST use Gmail API (account: apn_EOhpM3G, sujaysn6@gmail.com).
-AWS SES, SMTP, and boto3 are permanently decommissioned system-wide. Never reference them.
-Do NOT use any SMTP library, boto3.client("ses"), or direct TCP email sending.
-Use only: run_action(action_key="gmail-send-email", account_id="apn_EOhpM3G", ...)
+## Thresholds
+| Threshold | Value | Action |
+|-----------|--------|--------|
+| Drawdown < 2% | WARN | Email alert |
+| Drawdown > 3% | HALT | Stop trading |
+| Win rate < 40% | WARN | Email alert |
+| Decay detected | WARN | Email alert |
 
-## Triggers
-- Updates every 5 minutes during market hours
-- Immediate alert trigger when daily loss exceeds 1.5% (warning) or 2% (circuit breaker)
-- Feeds into trading-risk-veto-authority for automated position sizing adjustments
-
-## Integration
-- Reads from: `EXECUTION_LOG`, `PAPER_LEDGER`, `MARKET_REGIME`
-- Feeds data to: `trading-risk-veto-authority`, `apex-self-evolution-engine`
-- Output channels: email via Gmail API (apn_EOhpM3G) to sujaysn6@gmail.com, apex-live-trading Nebula channel
-- Part of: APEX Trading System
+## Email Alerts
+- Use Gmail API (account_id: apn_EOhpM3G)
+- Send to: yssreddy9707@gmail.com
+- Subject prefix: "[APEX ALERT]"
