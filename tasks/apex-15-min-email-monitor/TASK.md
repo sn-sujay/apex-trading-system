@@ -3,7 +3,6 @@ slug: apex-15-min-email-monitor
 title: APEX 15-Min Email Monitor
 steps:
 - description: Read APEX state from memory and send live update email
-  agent_id: agt_069aa998133c76d68000bc0c19c28627
   agent_slug: apex-trading-monitor
   format_guide: 'Read MARKET_REGIME, PAPER_LEDGER, APPROVED_SIGNALS from memory. Get
     current IST time. Send email to sujaysn6@gmail.com. Subject: APEX LIVE [HH:MM
