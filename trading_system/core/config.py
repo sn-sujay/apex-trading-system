@@ -13,23 +13,16 @@ load_dotenv()
 
 @dataclass
 class APEXConfig:
-    # ── Zerodha Kite ─────────────────────────────────────────────────────────────
-kite_api_key: str           = field(default_factory=lambda: os.getenv("KITE_API_KEY", ""))
-    kite_api_secret: str        = field(default_factory=lambda: os.getenv("KITE_API_SECRET", ""))
-    kite_access_token: str      = field(default_factory=lambda: os.getenv("KITE_ACCESS_TOKEN", ""))
-    kite_user_id: str           = field(default_factory=lambda: os.getenv("KITE_USER_ID", ""))
-
-    # ── Upstox ───────────────────────────────────────────────────────────────────
-    upstox_api_key: str         = field(default_factory=lambda: os.getenv("UPSTOX_API_KEY", ""))
-    upstox_api_secret: str      = field(default_factory=lambda: os.getenv("UPSTOX_API_SECRET", ""))
-    upstox_access_token: str    = field(default_factory=lambda: os.getenv("UPSTOX_ACCESS_TOKEN", ""))
+    # ── Dhan API ───────────────────────────────────────────────────────────────────
+    DHAN_CLIENT_ID: str             = field(default_factory=lambda: os.getenv("DHAN_CLIENT_ID", ""))
+    DHAN_ACCESS_TOKEN: str          = field(default_factory=lambda: os.getenv("DHAN_ACCESS_TOKEN", ""))
 
     # ── Database ───────────────────────────────────────────────────────────────────
-    db_host: str                = field(default_factory=lambda: os.getenv("TIMESCALEDB_HOST", "localhost"))
-    db_port: int                = field(default_factory=lambda: int(os.getenv("TIMESCALEDB_PORT", "5432")))
-    db_name: str                = field(default_factory=lambda: os.getenv("TIMESCALEDB_DB", "apex_trading"))
-    db_user: str                = field(default_factory=lambda: os.getenv("TIMESCALEDB_USER", "apex"))
-    db_password: str            = field(default_factory=lambda: os.getenv("TIMESCALEDB_PASSWORD", ""))
+    db_host: str                    = field(default_factory=lambda: os.getenv("TIMESCALEDB_HOST", "localhost"))
+    db_port: int                    = field(default_factory=lambda: int(os.getenv("TIMESCALEDB_PORT", "5432")))
+    db_name: str                    = field(default_factory=lambda: os.getenv("TIMESCALEDB_DB", "apex_trading"))
+    db_user: str                    = field(default_factory=lambda: os.getenv("TIMESCALEDB_USER", "apex"))
+    db_password: str                = field(default_factory=lambda: os.getenv("TIMESCALEDB_PASSWORD", ""))
 
     @property
     def db_url(self) -> str:
@@ -39,62 +32,48 @@ kite_api_key: str           = field(default_factory=lambda: os.getenv("KITE_API_
     def async_db_url(self) -> str:
         return f"postgresql+asyncpg://{self.db_user}:{self.db_password}@{self.db_host}:{self.db_port}/{self.db_name}"
 
-    # ── Redis ──────────────────────────────────────────────────────────────────────
-    redis_host: str             = field(default_factory=lambda: os.getenv("REDIS_HOST", "localhost"))
-    redis_port: int             = field(default_factory=lambda: int(os.getenv("REDIS_PORT", "6379")))
-    redis_password: Optional[str] = field(default_factory=lambda: os.getenv("REDIS_PASSWORD", None))
-    redis_db: int               = 0
+    # ── Redis ────────────────────────────────────────────────────────────────────────
+    REDIS_HOST: str                 = field(default_factory=lambda: os.getenv("REDIS_HOST", "localhost"))
+    REDIS_PORT: int                 = field(default_factory=lambda: int(os.getenv("REDIS_PORT", "6379")))
+    redis_password: str             = field(default_factory=lambda: os.getenv("REDIS_PASSWORD", ""))
 
-    # ── Kafka ──────────────────────────────────────────────────────────────────────
-    kafka_bootstrap: str        = field(default_factory=lambda: os.getenv("KAFKA_BOOTSTRAP_SERVERS", "localhost:9092"))
-    kafka_group_id: str         = "apex-consumers"
+    @property
+    def redis_url(self) -> str:
+        return f"redis://:{self.redis_password}@{self.REDIS_HOST}:{self.REDIS_PORT}/0"
 
-    # ── LLM / AI ────────────────────────────────────────────────────────────────────
-    openai_api_key: str         = field(default_factory=lambda: os.getenv("OPENAI_API_KEY", ""))
-    anthropic_api_key: str      = field(default_factory=lambda: os.getenv("ANTHROPIC_API_KEY", ""))
-    groq_api_key: str           = field(default_factory=lambda: os.getenv("GROQ_API_KEY", ""))
-    llm_model: str              = field(default_factory=lambda: os.getenv("LLM_MODEL", "gpt-4o-mini"))
+    # ── Kafka ────────────────────────────────────────────────────────────────────────
+    KAFKA_BOOTSTRAP_SERVERS: str    = field(default_factory=lambda: os.getenv("KAFKA_BOOTSTRAP_SERVERS", "localhost:9092"))
+    kafka_topic_ticks: str          = field(default_factory=lambda: os.getenv("KAFKA_TOPIC_MARKET_TICKS", "market.ticks"))
+    kafka_topic_signals: str        = field(default_factory=lambda: os.getenv("KAFKA_TOPIC_AGENT_SIGNALS", "agent.signals"))
+    kafka_topic_orders: str         = field(default_factory=lambda: os.getenv("KAFKA_TOPIC_ORDERS", "execution.orders"))
 
-    # ── News / Sentiment APIs ────────────────────────────────────────────────────────
-    newsapi_key: str            = field(default_factory=lambda: os.getenv("NEWSAPI_KEY", ""))
-    gnews_api_key: str          = field(default_factory=lambda: os.getenv("GNEWS_API_KEY", ""))
-    alpha_vantage_key: str      = field(default_factory=lambda: os.getenv("ALPHA_VANTAGE_API_KEY", ""))
-    eodhd_api_key: str          = field(default_factory=lambda: os.getenv("EODHD_API_KEY", ""))
+    # ── Risk ─────────────────────────────────────────────────────────────────────────
+    max_risk_per_trade_pct: float   = field(default_factory=lambda: float(os.getenv("MAX_RISK_PER_TRADE_PCT", "2.0")))
+    max_daily_loss_pct: float       = field(default_factory=lambda: float(os.getenv("MAX_DAILY_LOSS_PCT", "5.0")))
+    max_portfolio_drawdown_pct: float = field(default_factory=lambda: float(os.getenv("MAX_PORTFOLIO_DRAWDOWN_PCT", "15.0")))
+    max_position_size_pct: float    = field(default_factory=lambda: float(os.getenv("MAX_POSITION_SIZE_PCT", "10.0")))
+    min_agent_consensus: int        = field(default_factory=lambda: int(os.getenv("MIN_AGENT_CONSENSUS", "3")))
+    vix_kill_switch_threshold: float = field(default_factory=lambda: float(os.getenv("VIX_KILL_SWITCH_THRESHOLD", "25.0")))
+    max_sector_exposure_pct: float  = field(default_factory=lambda: float(os.getenv("MAX_SECTOR_EXPOSURE_PCT", "30.0")))
+    max_leverage: float             = field(default_factory=lambda: float(os.getenv("MAX_LEVERAGE", "2.0")))
 
-    # ── Trading Parameters ──────────────────────────────────────────────────────────
-    paper_trade: bool           = field(default_factory=lambda: os.getenv("PAPER_TRADE", "true").lower() == "true")
-    max_daily_loss_pct: float   = field(default_factory=lambda: float(os.getenv("MAX_DAILY_LOSS_PCT", "0.02")))
-    max_position_size_pct: float= field(default_factory=lambda: float(os.getenv("MAX_POSITION_SIZE_PCT", "0.05")))
-    kill_switch_vix: float      = field(default_factory=lambda: float(os.getenv("KILL_SWITCH_VIX", "30")))
+    # ── Capital ─────────────────────────────────────────────────────────────────────
+    total_capital: float            = field(default_factory=lambda: float(os.getenv("TOTAL_CAPITAL_INR", "1000000")))
+    core_allocation_pct: float      = field(default_factory=lambda: float(os.getenv("CORE_ALLOCATION_PCT", "60.0")))
+    satellite_allocation_pct: float = field(default_factory=lambda: float(os.getenv("SATELLITE_ALLOCATION_PCT", "40.0")))
 
-    # ── API Server ───────────────────────────────────────────────────────────────────
-    api_host: str               = field(default_factory=lambda: os.getenv("API_HOST", "0.0.0.0"))
-    api_port: int               = field(default_factory=lambda: int(os.getenv("API_PORT", "8000")))
-    api_secret_key: str         = field(default_factory=lambda: os.getenv("API_SECRET_KEY", "change-me-in-production"))
+    # ── Feature Flags ───────────────────────────────────────────────────────────────
+    enable_live_trading: bool       = field(default_factory=lambda: os.getenv("ENABLE_LIVE_TRADING", "false").lower() == "true")
+    enable_paper_trading: bool      = field(default_factory=lambda: os.getenv("PAPER_TRADE_MODE", "true").lower() == "true")
+    enable_options_trading: bool    = field(default_factory=lambda: os.getenv("ENABLE_OPTIONS_TRADING", "false").lower() == "true")
+    enable_zero_dte: bool           = field(default_factory=lambda: os.getenv("ENABLE_ZERO_DTE", "false").lower() == "true")
+    enable_learning_engine: bool    = field(default_factory=lambda: os.getenv("ENABLE_LEARNING_ENGINE", "true").lower() == "true")
 
-    # ── Logging ─────────────────────────────────────────────────────────────────────
-    log_level: str              = field(default_factory=lambda: os.getenv("LOG_LEVEL", "INFO"))
-    log_file: str               = "logs/apex.log"
+    # ── LLM ──────────────────────────────────────────────────────────────────────────
+    openai_api_key: str             = field(default_factory=lambda: os.getenv("OPENAI_API_KEY", ""))
+    openai_model: str               = field(default_factory=lambda: os.getenv("OPENAI_MODEL", "gpt-4o"))
+    anthropic_api_key: str          = field(default_factory=lambda: os.getenv("ANTHROPIC_API_KEY", ""))
 
-    # ── Watchlists ───────────────────────────────────────────────────────────────────
-    nifty50_symbols: List[str]  = field(default_factory=lambda: [
-        "RELIANCE", "TCS", "HDFCBANK", "INFY", "ICICIBANK",
-        "HINDUNILVR", "ITC", "SBIN", "BHARTIARTL", "KOTAKBANK",
-        "LT", "AXISBANK", "ASIANPAINT", "BAJFINANCE", "HCLTECH",
-        "SUNPHARMA", "MARUTI", "WIPRO", "ULTRACEMCO", "TITAN",
-        "ONGC", "NESTLEIND", "ADANIENT", "POWERGRID", "NTPC",
-        "JSWSTEEL", "TATASTEEL", "TECHM", "GRASIM", "INDUSINDBK",
-    ])
 
-    sector_etfs: List[str]      = field(default_factory=lambda: [
-        "NIFTYBEES", "BANKBEES", "ITBEES", "PSUBNKBEES",
-        "PHARMBEES", "AUTOBEES", "FMCGBEES",
-    ])
-
-    _instance = None
-
-    @classmethod
-    def get(cls) -> "APEXConfig":
-        if cls._instance is None:
-            cls._instance = cls()
-        return cls._instance
+# Singleton instance
+Config = APEXConfig
