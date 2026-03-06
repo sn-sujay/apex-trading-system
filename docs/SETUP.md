@@ -74,150 +74,139 @@ Each app connection is done once. All agents share the same OAuth tokens automat
 
 ## 3. Broker & API Connections
 
-### Dhan API Setup
+### Broker API Setup (Dhan)
 
-1. Log in to Dhan at [https://dhan.co](https://dhan.co)
-2. Go to **My Profile > API Access**
-3. Generate Access Token
+1. Log in to your Dhan account at https://dhan.co
+2. Go to **My Profile** > **API Access**
+3. Click **Generate Access Token**
 4. Copy your **Client ID** and **Access Token**
-5. Add to `.env`:
-
-```
-DHAN_CLIENT_ID=your_client_id_here
-DHAN_ACCESS_TOKEN=your_access_token_here
-```
-
-**Important:** Dhan access tokens expire every 24 hours — regenerate daily or use Dhan's token refresh flow. APEX reads `DHAN_ACCESS_TOKEN` from agent memory at execution time. Update this variable daily in Nebula Secrets.
+5. Add them to your `.env` file:
+   ```
+   DHAN_CLIENT_ID=your_client_id_here
+   DHAN_ACCESS_TOKEN=your_access_token_here
+   ```
+6. Note: The Dhan access token expires daily. Re-generate it each morning before market open (before 09:00 IST).
 
 ### Indian API Setup
 
 1. Register at [indianapi.in](https://indianapi.in)
-2. Generate an API key
-3. Add to Nebula secrets: `INDIAN_API_KEY`
+2. Subscribe to the NSE data plan
+3. Copy your API key
+4. Add to `.env`:
+
+```
+INDIAN_API_KEY=your_api_key_here
+```
 
 ---
 
 ## 4. Agent Configuration
 
-All agents use a shared configuration structure. Set the following in Nebula Secrets:
+### Core Agents
 
-```
-# Core
-DHAN_CLIENT_ID=your_client_id
-DHAN_ACCESS_TOKEN=your_access_token
+All agents are created via Nebula's chat interface. Each agent is configured with a system prompt from the `/agents` directory in this repo.
 
-# Data APIs
-INDIAN_API_KEY=your_indian_api_key
+| Agent File | Role | Triggers |
+|------------|------|----------|
+| `apex-trading-monitor.md` | Master orchestrator | 15-min schedule |
+| `nse-option-chain-monitor.md` | Option chain analysis | Price alert |
+| `sentiment-intelligence-engine.md` | Sentiment analysis | Daily schedule |
+| `live-trade-performance-monitor.md` | P&l tracking | Trade event |
+| `apex-self-evolution-engine.md` | Strategy learning | EOD schedule |
 
-# Risk Limits
-MAX_DAILY_LOSS_PCT=5.0
-MAX_POSITION_SIZE_PCT=10.0
-VIX_KILL_SWITCH_THRESHOLD=25.0
+### Creating Agents in Nebula
 
-# Capital
-TOTAL_CAPITAL_INR=1000000
-
-# Mode
-PAPER_TRADE_MODE=true
-ENABLE_LIVE_TRADING=false
-```
+1. In Nebula, click **New Agent**
+2. Paste the system prompt from the agent markdown file
+3. Configure the agent's app connections (Dhan, IndianAPI, Gmail)
+4. Save the agent
 
 ---
 
 ## 5. Memory Namespace Initialization
 
-Before the first run, initialize the `APEX_TRADING` memory namespace:
-
-```python
-from nebula_sdk import memory
-
-memory.set("APEX_TRADING", "KILL_SWITCH", "FALSE")
-memory.set("APEX_TRADING", "PAPER_LEDGER", "{}")
-memory.set("APEX_TRADING", "DAILY_PNL", "0.0")
-```
-
-Or, in the Nebula chat:
+Before first run, initialize the APEX memory namespace in Nebula:
 
 ```
-Initialize APEX_TRADING memory namespace with KILL_SWITCH=FALSE, PAPER_LEDGER={}, DAILY_PNL=0.0
+APEX_TRADING.KILL_SWITCH=FALSE
+APEX_TRADING.PAPER_MODE=TRUE
+APEX_TRADING.PAPER_LEDGER={}
+APEX_TRADING.DAILY_PNL={}
+APEX_TRADING.RISK_PER_TRADE=0.02
 ```
+
+These are set via Nebula's memory interface or through an agent command.
 
 ---
 
 ## 6. Trigger Activation
 
-Activate triggers in this order:
+### Main Trading Trigger
 
-1. **Trigger06** — EOD Reconciliation (test manually first)
-2. **Trigger01** — Overnight macro scanner
-3. **Trigger02** — Morning pre-session brief
-4. **Trigger03** — Option chain refresh
-5. **Trigger05** — Position monitor
-   - Start 30 minutes after Trigger03
-6. **Trigger04** **(last)** — Core trading loop
-   - Only activate after all others are running
+Create a scheduled trigger in Nebula:
+
+```
+Trigger: Scheduled
+Cron: */15 9-15 Mon-Fri * * (IST)
+Agent: APEX Trading Monitor
+```
+
+### Additional Triggers
+
+```
+EOD Report:       0 16 Mon-Fri * * (IST)
+Self Evolution:   0 20 Mon-Fri * * (IST)
+Sentiment Scan:   0 8 Mon-Fri * * (IST)
+```
 
 ---
 
 ## 7. Paper Trading First Run
 
-1. Verify `PAPER_TRADE_MODE=true` in secrets
-2. Manually trigger Trigger02 at 08:00 IST and check output:
-   - Should see `GLOBAL_SENTIMENT` and `MARKET_DATA` written to memory
-3. At 09:15 IST, Trigger04 should produce first signals
-4. Check `PAPER_LEDGER` in memory for positions
-5. At 15:35 IST, Trigger06 produces EOD report via email
+1. Ensure `APEX_TRADING.PAPER_MODE=TRUE` in memory
+2. Start the main trigger at 09:15 IST
+3. Monitor the agent logs in Nebula
+4. Check paper P&L after market close (15:30 IST)
+5. Run for at least 2 weeks before going live
 
 ---
 
 ## 8. Going Live — Checklist
 
-- [ ] Paper trading > 20 sessions with > 60% win rate
-- [ ] Dhan API v2 Client ID and Access Token configured
-- [ ] Risk limits reviewed and set
-- [ ] Emergency kill switch tested
-- [ ] Alerts (WhatsApp + email) configured
-- [ ] Set `ENABLE_LIVE_TRADING=true` in Nebula secrets
-- [ ] Set `PAPER_TRADE_MODE=false` in Nebula secrets
+- [ ] Paper trading profitable for 2+ weeks
+- [ ] Risk parameters reviewed and approved
+- [ ] Dhan account funded
+- [ ] APEX_TRADING.PAPER_MODE set to FALSE
+- [ ] Kill switch tested
+- [ ] EOD report email verified
+- [ ] Position sizing confirmed (max 2% risk per trade)
 
 ---
 
 ## 9. Environment Variables Reference
 
-| Variable | Required | Default | Description |
-|---------|----------|---------|-------------|
-| DHAN_CLIENT_ID | Yes | - | Dhan account client ID |
-| DHAN_ACCESS_TOKEN | Yes | - | Dhan API access token (regenerate daily) |
-| INDIAN_API_KEY | Yes | - | IndianAPI key for NSE data |
-| OPENAI_API_KEY | Yes | - | OpenAI GPT-4o for agent LLM |
-| ANTHROPIC_API_KEY | No | - | Claude fallback LLM |
-| MAX_DAILY_LOSS_PCT | No | 5.0 | Daily loss limit % |
-| MAX_POSITION_SIZE_PCT | No | 10.0 | Max single position size % |
-| VIX_KILL_SWITCH_THRESHOLD | No | 25.0 | VIX level to halt trading |
-| TOTAL_CAPITAL_INR | No | 1000000 | Trading capital in INR |
-| PAPER_TRADE_MODE | No | true | Enable paper trading mode |
-| ENABLE_LIVE_TRADING | No | false | Enable live order execution |
+| Variable | Required | Description |
+|----------|----------|--------------|
+| DHAN_CLIENT_ID | Yes | Dhan account ID |
+| DHAN_ACCESS_TOKEN | Yes | Dhan API token (daily renewal) |
+| INDIAN_API_KEY | Yes | IndianAPI.in key for NSE data |
+| PAPER_MODE | No | TRUE for paper trading (default) |
+| RISK_PER_TRADE | No | Max risk per trade (default: 0.02) |
+| MAX_DAILY_LOSS | No | Daily loss limit (default: 0.05) |
+| GMAIL_TO | Yes | EOD report recipient email |
 
 ---
 
 ## 10. Troubleshooting
 
-### Common Issues
+| Issue | Solution |
+|-------|----------|
+| Dhan authentication error | Regenerate access token in Dhan portal |
+| No market data | Check IndianAPI subscription status |
+| Orders not executing | Verify PAPER_MODE=FALSE and Dhan limits |
+| Agent not triggering | Check Nebula trigger schedule and timezone |
+| Memory errors | Re-initialize APEX_TRADING namespace |
 
-**Trigger04 produces no signals**
-- Check that Trigger02 ran successfully and wrote to memory
-- Verify `MARKET_STATE` is not stale (TTL: 20min)
-- Ensure VIX_KILL_SWITCH_THRESHOLD is not triggered
+---
 
-**Orders not executing**
-- Verify `DHAN_ACCESS_TOKEN` is fresh (regenerate daily)
-- Check `KILL_SWITCH` is `FALSE` in memory
-- Confirm `ENABLE_LIVE_TRADING` is `true` for live mode
-
-**Memory read errors**
-- Re-initialize the APEX_TRADING namespace
-- Check Nebula memory quota
-
-**Dhan API errors**
-- Token expired: regenerate at dhan.co > My Profile > API Access
-- Rate limit: Dhan API v2 allows 10 req/sec by default
+> **Ready to trade? ** Start with paper trading, validate performance, then go live with confidence.
