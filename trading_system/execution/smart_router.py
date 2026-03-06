@@ -8,7 +8,7 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from typing import Dict, List, Optional
 from .order_manager import Order, OrderManagementSystem, OrderType
-from .kite_executor import KiteExecutor
+from .dhan_executor import DhanExecutor
 
 
 @dataclass
@@ -22,7 +22,7 @@ class RoutingConfig:
 class SmartOrderRouter:
     """Splits parent orders into time-sliced child orders."""
 
-    def __init__(self, executor: KiteExecutor, oms: OrderManagementSystem):
+    def __init__(self, executor: DhanExecutor, oms: OrderManagementSystem):
         self.executor = executor
         self.oms = oms
 
