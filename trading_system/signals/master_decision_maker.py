@@ -7,7 +7,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Any, Dict, Optional
 from ..core.signal_schema import (
-    AgentSignal, ConsensusDecision, SignalDirection, SignalTimeframe, AssetClass
+    ConsensusDecision, SignalDirection, SignalTimeframe, AssetClass
 )
 from .signal_bus import InterAgentSignalBus
 from .conflict_detector import ConflictDetectionEngine

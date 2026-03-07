@@ -3,9 +3,7 @@ FundamentalAnalysis Agent — evaluates company/index fundamentals.
 Tracks P/E, P/B, EPS growth, sector rotation, FII/DII flows, and earnings calendar.
 """
 from __future__ import annotations
-import asyncio
-from datetime import datetime
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict
 from ..core.base_agent import APEXBaseAgent
 from ..core.signal_schema import AgentSignal, SignalDirection, SignalTimeframe, AssetClass
 

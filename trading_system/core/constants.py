@@ -51,24 +51,24 @@ CONFLICT_THRESHOLD = 0.30        # conflict if bull/bear split within 30%
 
 # ── Agent Weights (sum to 1.0) ──────────────────────────────────────────────
 AGENT_WEIGHTS = {
-    "IndianMarketDataAgent":      0.08,
-    "GlobalMarketDataAgent":      0.07,
-    "CommoditiesAgent":           0.05,
-    "TechnicalAnalysisAgent":     0.10,
-    "AlgoStrategyAgent":          0.08,
-    "OptionsDerivativesAgent":    0.07,
-    "MarketRegimeAgent":          0.06,
-    "SGXPreMarketAgent":          0.04,
-    "FundamentalAnalysisAgent":   0.06,
-    "FIIDIIFlowAgent":            0.06,
-    "RBIIndianMacroAgent":        0.05,
-    "GlobalMacroAgent":           0.05,
-    "IndianNewsEventsAgent":      0.04,
-    "GlobalNewsAgent":            0.04,
-    "SentimentPositioningAgent":  0.05,
-    "ZeroDTEExpiryAgent":         0.05,
-    "RiskManagementAgent":        0.05,  # veto power
-    "PortfolioManagementAgent":   0.05,
+    "IndianMarketDataAgent": 0.08,
+    "GlobalMarketDataAgent": 0.07,
+    "CommoditiesAgent": 0.05,
+    "TechnicalAnalysisAgent": 0.10,
+    "AlgoStrategyAgent": 0.08,
+    "OptionsDerivativesAgent": 0.07,
+    "MarketRegimeAgent": 0.06,
+    "SGXPreMarketAgent": 0.04,
+    "FundamentalAnalysisAgent": 0.06,
+    "FIIDIIFlowAgent": 0.06,
+    "RBIIndianMacroAgent": 0.05,
+    "GlobalMacroAgent": 0.05,
+    "IndianNewsEventsAgent": 0.04,
+    "GlobalNewsAgent": 0.04,
+    "SentimentPositioningAgent": 0.05,
+    "ZeroDTEExpiryAgent": 0.05,
+    "RiskManagementAgent": 0.05,  # veto power
+    "PortfolioManagementAgent": 0.05,
 }
 
 # ── Risk Parameters ─────────────────────────────────────────────────────────

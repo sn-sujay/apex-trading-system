@@ -5,7 +5,7 @@ orchestrates order lifecycle via DhanExecutor.
 from __future__ import annotations
 
 import logging
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Dict, List, Optional
 
 from trading_system.execution.dhan_executor import DhanExecutor
@@ -86,5 +86,5 @@ class OrderManagementSystem:
             logger.error(f"Cancel failed for {order_id}: {e}")
             return False
 
-    def get_open_orders(self) -> List[Order]:
+    def get_open_orders(self) -> "List[Order]":
         return [o for o in self._orders.values() if o.status not in ("cancelled", "filled")]

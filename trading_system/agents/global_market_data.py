@@ -3,10 +3,7 @@ APEX Agent 2: GlobalMarketDataAgent
 Monitors US/EU/Asian markets and measures correlation with Indian markets.
 """
 from __future__ import annotations
-import asyncio
-from typing import Dict, Any, List
-import numpy as np
-import pandas as pd
+from typing import Dict, Any
 
 from ..core.base_agent import APEXBaseAgent
 from ..core.signal_schema import AgentSignal, SignalDirection, SignalTimeframe, AssetClass
@@ -21,24 +18,24 @@ class GlobalMarketDataAgent(APEXBaseAgent):
     """
 
     GLOBAL_SYMBOLS = {
-        "SP500":    SP500_SYMBOL,
-        "NASDAQ":   NASDAQ_SYMBOL,
-        "NIKKEI":   NIKKEI_SYMBOL,
+        "SP500": SP500_SYMBOL,
+        "NASDAQ": NASDAQ_SYMBOL,
+        "NIKKEI": NIKKEI_SYMBOL,
         "HANGSENG": HANGSENG_SYMBOL,
-        "DAX":      DAX_SYMBOL,
-        "FTSE":     "^FTSE",
-        "VIX":      "^VIX",
-        "INDIA_VIX":"^INDIAVIX",
+        "DAX": DAX_SYMBOL,
+        "FTSE": "^FTSE",
+        "VIX": "^VIX",
+        "INDIA_VIX": "^INDIAVIX",
     }
 
     # Historical correlation of each index with Nifty (approximate)
     NIFTY_CORRELATIONS = {
-        "SP500":    0.72,
-        "NASDAQ":   0.68,
-        "NIKKEI":   0.55,
+        "SP500": 0.72,
+        "NASDAQ": 0.68,
+        "NIKKEI": 0.55,
         "HANGSENG": 0.50,
-        "DAX":      0.60,
-        "FTSE":     0.45,
+        "DAX": 0.60,
+        "FTSE": 0.45,
     }
 
     def __init__(self, config=None):

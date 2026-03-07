@@ -3,8 +3,7 @@ ZeroDTE / Expiry Day Agent — specialized logic for Nifty/BankNifty/FinNifty/Se
 weekly expiry dynamics: gamma squeeze, max pain gravity, 0DTE flows, and pin risk.
 """
 from __future__ import annotations
-from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict
 from ..core.base_agent import APEXBaseAgent
 from ..core.signal_schema import AgentSignal, SignalDirection, SignalTimeframe, AssetClass
 

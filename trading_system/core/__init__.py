@@ -5,7 +5,6 @@ from .signal_schema import (
 )
 from .config import APEXConfig, settings
 from .base_agent import APEXBaseAgent
-from .constants import *
 
 __all__ = [
     "AgentSignal", "ConsensusDecision",

@@ -4,7 +4,7 @@ APEX Trading Intelligence System - Kafka Setup and Management
 
 import logging
 from typing import List, Dict, Any, Optional
-from confluent_kafka import Producer, Consumer, KafkaError
+from confluent_kafka import Producer, Consumer
 from confluent_kafka.admin import AdminClient, NewTopic
 
 logger = logging.getLogger("apex.kafka")
@@ -155,7 +155,7 @@ class KafkaManager:
 
         Returns:
             True if successful
-        
+
         """
         try:
             fs = self.admin_client.delete_topics([topic], request_timeout=10.0)

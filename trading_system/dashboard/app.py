@@ -3,16 +3,13 @@ APEX Dashboard — Streamlit-based real-time monitoring dashboard.
 Displays live signals, portfolio status, agent health, and performance metrics.
 """
 from __future__ import annotations
-import json
 import time
-from datetime import datetime, timezone
-from typing import Any, Dict
+from typing import Any
 
 try:
     import streamlit as st
     import pandas as pd
     import plotly.graph_objects as go
-    import plotly.express as px
     import httpx
     STREAMLIT_AVAILABLE = True
 except ImportError:

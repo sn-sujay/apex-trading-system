@@ -3,8 +3,6 @@ dhan_feed.py -- Dhan API v2 WebSocket Market Data Feed
 Replaces kite_feed.py. Streams live NSE F&O tick data via DhanHQ WebSocket.
 """
 
-import asyncio
-import json
 import logging
 import threading
 from typing import Callable, Dict, List, Optional

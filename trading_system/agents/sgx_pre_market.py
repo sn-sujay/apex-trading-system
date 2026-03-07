@@ -3,10 +3,8 @@ SGX Pre-Market Agent — monitors SGX Nifty / GIFT Nifty for overnight gap predi
 Runs before Indian market open (8:00–9:15 AM IST) to set pre-market directional bias.
 """
 from __future__ import annotations
-import asyncio
 import httpx
-from datetime import datetime, timezone
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 from ..core.base_agent import APEXBaseAgent
 from ..core.signal_schema import AgentSignal, SignalDirection, SignalTimeframe, AssetClass
 

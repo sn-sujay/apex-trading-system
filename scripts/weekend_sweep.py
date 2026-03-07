@@ -28,13 +28,8 @@ import sys
 import time
 from collections import defaultdict
 from datetime import datetime, timezone, timedelta
+from typing import Any
 from pathlib import Path
-from typing import TYPE_CHECKING
-
-
-
-if TYPE_CHECKING:
-    from typing import Any
 
 
 try:
@@ -73,14 +68,14 @@ log = logging.getLogger("apex.weekend_sweep")
 
 RSS_FEEDS = {
     "economic_times_markets": "https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms",
-    "economic_times_economy":  "https://economictimes.indiatimes.com/news/economy/rssfeeds/1373380680.cms",
-    "moneycontrol_news":       "https://www.moneycontrol.com/rss/MCtopnews.xml",
-    "moneycontrol_markets":    "https://www.moneycontrol.com/rss/marketreports.xml",
-    "reuters_india":           "https://feeds.reuters.com/reuters/INtopNews",
-    "reuters_business":        "https://feeds.reuters.com/reuters/businessNews",
-    "reuters_markets":         "https://feeds.reuters.com/reuters/marketsNews",
-    "livemint_markets":        "https://www.livemint.com/rss/markets",
-    "livemint_economy":        "https://www.livemint.com/rss/economy",
+    "economic_times_economy": "https://economictimes.indiatimes.com/news/economy/rssfeeds/1373380680.cms",
+    "moneycontrol_news": "https://www.moneycontrol.com/rss/MCtopnews.xml",
+    "moneycontrol_markets": "https://www.moneycontrol.com/rss/marketreports.xml",
+    "reuters_india": "https://feeds.reuters.com/reuters/INtopNews",
+    "reuters_business": "https://feeds.reuters.com/reuters/businessNews",
+    "reuters_markets": "https://feeds.reuters.com/reuters/marketsNews",
+    "livemint_markets": "https://www.livemint.com/rss/markets",
+    "livemint_economy": "https://www.livemint.com/rss/economy",
 }
 
 BULLISH_KEYWORDS = [
@@ -209,8 +204,8 @@ def fetch_rss_feed(name: str, url: str, cutoff: datetime) -> list[dict]:
 def aggregate_snapshot(articles: list[dict], lookback_hours: int) -> dict:
     bullish = [a for a in articles if a["sentiment"] == "BULLISH"]
     bearish = [a for a in articles if a["sentiment"] == "BEARISH"]
-    neutral  = [a for a in articles if a["sentiment"] == "NEUTRAL"]
-    macro    = [a for a in articles if a["macro_relevant"]]
+    neutral = [a for a in articles if a["sentiment"] == "NEUTRAL"]
+    macro = [a for a in articles if a["macro_relevant"]]
     total = len(articles)
     bull_pct = round(len(bullish) / total * 100, 1) if total > 0 else 0.0
     bear_pct = round(len(bearish) / total * 100, 1) if total > 0 else 0.0
@@ -270,7 +265,7 @@ def write_to_redis(snapshot: dict) -> None:
         return
     host = os.environ.get("REDIS_HOST", "localhost")
     port = int(os.environ.get("REDIS_PORT", "6379"))
-    db   = int(os.environ.get("REDIS_DB", "0"))
+    db = int(os.environ.get("REDIS_DB", "0"))
     try:
         r = redis_lib.Redis(host=host, port=port, db=db,
                             socket_connect_timeout=5, socket_timeout=5,

@@ -4,7 +4,6 @@ Tracks RBI policy, Indian inflation (CPI/WPI), GDP, IIP data.
 """
 from __future__ import annotations
 from typing import Dict, Any
-import httpx
 
 from ..core.base_agent import APEXBaseAgent
 from ..core.signal_schema import AgentSignal, SignalDirection, SignalTimeframe, AssetClass

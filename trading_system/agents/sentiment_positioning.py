@@ -110,7 +110,7 @@ class SentimentPositioningAgent(APEXBaseAgent):
 
     def _score_fii_derivatives(self, data: Dict) -> float:
         fii_index_fut_net = data.get("fii_index_fut_net_cr", 0)
-        fii_index_opt_net = data.get("fii_index_opt_net_cr", 0)
+        data.get("fii_index_opt_net_cr", 0)
         score = 0.0
         if fii_index_fut_net > 2000:
             score += 20

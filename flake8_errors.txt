@@ -1,0 +1,255 @@
+scripts/weekend_sweep.py:70:30: E241 multiple spaces after ':'
+scripts/weekend_sweep.py:71:25: E241 multiple spaces after ':'
+scripts/weekend_sweep.py:72:28: E241 multiple spaces after ':'
+scripts/weekend_sweep.py:73:21: E241 multiple spaces after ':'
+scripts/weekend_sweep.py:74:24: E241 multiple spaces after ':'
+scripts/weekend_sweep.py:75:23: E241 multiple spaces after ':'
+scripts/weekend_sweep.py:76:24: E241 multiple spaces after ':'
+scripts/weekend_sweep.py:77:24: E241 multiple spaces after ':'
+scripts/weekend_sweep.py:132:34: F821 undefined name 'Any'
+scripts/weekend_sweep.py:206:12: E221 multiple spaces before operator
+scripts/weekend_sweep.py:207:10: E221 multiple spaces before operator
+scripts/weekend_sweep.py:267:7: E221 multiple spaces before operator
+trading_system/agents/__init__.py:2:1: F401 '.indian_market_data.IndianMarketDataAgent' imported but unused
+trading_system/agents/__init__.py:3:1: F401 '.global_market_data.GlobalMarketDataAgent' imported but unused
+trading_system/agents/__init__.py:4:1: F401 '.commodities.CommoditiesAgent' imported but unused
+trading_system/agents/__init__.py:5:1: F401 '.technical_analysis.TechnicalAnalysisAgent' imported but unused
+trading_system/agents/__init__.py:6:1: F401 '.algo_strategy.AlgoStrategyAgent' imported but unused
+trading_system/agents/__init__.py:7:1: F401 '.options_derivatives.OptionsDerivativesAgent' imported but unused
+trading_system/agents/__init__.py:8:1: F401 '.market_regime.MarketRegimeAgent' imported but unused
+trading_system/agents/__init__.py:9:1: F401 '.sgx_pre_market.SGXPreMarketAgent' imported but unused
+trading_system/agents/__init__.py:10:1: F401 '.fundamental_analysis.FundamentalAnalysisAgent' imported but unused
+trading_system/agents/__init__.py:11:1: F401 '.fii_dii_flow.FIIDIIFlowAgent' imported but unused
+trading_system/agents/__init__.py:12:1: F401 '.rbi_macro.RBIIndianMacroAgent' imported but unused
+trading_system/agents/__init__.py:13:1: F401 '.global_macro.GlobalMacroAgent' imported but unused
+trading_system/agents/__init__.py:14:1: F401 '.indian_news_events.IndianNewsEventsAgent' imported but unused
+trading_system/agents/__init__.py:15:1: F401 '.global_news.GlobalNewsAgent' imported but unused
+trading_system/agents/__init__.py:16:1: F401 '.sentiment_positioning.SentimentPositioningAgent' imported but unused
+trading_system/agents/__init__.py:17:1: F401 '.zero_dte_expiry.ZeroDTEExpiryAgent' imported but unused
+trading_system/agents/algo_strategy.py:6:1: F401 'asyncio' imported but unused
+trading_system/agents/algo_strategy.py:7:1: F401 'datetime.datetime' imported but unused
+trading_system/agents/algo_strategy.py:8:1: F401 'typing.Optional' imported but unused
+trading_system/agents/algo_strategy.py:11:1: F401 '..core.constants.NIFTY50_SYMBOL' imported but unused
+trading_system/agents/algo_strategy.py:11:1: F401 '..core.constants.BANKNIFTY_SYMBOL' imported but unused
+trading_system/agents/fundamental_analysis.py:6:1: F401 'asyncio' imported but unused
+trading_system/agents/fundamental_analysis.py:7:1: F401 'datetime.datetime' imported but unused
+trading_system/agents/fundamental_analysis.py:8:1: F401 'typing.List' imported but unused
+trading_system/agents/fundamental_analysis.py:8:1: F401 'typing.Optional' imported but unused
+trading_system/agents/global_market_data.py:6:1: F401 'asyncio' imported but unused
+trading_system/agents/global_market_data.py:7:1: F401 'typing.List' imported but unused
+trading_system/agents/global_market_data.py:8:1: F401 'numpy as np' imported but unused
+trading_system/agents/global_market_data.py:9:1: F401 'pandas as pd' imported but unused
+trading_system/agents/global_market_data.py:24:17: E241 multiple spaces after ':'
+trading_system/agents/global_market_data.py:25:18: E241 multiple spaces after ':'
+trading_system/agents/global_market_data.py:26:18: E241 multiple spaces after ':'
+trading_system/agents/global_market_data.py:28:15: E241 multiple spaces after ':'
+trading_system/agents/global_market_data.py:29:16: E241 multiple spaces after ':'
+trading_system/agents/global_market_data.py:30:15: E241 multiple spaces after ':'
+trading_system/agents/global_market_data.py:31:20: E231 missing whitespace after ':'
+trading_system/agents/global_market_data.py:36:17: E241 multiple spaces after ':'
+trading_system/agents/global_market_data.py:37:18: E241 multiple spaces after ':'
+trading_system/agents/global_market_data.py:38:18: E241 multiple spaces after ':'
+trading_system/agents/global_market_data.py:40:15: E241 multiple spaces after ':'
+trading_system/agents/global_market_data.py:41:16: E241 multiple spaces after ':'
+trading_system/agents/indian_market_data.py:50:21: F821 undefined name 'datetime'
+trading_system/agents/indian_market_data.py:60:30: F821 undefined name 'datetime'
+trading_system/agents/indian_market_data.py:74:26: F821 undefined name 'datetime'
+trading_system/agents/indian_news_events.py:6:1: F401 'asyncio' imported but unused
+trading_system/agents/indian_news_events.py:7:1: F401 'httpx' imported but unused
+trading_system/agents/indian_news_events.py:8:1: F401 'datetime.datetime' imported but unused
+trading_system/agents/indian_news_events.py:8:1: F401 'datetime.timedelta' imported but unused
+trading_system/agents/indian_news_events.py:8:1: F401 'datetime.timezone' imported but unused
+trading_system/agents/indian_news_events.py:9:1: F401 'typing.Optional' imported but unused
+trading_system/agents/indian_news_events.py:85:13: F841 local variable 'sentiment' is assigned to but never used
+trading_system/agents/market_regime.py:9:1: F401 'pandas as pd' imported but unused
+trading_system/agents/market_regime.py:106:35: E241 multiple spaces after ':'
+trading_system/agents/market_regime.py:107:35: E241 multiple spaces after ':'
+trading_system/agents/market_regime.py:108:34: E241 multiple spaces after ':'
+trading_system/agents/market_regime.py:109:33: E241 multiple spaces after ':'
+trading_system/agents/options_derivatives.py:6:1: F401 'typing.List' imported but unused
+trading_system/agents/options_derivatives.py:6:1: F401 'typing.Optional' imported but unused
+trading_system/agents/options_derivatives.py:7:1: F401 'numpy as np' imported but unused
+trading_system/agents/options_derivatives.py:54:9: F841 local variable 'max_pain_candidates' is assigned to but never used
+trading_system/agents/rbi_macro.py:7:1: F401 'httpx' imported but unused
+trading_system/agents/sentiment_positioning.py:113:9: F841 local variable 'fii_index_opt_net' is assigned to but never used
+trading_system/agents/sgx_pre_market.py:6:1: F401 'asyncio' imported but unused
+trading_system/agents/sgx_pre_market.py:8:1: F401 'datetime.datetime' imported but unused
+trading_system/agents/sgx_pre_market.py:8:1: F401 'datetime.timezone' imported but unused
+trading_system/agents/sgx_pre_market.py:9:1: F401 'typing.Optional' imported but unused
+trading_system/agents/technical_analysis.py:7:1: F401 'typing.List' imported but unused
+trading_system/agents/technical_analysis.py:22:21: E241 multiple spaces after ':'
+trading_system/agents/technical_analysis.py:23:15: E241 multiple spaces after ':'
+trading_system/agents/technical_analysis.py:24:16: E241 multiple spaces after ':'
+trading_system/agents/technical_analysis.py:25:21: E241 multiple spaces after ':'
+trading_system/agents/technical_analysis.py:26:22: E241 multiple spaces after ':'
+trading_system/agents/technical_analysis.py:27:15: E241 multiple spaces after ':'
+trading_system/agents/technical_analysis.py:28:24: E241 multiple spaces after ':'
+trading_system/agents/technical_analysis.py:136:9: E741 ambiguous variable name 'l'
+trading_system/agents/technical_analysis.py:155:26: E127 continuation line over-indented for visual indent
+trading_system/agents/technical_analysis.py:167:50: E226 missing whitespace around arithmetic operator
+trading_system/agents/technical_analysis.py:168:52: E226 missing whitespace around arithmetic operator
+trading_system/agents/technical_analysis.py:194:26: E127 continuation line over-indented for visual indent
+trading_system/agents/technical_analysis.py:245:29: E241 multiple spaces after ':'
+trading_system/agents/technical_analysis.py:246:23: E241 multiple spaces after ':'
+trading_system/agents/technical_analysis.py:247:24: E241 multiple spaces after ':'
+trading_system/agents/technical_analysis.py:248:29: E241 multiple spaces after ':'
+trading_system/agents/technical_analysis.py:249:30: E241 multiple spaces after ':'
+trading_system/agents/technical_analysis.py:250:23: E241 multiple spaces after ':'
+trading_system/agents/technical_analysis.py:251:32: E241 multiple spaces after ':'
+trading_system/agents/zero_dte_expiry.py:6:1: F401 'datetime.datetime' imported but unused
+trading_system/agents/zero_dte_expiry.py:6:1: F401 'datetime.timezone' imported but unused
+trading_system/agents/zero_dte_expiry.py:7:1: F401 'typing.List' imported but unused
+trading_system/agents/zero_dte_expiry.py:7:1: F401 'typing.Optional' imported but unused
+trading_system/agents/zero_dte_expiry.py:7:1: F401 'typing.Tuple' imported but unused
+trading_system/api/routes.py:7:1: F401 'fastapi.HTTPException' imported but unused
+trading_system/api/server.py:9:1: F401 'typing.Any' imported but unused
+trading_system/api/server.py:11:1: F401 'fastapi.BackgroundTasks' imported but unused
+trading_system/backtesting/engine.py:6:1: F401 'numpy as np' imported but unused
+trading_system/backtesting/engine.py:9:1: F401 'datetime.datetime' imported but unused
+trading_system/backtesting/engine.py:10:1: F401 'typing.Any' imported but unused
+trading_system/backtesting/engine.py:10:1: F401 'typing.Tuple' imported but unused
+trading_system/core/__init__.py:8:1: F403 'from .constants import *' used; unable to detect undefined names
+trading_system/core/__init__.py:8:1: F401 '.constants.*' imported but unused
+trading_system/core/base_agent.py:10:1: F401 'uuid' imported but unused
+trading_system/core/base_agent.py:11:1: F401 'abc.abstractmethod' imported but unused
+trading_system/core/base_agent.py:12:1: F401 'datetime.datetime' imported but unused
+trading_system/core/base_agent.py:15:1: F401 '.signal_schema.MarketRegime' imported but unused
+trading_system/core/base_agent.py:15:1: F401 '.signal_schema.SignalTimeframe' imported but unused
+trading_system/core/base_agent.py:15:1: F401 '.signal_schema.AssetClass' imported but unused
+trading_system/core/base_agent.py:17:1: F401 '.constants.STRONG_SIGNAL_THRESHOLD' imported but unused
+trading_system/core/base_agent.py:81:9: F841 local variable 'data' is assigned to but never used
+trading_system/core/base_agent.py:98:1: W293 blank line contains whitespace
+trading_system/core/config.py:8:1: F401 'typing.List' imported but unused
+trading_system/core/config.py:57:5: E303 too many blank lines (2)
+trading_system/core/config.py:58:5: E704 multiple statements on one line (def)
+trading_system/core/config.py:60:5: E704 multiple statements on one line (def)
+trading_system/core/config.py:62:5: E704 multiple statements on one line (def)
+trading_system/core/config.py:64:5: E704 multiple statements on one line (def)
+trading_system/core/config.py:66:1: E305 expected 2 blank lines after class or function definition, found 1
+trading_system/core/constants.py:54:29: E241 multiple spaces after ':'
+trading_system/core/constants.py:55:29: E241 multiple spaces after ':'
+trading_system/core/constants.py:56:24: E241 multiple spaces after ':'
+trading_system/core/constants.py:57:30: E241 multiple spaces after ':'
+trading_system/core/constants.py:58:25: E241 multiple spaces after ':'
+trading_system/core/constants.py:59:31: E241 multiple spaces after ':'
+trading_system/core/constants.py:60:25: E241 multiple spaces after ':'
+trading_system/core/constants.py:61:25: E241 multiple spaces after ':'
+trading_system/core/constants.py:62:32: E241 multiple spaces after ':'
+trading_system/core/constants.py:63:23: E241 multiple spaces after ':'
+trading_system/core/constants.py:64:27: E241 multiple spaces after ':'
+trading_system/core/constants.py:65:24: E241 multiple spaces after ':'
+trading_system/core/constants.py:66:29: E241 multiple spaces after ':'
+trading_system/core/constants.py:67:23: E241 multiple spaces after ':'
+trading_system/core/constants.py:68:33: E241 multiple spaces after ':'
+trading_system/core/constants.py:69:26: E241 multiple spaces after ':'
+trading_system/core/constants.py:70:27: E241 multiple spaces after ':'
+trading_system/core/constants.py:71:32: E241 multiple spaces after ':'
+trading_system/core/signal_schema.py:17:15: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:18:8: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:19:12: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:20:9: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:21:16: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:22:14: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:25:1: E305 expected 2 blank lines after class or function definition, found 1
+trading_system/core/signal_schema.py:32:13: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:33:15: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:34:10: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:35:15: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:36:14: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:40:11: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:41:12: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:42:12: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:43:14: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:44:10: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:45:11: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:46:10: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:50:15: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:51:15: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:52:13: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:53:13: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:54:12: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:55:11: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:64:19: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:65:20: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:66:23: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:67:19: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:70:31: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:71:22: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:72:31: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:73:28: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:74:25: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:77:16: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:78:18: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:79:26: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:80:28: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:81:31: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:84:33: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:85:31: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:86:30: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:87:30: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:88:35: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:91:19: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:92:27: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:93:36: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:94:29: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:95:39: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:96:39: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:99:25: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:100:31: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:101:33: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:104:32: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:106:22: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:121:23: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:122:23: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:124:20: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:139:40: E241 multiple spaces after ':'
+trading_system/core/signal_schema.py:140:33: E241 multiple spaces after ':'
+trading_system/core/signal_schema.py:141:37: E241 multiple spaces after ':'
+trading_system/core/signal_schema.py:142:34: E241 multiple spaces after ':'
+trading_system/core/signal_schema.py:142:34: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:143:40: E231 missing whitespace after ':'
+trading_system/core/signal_schema.py:144:39: E241 multiple spaces after ':'
+trading_system/core/signal_schema.py:155:21: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:156:19: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:159:37: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:160:27: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:161:26: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:162:24: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:165:16: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:166:18: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:167:28: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:168:31: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:198:33: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:199:31: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:200:30: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:201:30: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:202:29: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:205:22: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:206:24: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:207:24: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:208:24: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:209:21: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:210:22: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:211:31: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:214:37: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:215:33: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:218:25: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:219:22: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:220:22: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:221:38: E221 multiple spaces before operator
+trading_system/core/signal_schema.py:234:1: E305 expected 2 blank lines after class or function definition, found 1
+trading_system/dashboard/app.py:6:1: F401 'json' imported but unused
+trading_system/dashboard/app.py:8:1: F401 'datetime.datetime' imported but unused
+trading_system/dashboard/app.py:8:1: F401 'datetime.timezone' imported but unused
+trading_system/dashboard/app.py:9:1: F401 'typing.Dict' imported but unused
+trading_system/dashboard/app.py:15:5: F401 'plotly.express as px' imported but unused
+trading_system/data/dhan_feed.py:6:1: F401 'asyncio' imported but unused
+trading_system/data/dhan_feed.py:7:1: F401 'json' imported but unused
+trading_system/data/kafka_setup.py:7:1: F401 'confluent_kafka.KafkaError' imported but unused
+trading_system/data/kafka_setup.py:158:1: W293 blank line contains whitespace
+trading_system/data/redis_client.py:10:1: F401 'datetime.timedelta' imported but unused
+trading_system/execution/order_manager.py:8:1: F401 'dataclasses.field' imported but unused
+trading_system/execution/smart_router.py:8:1: F401 'datetime.datetime' imported but unused
+trading_system/execution/smart_router.py:8:1: F401 'datetime.timedelta' imported but unused
+trading_system/execution/smart_router.py:8:1: F401 'datetime.timezone' imported but unused
+trading_system/execution/smart_router.py:9:1: F401 'typing.Dict' imported but unused

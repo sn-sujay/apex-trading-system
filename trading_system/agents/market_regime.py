@@ -6,7 +6,6 @@ Used by MasterDecisionMaker to weight/filter signals from all other agents.
 from __future__ import annotations
 from typing import Dict, Any, Tuple
 import numpy as np
-import pandas as pd
 
 from ..core.base_agent import APEXBaseAgent
 from ..core.signal_schema import AgentSignal, SignalDirection, MarketRegime, SignalTimeframe, AssetClass
@@ -103,10 +102,10 @@ class MarketRegimeAgent(APEXBaseAgent):
         regime_direction_map = {
             MarketRegime.BULL_TREND: SignalDirection.BUY,
             MarketRegime.BEAR_TREND: SignalDirection.SELL,
-            MarketRegime.SIDEWAYS:   SignalDirection.NEUTRAL,
-            MarketRegime.HIGH_VOL:   SignalDirection.NEUTRAL,
-            MarketRegime.LOW_VOL:    SignalDirection.BUY,
-            MarketRegime.CRISIS:     SignalDirection.STRONG_SELL,
+            MarketRegime.SIDEWAYS: SignalDirection.NEUTRAL,
+            MarketRegime.HIGH_VOL: SignalDirection.NEUTRAL,
+            MarketRegime.LOW_VOL: SignalDirection.BUY,
+            MarketRegime.CRISIS: SignalDirection.STRONG_SELL,
         }
         direction = regime_direction_map[regime]
 

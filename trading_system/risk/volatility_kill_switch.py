@@ -5,7 +5,7 @@ pre-defined volatility, gap, or circuit-breaker thresholds.
 from __future__ import annotations
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Dict, List, Optional, Tuple
+from typing import Any, Dict, Optional, Tuple
 
 
 @dataclass
@@ -31,7 +31,7 @@ class VolatilityKillSwitch:
         if hasattr(self.config, "VIX_KILL_SWITCH_THRESHOLD"):
             # Map APEXConfig fields to KillSwitchConfig if available
             self.config.india_vix_halt_threshold = getattr(self.config, "VIX_KILL_SWITCH_THRESHOLD", 30.0)
-        
+
         self.is_active = False
         self.trigger_reason: Optional[str] = None
         self.triggered_at: Optional[datetime] = None

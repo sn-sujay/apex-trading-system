@@ -3,8 +3,7 @@ APEX Agent 6: OptionsDerivativesAgent
 Analyzes options chain data: PCR, OI buildup, max pain, IV surface.
 """
 from __future__ import annotations
-from typing import Dict, Any, List, Optional
-import numpy as np
+from typing import Dict, Any
 import pandas as pd
 
 from ..core.base_agent import APEXBaseAgent
@@ -51,7 +50,6 @@ class OptionsDerivativesAgent(APEXBaseAgent):
         data_rows = records.get("data", [])
         total_ce_oi = 0
         total_pe_oi = 0
-        max_pain_candidates = {}
         iv_data = []
 
         for row in data_rows:

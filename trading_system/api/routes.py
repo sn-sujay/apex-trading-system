@@ -4,7 +4,7 @@ Additional API route handlers — backtesting, agent management, and alert confi
 from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 from pydantic import BaseModel
 
 router = APIRouter(prefix="/api/v1", tags=["extended"])

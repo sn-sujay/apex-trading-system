@@ -3,10 +3,7 @@ IndianNewsEvents Agent — parses NSE/BSE announcements, SEBI circulars,
 RBI bulletins, earnings releases, and corporate actions for event-driven signals.
 """
 from __future__ import annotations
-import asyncio
-import httpx
-from datetime import datetime, timedelta, timezone
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from ..core.base_agent import APEXBaseAgent
 from ..core.signal_schema import AgentSignal, SignalDirection, SignalTimeframe, AssetClass
 
@@ -82,7 +79,7 @@ class IndianNewsEventsAgent(APEXBaseAgent):
         for event in events:
             headline = event.get("headline", "").lower()
             impact = event.get("impact", "LOW")
-            sentiment = event.get("sentiment", "neutral")
+            event.get("sentiment", "neutral")
             weight = {"HIGH": 15, "MEDIUM": 8, "LOW": 3}.get(impact, 3)
             for kw in self.BULLISH_KEYWORDS:
                 if kw in headline:

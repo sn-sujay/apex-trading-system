@@ -7,7 +7,6 @@ import logging
 import json
 from typing import Dict, List, Optional, Any
 from redis.asyncio import Redis, ConnectionPool
-from datetime import timedelta
 
 logger = logging.getLogger("apex.redis")
 

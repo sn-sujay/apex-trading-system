@@ -3,12 +3,9 @@ AlgoStrategy Agent — generates structured trade signals using multi-factor sco
 Combines technical patterns, regime context, and options flow into actionable signals.
 """
 from __future__ import annotations
-import asyncio
-from datetime import datetime
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 from ..core.base_agent import APEXBaseAgent
 from ..core.signal_schema import AgentSignal, SignalDirection, SignalTimeframe, AssetClass
-from ..core.constants import NIFTY50_SYMBOL, BANKNIFTY_SYMBOL
 
 
 class AlgoStrategyAgent(APEXBaseAgent):

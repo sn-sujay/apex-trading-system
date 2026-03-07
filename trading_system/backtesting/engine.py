@@ -3,11 +3,9 @@ BacktestEngine — vectorised backtesting using pandas + numpy.
 Supports OHLCV replay, signal injection, slippage simulation, and multi-strategy comparison.
 """
 from __future__ import annotations
-import numpy as np
 import pandas as pd
 from dataclasses import dataclass, field
-from datetime import datetime
-from typing import Any, Callable, Dict, List, Optional, Tuple
+from typing import Callable, Dict, List, Optional
 from ..risk.slippage_simulator import SlippageCostSimulator, BrokerageConfig
 
 

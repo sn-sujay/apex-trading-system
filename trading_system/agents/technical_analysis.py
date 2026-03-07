@@ -4,7 +4,7 @@ Multi-timeframe technical analysis using pandas_ta.
 Indicators: EMA, RSI, MACD, Bollinger Bands, Supertrend, ADX, Ichimoku.
 """
 from __future__ import annotations
-from typing import Dict, Any, List, Tuple
+from typing import Dict, Any, Tuple
 import numpy as np
 import pandas as pd
 
@@ -19,13 +19,13 @@ class TechnicalAnalysisAgent(APEXBaseAgent):
     """
 
     INDICATOR_WEIGHTS = {
-        "ema_cross":     0.20,
-        "rsi":           0.15,
-        "macd":          0.20,
-        "bollinger":     0.15,
-        "supertrend":    0.15,
-        "adx":           0.10,
-        "volume_trend":  0.05,
+        "ema_cross": 0.20,
+        "rsi": 0.15,
+        "macd": 0.20,
+        "bollinger": 0.15,
+        "supertrend": 0.15,
+        "adx": 0.10,
+        "volume_trend": 0.05,
     }
 
     def __init__(self, config=None):
@@ -133,8 +133,8 @@ class TechnicalAnalysisAgent(APEXBaseAgent):
         lower = ma - 2 * std
         price = float(c.iloc[-1])
         u = float(upper.iloc[-1])
-        l = float(lower.iloc[-1])
-        b = (price - l) / (u - l) if (u - l) > 0 else 0.5
+        l_band = float(lower.iloc[-1])
+        b = (price - l_band) / (u - l_band) if (u - l_band) > 0 else 0.5
         if b < 0.1:
             return 0.8, f"Price near BB lower band (oversold, %B={b:.2f})"
         elif b > 0.9:
@@ -152,8 +152,8 @@ class TechnicalAnalysisAgent(APEXBaseAgent):
         close = df["close"] if "close" in df.columns else df["Close"]
         hl2 = (high + low) / 2
         tr = pd.concat([high - low,
-                         (high - close.shift()).abs(),
-                         (low - close.shift()).abs()], axis=1).max(axis=1)
+                        (high - close.shift()).abs(),
+                        (low - close.shift()).abs()], axis=1).max(axis=1)
         atr = tr.rolling(period).mean()
         upper = hl2 + multiplier * atr
         lower = hl2 - multiplier * atr
@@ -164,8 +164,8 @@ class TechnicalAnalysisAgent(APEXBaseAgent):
                 supertrend.iloc[i] = lower.iloc[i]
                 direction_arr.iloc[i] = 1
             else:
-                prev_st = float(supertrend.iloc[i-1])
-                prev_dir = int(direction_arr.iloc[i-1])
+                prev_st = float(supertrend.iloc[i - 1])
+                prev_dir = int(direction_arr.iloc[i - 1])
                 curr_close = float(close.iloc[i])
                 if prev_dir == 1:
                     supertrend.iloc[i] = max(float(lower.iloc[i]), prev_st)
@@ -191,8 +191,8 @@ class TechnicalAnalysisAgent(APEXBaseAgent):
         low = df["low"] if "low" in df.columns else df["Low"]
         close = df["close"] if "close" in df.columns else df["Close"]
         tr = pd.concat([high - low,
-                         (high - close.shift()).abs(),
-                         (low - close.shift()).abs()], axis=1).max(axis=1)
+                        (high - close.shift()).abs(),
+                        (low - close.shift()).abs()], axis=1).max(axis=1)
         atr14 = tr.rolling(14).mean()
         dm_plus = high.diff().clip(lower=0)
         dm_minus = (-low.diff()).clip(lower=0)
@@ -242,13 +242,13 @@ class TechnicalAnalysisAgent(APEXBaseAgent):
                 continue
 
             indicator_scores = {
-                "ema_cross":     self._ema_cross_signal(df),
-                "rsi":           self._rsi_signal(df),
-                "macd":          self._macd_signal(df),
-                "bollinger":     self._bollinger_signal(df),
-                "supertrend":    self._supertrend_signal(df),
-                "adx":           self._adx_signal(df),
-                "volume_trend":  self._volume_trend_signal(df),
+                "ema_cross": self._ema_cross_signal(df),
+                "rsi": self._rsi_signal(df),
+                "macd": self._macd_signal(df),
+                "bollinger": self._bollinger_signal(df),
+                "supertrend": self._supertrend_signal(df),
+                "adx": self._adx_signal(df),
+                "volume_trend": self._volume_trend_signal(df),
             }
 
             tf_score = sum(

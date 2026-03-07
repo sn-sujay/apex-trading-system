@@ -7,16 +7,14 @@ from __future__ import annotations
 import asyncio
 import logging
 import time
-import uuid
-from abc import ABC, abstractmethod
-from datetime import datetime
+from abc import ABC
 from typing import Optional, Dict, Any, List
 
-from .signal_schema import AgentSignal, SignalDirection, MarketRegime, SignalTimeframe, AssetClass
+from .signal_schema import AgentSignal, SignalDirection
 from .config import APEXConfig
 from .constants import (
     KAFKA_SIGNAL_TOPIC, REDIS_SIGNAL_PREFIX,
-    STRONG_SIGNAL_THRESHOLD, WEAK_SIGNAL_THRESHOLD
+    WEAK_SIGNAL_THRESHOLD
 )
 
 
@@ -78,7 +76,7 @@ class APEXBaseAgent(ABC):
         Core analysis logic. Must return a populated AgentSignal.
         Called by run_cycle() on every tick/interval.
         """
-        data = await self._fetch_data()
+        await self._fetch_data()
         return self._no_signal("Method not implemented")
 
     async def _fetch_data(self) -> Dict[str, Any]:
@@ -95,7 +93,7 @@ class APEXBaseAgent(ABC):
         try:
             self._run_count += 1
             self._last_run_ts = start
-            
+
             # Flexible call to analyze
             import inspect
             sig = inspect.signature(self.analyze)

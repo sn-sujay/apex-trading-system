@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import os
 from dataclasses import dataclass, field
-from typing import List, Optional
+from typing import Optional
 
 
 @dataclass
@@ -53,15 +53,22 @@ class APEXConfig:
     # --- Kill Switch ---
     VIX_KILL_SWITCH_THRESHOLD: float = field(default_factory=lambda: float(os.getenv("VIX_KILL_SWITCH_THRESHOLD", "30.0")))
 
+    @property
+    def redis_host(self) -> str:
+        return self.REDIS_HOST
 
     @property
-    def redis_host(self) -> str: return self.REDIS_HOST
+    def redis_port(self) -> int:
+        return self.REDIS_PORT
+
     @property
-    def redis_port(self) -> int: return self.REDIS_PORT
+    def redis_password(self) -> Optional[str]:
+        return os.getenv("REDIS_PASSWORD")
+
     @property
-    def redis_password(self) -> Optional[str]: return os.getenv("REDIS_PASSWORD")
-    @property
-    def kafka_bootstrap(self) -> str: return self.KAFKA_BOOTSTRAP_SERVERS
+    def kafka_bootstrap(self) -> str:
+        return self.KAFKA_BOOTSTRAP_SERVERS
+
 
 Config = APEXConfig
 settings = APEXConfig()

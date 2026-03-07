@@ -63,7 +63,7 @@ class APEXOrchestrator:
         self.signal_bus = SignalBus(redis_client=self.redis)
         self.conflict_detector = ConflictDetector()
         self.learning_engine = LearningEngine(redis_client=self.redis)
-        
+
         self.risk_manager = RiskManager(config=self.config)
         self.kill_switch = VolatilityKillSwitch(config=self.config)
 

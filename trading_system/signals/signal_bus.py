@@ -4,9 +4,8 @@ and broadcasts the aggregated view to the MasterDecisionMaker.
 """
 from __future__ import annotations
 import asyncio
-from collections import defaultdict
 from datetime import datetime, timezone
-from typing import Any, Callable, Dict, List, Optional
+from typing import Any, Callable, Dict, List
 from ..core.signal_schema import AgentSignal, SignalDirection
 
 
