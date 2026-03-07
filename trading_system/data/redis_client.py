@@ -1,425 +1,319 @@
 """
-APEX Trading Intelligence System - Redis Client
-Async Redis operations for caching and pub/sub
-"""
+APEX Trading System — Upstash Redis Client
+==========================================
+Two-database architecture:
+  DB1 (Live State)    — env: UPSTASH_LIVE_STATE_URL / UPSTASH_LIVE_STATE_TOKEN
+  DB2 (Intelligence)  — env: UPSTASH_INTELLIGENCE_URL / UPSTASH_INTELLIGENCE_TOKEN
 
-import logging
+Import:
+    from trading_system.data.redis_client import db1, db2, TTL_REGIME, TTL_SIGNAL
+
+Key Schema (DB1):
+  MARKET_REGIME, TRADE_SIGNALS, APPROVED_SIGNALS, PAPER_LEDGER, PAPER_STATS,
+  EXECUTION_LOG, VETO_REPORT, OPTION_CHAIN_SNAPSHOT, SENTIMENT_SNAPSHOT,
+  GLOBAL_MACRO_SNAPSHOT, POS:{symbol}, VALIDATION_RESULT, HEALTH_STATUS, ERROR_LOG
+
+Key Schema (DB2):
+  CONFIG:CAPITAL, CONFIG:RISK, CONFIG:LOT_SIZES, CONFIG:EMAIL,
+  CONFIG:INSTRUMENTS, CONFIG:SCHEDULE, STRATEGY:*, HISTORICAL:*
+"""
+from __future__ import annotations
+
 import json
-from typing import Dict, List, Optional, Any
-from redis.asyncio import Redis, ConnectionPool
+import logging
+import os
+from typing import Any, Dict, List, Optional
+
+from redis.asyncio import Redis
 
 logger = logging.getLogger("apex.redis")
 
+_DB1_URL_ENV   = "UPSTASH_LIVE_STATE_URL"
+_DB1_TOKEN_ENV = "UPSTASH_LIVE_STATE_TOKEN"
+_DB2_URL_ENV   = "UPSTASH_INTELLIGENCE_URL"
+_DB2_TOKEN_ENV = "UPSTASH_INTELLIGENCE_TOKEN"
 
-class RedisClient:
-    """Async Redis client wrapper for APEX system"""
+# TTL constants (seconds)
+TTL_TICK      = 10
+TTL_SNAPSHOT  = 300
+TTL_REGIME    = 900
+TTL_SIGNAL    = 900
+TTL_POSITION  = 3_600
+TTL_SESSION   = 28_800
+TTL_EOD       = 86_400
+TTL_WEEK      = 604_800
+TTL_PERMANENT = 0
 
-    def __init__(
-        self,
-        redis_url: Optional[str] = None,
-        host: str = "localhost",
-        port: int = 6379,
-        db: int = 0
-    ):
-        """
-        Initialize Redis client
 
-        Args:
-            redis_url: Redis connection URL (optional)
-            host: Redis host (default: localhost)
-            port: Redis port (default: 6379)
-            db: Redis database (default: 0)
-        """
-        if not redis_url:
-            redis_url = f"redis://{host}:{port}/{db}"
+def _build_client(url: str, token: str) -> Redis:
+    redis_url = url.replace("https://", "rediss://").replace("http://", "redis://").rstrip("/")
+    if ":6380" not in redis_url and ":6379" not in redis_url:
+        redis_url = f"{redis_url}:6380"
+    return Redis.from_url(
+        redis_url,
+        password=token,
+        decode_responses=True,
+        ssl=True,
+        ssl_cert_reqs=None,
+        socket_timeout=5,
+        socket_connect_timeout=5,
+        retry_on_timeout=True,
+    )
 
-        self.redis_url = redis_url
-        self.pool = ConnectionPool.from_url(redis_url, decode_responses=False)
-        self.client = Redis(connection_pool=self.pool)
-        logger.info(f"Redis client initialized: {redis_url}")
 
-    async def close(self):
-        """Close Redis connection"""
-        await self.client.close()
-        await self.pool.disconnect()
+class ApexRedis:
+    """Unified APEX Redis client for DB1 (live state) and DB2 (intelligence)."""
 
-    async def setex(self, name, time, value):
-        """Proxy setex to underlying Redis client"""
-        return await self.client.setex(name, time, value)
+    def __init__(self, url_env: str, token_env: str, db_name: str):
+        self._url_env   = url_env
+        self._token_env = token_env
+        self._db_name   = db_name
+        self._client: Optional[Redis] = None
 
-    # ===== PRICE CACHE =====
-    async def set_price(self, symbol: str, price: float, ttl: int = 5) -> bool:
-        """
-        Cache latest price for a symbol
+    def _ensure_client(self) -> Redis:
+        if self._client is None:
+            url   = os.environ.get(self._url_env, "")
+            token = os.environ.get(self._token_env, "")
+            if not url or not token:
+                raise EnvironmentError(
+                    f"Missing env vars {self._url_env} / {self._token_env}. "
+                    "Set them in .env or your deployment environment."
+                )
+            self._client = _build_client(url, token)
+            logger.info(f"[{self._db_name}] Redis client initialised")
+        return self._client
 
-        Args:
-            symbol: Asset symbol
-            price: Current price
-            ttl: Time to live in seconds
+    async def close(self) -> None:
+        if self._client:
+            await self._client.aclose()
+            self._client = None
 
-        Returns:
-            True if successful
-        """
+    # -- Core primitives ----------------------------------------------------------
+
+    async def set(self, key: str, value: Any, ttl: int = TTL_SESSION) -> bool:
         try:
-            key = f"price:{symbol}"
-            await self.client.setex(key, ttl, str(price))
+            client = self._ensure_client()
+            payload = json.dumps(value, default=str)
+            if ttl and ttl > 0:
+                await client.setex(key, ttl, payload)
+            else:
+                await client.set(key, payload)
             return True
         except Exception as e:
-            logger.error(f"Error setting price for {symbol}: {e}")
+            logger.error(f"[{self._db_name}] SET {key} failed: {e}")
             return False
 
-    async def get_price(self, symbol: str) -> Optional[float]:
-        """
-        Get cached price for a symbol
-
-        Args:
-            symbol: Asset symbol
-
-        Returns:
-            Price or None
-        """
+    async def get(self, key: str) -> Optional[Any]:
         try:
-            key = f"price:{symbol}"
-            price_bytes = await self.client.get(key)
-            if price_bytes:
-                return float(price_bytes.decode())
-            return None
+            client = self._ensure_client()
+            raw = await client.get(key)
+            return json.loads(raw) if raw is not None else None
         except Exception as e:
-            logger.error(f"Error getting price for {symbol}: {e}")
+            logger.error(f"[{self._db_name}] GET {key} failed: {e}")
             return None
 
-    # ===== AGENT SIGNALS =====
-    async def set_agent_signal(
-        self,
-        agent_name: str,
-        symbol: str,
-        signal_dict: Dict[str, Any],
-        ttl: int = 300
-    ) -> bool:
-        """
-        Cache agent signal
-
-        Args:
-            agent_name: Agent name
-            symbol: Asset symbol
-            signal_dict: Signal data as dict
-            ttl: Time to live in seconds
-
-        Returns:
-            True if successful
-        """
+    async def delete(self, *keys: str) -> int:
         try:
-            key = f"signal:{agent_name}:{symbol}"
-            await self.client.setex(key, ttl, json.dumps(signal_dict))
-            return True
+            return await self._ensure_client().delete(*keys)
         except Exception as e:
-            logger.error(f"Error setting signal: {e}")
+            logger.error(f"[{self._db_name}] DELETE {keys} failed: {e}")
+            return 0
+
+    async def exists(self, key: str) -> bool:
+        try:
+            return bool(await self._ensure_client().exists(key))
+        except Exception as e:
+            logger.error(f"[{self._db_name}] EXISTS {key} failed: {e}")
             return False
 
-    async def get_agent_signal(
-        self,
-        agent_name: str,
-        symbol: str
-    ) -> Optional[Dict[str, Any]]:
-        """
-        Get cached agent signal
-
-        Args:
-            agent_name: Agent name
-            symbol: Asset symbol
-
-        Returns:
-            Signal dict or None
-        """
+    async def ttl(self, key: str) -> int:
         try:
-            key = f"signal:{agent_name}:{symbol}"
-            data = await self.client.get(key)
-            if data:
-                return json.loads(data.decode())
-            return None
+            return await self._ensure_client().ttl(key)
         except Exception as e:
-            logger.error(f"Error getting signal: {e}")
-            return None
+            logger.error(f"[{self._db_name}] TTL {key} failed: {e}")
+            return -2
 
-    async def get_all_signals_for_symbol(
-            self, symbol: str) -> List[Dict[str, Any]]:
-        """
-        Get all agent signals for a symbol
-
-        Args:
-            symbol: Asset symbol
-
-        Returns:
-            List of signal dicts
-        """
+    async def keys(self, pattern: str = "*") -> List[str]:
         try:
-            pattern = f"signal:*:{symbol}"
-            keys = await self.client.keys(pattern)
-
-            signals = []
-            for key in keys:
-                data = await self.client.get(key)
-                if data:
-                    signals.append(json.loads(data.decode()))
-
-            return signals
+            result: List[str] = []
+            async for key in self._ensure_client().scan_iter(pattern):
+                result.append(key)
+            return result
         except Exception as e:
-            logger.error(f"Error getting signals for {symbol}: {e}")
+            logger.error(f"[{self._db_name}] KEYS {pattern} failed: {e}")
             return []
 
-    # ===== ORDER BOOK =====
-    async def set_order_book(
-        self,
-        symbol: str,
-        bids: List[tuple],
-        asks: List[tuple],
-        ttl: int = 2
-    ) -> bool:
-        """
-        Cache order book data
-
-        Args:
-            symbol: Asset symbol
-            bids: List of (price, qty) tuples
-            asks: List of (price, qty) tuples
-            ttl: Time to live in seconds
-
-        Returns:
-            True if successful
-        """
+    async def expire(self, key: str, ttl: int) -> bool:
         try:
-            key = f"orderbook:{symbol}"
-            data = {"bids": bids, "asks": asks}
-            await self.client.setex(key, ttl, json.dumps(data))
-            return True
+            return bool(await self._ensure_client().expire(key, ttl))
         except Exception as e:
-            logger.error(f"Error setting order book: {e}")
+            logger.error(f"[{self._db_name}] EXPIRE {key} failed: {e}")
             return False
 
-    async def get_order_book(self, symbol: str) -> Optional[Dict[str, Any]]:
-        """
-        Get cached order book
+    # -- Batch helpers ------------------------------------------------------------
 
-        Args:
-            symbol: Asset symbol
-
-        Returns:
-            Order book dict or None
-        """
+    async def set_many(self, mapping: Dict[str, Any], ttl: int = TTL_SESSION) -> bool:
         try:
-            key = f"orderbook:{symbol}"
-            data = await self.client.get(key)
-            if data:
-                return json.loads(data.decode())
-            return None
-        except Exception as e:
-            logger.error(f"Error getting order book: {e}")
-            return None
-
-    # ===== MARKET REGIME =====
-    async def set_regime(self, regime: str, ttl: int = 3600) -> bool:
-        """
-        Set current market regime
-
-        Args:
-            regime: Regime string
-            ttl: Time to live in seconds
-
-        Returns:
-            True if successful
-        """
-        try:
-            key = "regime:current"
-            await self.client.setex(key, ttl, regime)
+            pipe = self._ensure_client().pipeline()
+            for key, value in mapping.items():
+                payload = json.dumps(value, default=str)
+                if ttl and ttl > 0:
+                    pipe.setex(key, ttl, payload)
+                else:
+                    pipe.set(key, payload)
+            await pipe.execute()
             return True
         except Exception as e:
-            logger.error(f"Error setting regime: {e}")
+            logger.error(f"[{self._db_name}] SET_MANY failed: {e}")
             return False
 
-    async def get_regime(self) -> Optional[str]:
-        """
-        Get current market regime
-
-        Returns:
-            Regime string or None
-        """
+    async def get_many(self, keys: List[str]) -> Dict[str, Any]:
         try:
-            key = "regime:current"
-            regime = await self.client.get(key)
-            return regime.decode() if regime else None
+            raw_values = await self._ensure_client().mget(*keys)
+            return {k: (json.loads(v) if v is not None else None) for k, v in zip(keys, raw_values)}
         except Exception as e:
-            logger.error(f"Error getting regime: {e}")
+            logger.error(f"[{self._db_name}] GET_MANY failed: {e}")
+            return {k: None for k in keys}
+
+    async def append_list(self, key: str, item: Any, max_len: int = 200, ttl: int = TTL_EOD) -> bool:
+        try:
+            client = self._ensure_client()
+            await client.rpush(key, json.dumps(item, default=str))
+            await client.ltrim(key, -max_len, -1)
+            if ttl > 0:
+                await client.expire(key, ttl)
+            return True
+        except Exception as e:
+            logger.error(f"[{self._db_name}] APPEND_LIST {key} failed: {e}")
+            return False
+
+    async def get_list(self, key: str, start: int = 0, end: int = -1) -> List[Any]:
+        try:
+            raw = await self._ensure_client().lrange(key, start, end)
+            return [json.loads(item) for item in raw]
+        except Exception as e:
+            logger.error(f"[{self._db_name}] GET_LIST {key} failed: {e}")
+            return []
+
+    async def increment(self, key: str, amount: float = 1.0, ttl: int = TTL_EOD) -> Optional[float]:
+        try:
+            client = self._ensure_client()
+            new_val = await client.incrbyfloat(key, amount)
+            if ttl > 0:
+                await client.expire(key, ttl)
+            return float(new_val)
+        except Exception as e:
+            logger.error(f"[{self._db_name}] INCREMENT {key} failed: {e}")
             return None
 
-    # ===== COUNTERS =====
-    async def increment_daily_counter(self, key: str) -> int:
-        """
-        Increment a daily counter
-
-        Args:
-            key: Counter key
-
-        Returns:
-            New count
-        """
+    async def publish(self, channel: str, message: Any) -> int:
         try:
-            daily_key = f"{key}:daily"
-            count = await self.client.incr(daily_key)
-
-            # Set expiry for end of day
-            if count == 1:
-                await self.client.expire(daily_key, 86400)
-
-            return count
+            return await self._ensure_client().publish(channel, json.dumps(message, default=str))
         except Exception as e:
-            logger.error(f"Error incrementing counter: {e}")
+            logger.error(f"[{self._db_name}] PUBLISH {channel} failed: {e}")
             return 0
 
-    # ===== PUB/SUB =====
-    async def publish_alert(
-            self, channel: str, message: Dict[str, Any]) -> int:
-        """
-        Publish alert message
+    # -- APEX domain helpers ------------------------------------------------------
 
-        Args:
-            channel: Channel name
-            message: Message dict
+    async def set_market_regime(self, regime: Dict) -> bool:
+        return await self.set("MARKET_REGIME", regime, ttl=TTL_REGIME)
 
-        Returns:
-            Number of subscribers
-        """
-        try:
-            count = await self.client.publish(channel, json.dumps(message))
-            return count
-        except Exception as e:
-            logger.error(f"Error publishing alert: {e}")
-            return 0
+    async def get_market_regime(self) -> Optional[Dict]:
+        return await self.get("MARKET_REGIME")
 
-    # ===== AGENT WEIGHTS =====
-    async def set_agent_weight(self, agent_name: str, weight: float) -> bool:
-        """
-        Set agent weight
+    async def set_trade_signals(self, signals: List[Dict]) -> bool:
+        return await self.set("TRADE_SIGNALS", signals, ttl=TTL_SIGNAL)
 
-        Args:
-            agent_name: Agent name
-            weight: Weight value
+    async def get_trade_signals(self) -> Optional[List[Dict]]:
+        return await self.get("TRADE_SIGNALS")
 
-        Returns:
-            True if successful
-        """
-        try:
-            key = f"weight:{agent_name}"
-            await self.client.set(key, str(weight))
-            return True
-        except Exception as e:
-            logger.error(f"Error setting weight: {e}")
-            return False
+    async def set_approved_signals(self, signals: List[Dict]) -> bool:
+        return await self.set("APPROVED_SIGNALS", signals, ttl=TTL_SIGNAL)
 
-    async def get_agent_weight(self, agent_name: str) -> Optional[float]:
-        """
-        Get agent weight
+    async def get_approved_signals(self) -> Optional[List[Dict]]:
+        return await self.get("APPROVED_SIGNALS")
 
-        Args:
-            agent_name: Agent name
+    async def set_paper_ledger(self, ledger: Dict) -> bool:
+        return await self.set("PAPER_LEDGER", ledger, ttl=TTL_SESSION)
 
-        Returns:
-            Weight or None
-        """
-        try:
-            key = f"weight:{agent_name}"
-            weight = await self.client.get(key)
-            return float(weight.decode()) if weight else None
-        except Exception as e:
-            logger.error(f"Error getting weight: {e}")
-            return None
+    async def get_paper_ledger(self) -> Optional[Dict]:
+        return await self.get("PAPER_LEDGER")
 
-    # ===== VIX =====
-    async def set_vix(self, vix_value: float, ttl: int = 300) -> bool:
-        """
-        Set current VIX value
+    async def set_option_chain(self, chain: Dict) -> bool:
+        return await self.set("OPTION_CHAIN_SNAPSHOT", chain, ttl=TTL_SNAPSHOT)
 
-        Args:
-            vix_value: VIX value
-            ttl: Time to live in seconds
+    async def get_option_chain(self) -> Optional[Dict]:
+        return await self.get("OPTION_CHAIN_SNAPSHOT")
 
-        Returns:
-            True if successful
-        """
-        try:
-            key = "vix:current"
-            await self.client.setex(key, ttl, str(vix_value))
-            return True
-        except Exception as e:
-            logger.error(f"Error setting VIX: {e}")
-            return False
+    async def set_sentiment(self, sentiment: Dict) -> bool:
+        return await self.set("SENTIMENT_SNAPSHOT", sentiment, ttl=TTL_SNAPSHOT)
 
-    async def get_vix(self) -> Optional[float]:
-        """
-        Get current VIX value
+    async def get_sentiment(self) -> Optional[Dict]:
+        return await self.get("SENTIMENT_SNAPSHOT")
 
-        Returns:
-            VIX value or None
-        """
-        try:
-            key = "vix:current"
-            vix = await self.client.get(key)
-            return float(vix.decode()) if vix else None
-        except Exception as e:
-            logger.error(f"Error getting VIX: {e}")
-            return None
+    async def log_execution(self, entry: Dict) -> bool:
+        return await self.append_list("EXECUTION_LOG", entry, max_len=200, ttl=TTL_EOD)
 
-    # ===== KILL SWITCH =====
-    async def set_kill_switch(self, status: bool) -> bool:
-        """
-        Set kill switch status
+    async def get_execution_log(self) -> List[Dict]:
+        return await self.get_list("EXECUTION_LOG")
 
-        Args:
-            status: True if halted
+    async def set_health_status(self, status: Dict) -> bool:
+        return await self.set("HEALTH_STATUS", status, ttl=TTL_EOD)
 
-        Returns:
-            True if successful
-        """
-        try:
-            key = "killswitch:status"
-            await self.client.set(key, "1" if status else "0")
-            return True
-        except Exception as e:
-            logger.error(f"Error setting kill switch: {e}")
-            return False
+    async def get_health_status(self) -> Optional[Dict]:
+        return await self.get("HEALTH_STATUS")
 
-    async def get_kill_switch(self) -> bool:
-        """
-        Get kill switch status
+    async def set_position(self, symbol: str, position: Dict) -> bool:
+        return await self.set(f"POS:{symbol}", position, ttl=TTL_POSITION)
 
-        Returns:
-            True if halted
-        """
-        try:
-            key = "killswitch:status"
-            status = await self.client.get(key)
-            return status.decode() == "1" if status else False
-        except Exception as e:
-            logger.error(f"Error getting kill switch: {e}")
-            return False
+    async def get_position(self, symbol: str) -> Optional[Dict]:
+        return await self.get(f"POS:{symbol}")
 
-    # ===== HEALTH CHECK =====
-    async def health_check(self) -> Dict[str, Any]:
-        """
-        Check Redis connection health
+    async def get_all_positions(self) -> Dict[str, Dict]:
+        pos_keys = await self.keys("POS:*")
+        if not pos_keys:
+            return {}
+        results = await self.get_many(pos_keys)
+        return {k.replace("POS:", ""): v for k, v in results.items() if v}
 
-        Returns:
-            Health status dict
-        """
-        try:
-            await self.client.ping()
-            info = await self.client.info()
 
-            return {
-                "status": "healthy",
-                "connected_clients": info.get("connected_clients", 0),
-                "used_memory_human": info.get("used_memory_human", "unknown"),
-                "uptime_in_seconds": info.get("uptime_in_seconds", 0),
-            }
-        except Exception as e:
-            logger.error(f"Health check failed: {e}")
-            return {"status": "error", "error": str(e)}
+# -- Module-level singletons --------------------------------------------------
+db1 = ApexRedis(url_env=_DB1_URL_ENV, token_env=_DB1_TOKEN_ENV, db_name="DB1-LiveState")
+db2 = ApexRedis(url_env=_DB2_URL_ENV, token_env=_DB2_TOKEN_ENV, db_name="DB2-Intelligence")
+
+
+# -- Backward-compat shim -----------------------------------------------------
+class RedisClient(ApexRedis):
+    """Legacy shim — existing imports still work. New code should use db1/db2."""
+    def __init__(self, redis_url: Optional[str] = None,
+                 host: str = "localhost", port: int = 6379, db: int = 0):
+        super().__init__(url_env=_DB1_URL_ENV, token_env=_DB1_TOKEN_ENV,
+                         db_name="DB1-LiveState(compat)")
+        if redis_url and "upstash" not in redis_url:
+            logger.warning("RedisClient: redis_url ignored — APEX now uses Upstash.")
+
+    async def set_price(self, symbol: str, price: float, ttl: int = TTL_TICK) -> bool:
+        return await self.set(f"price:{symbol}", price, ttl=ttl)
+
+    async def get_price(self, symbol: str) -> Optional[float]:
+        val = await self.get(f"price:{symbol}")
+        return float(val) if val is not None else None
+
+    async def set_agent_signal(self, agent_name: str, symbol: str,
+                               signal_dict: Dict, ttl: int = TTL_SIGNAL) -> bool:
+        return await self.set(f"signal:{agent_name}:{symbol}", signal_dict, ttl=ttl)
+
+    async def get_agent_signal(self, agent_name: str, symbol: str) -> Optional[Dict]:
+        return await self.get(f"signal:{agent_name}:{symbol}")
+
+    async def set_json(self, key: str, data: Any, ttl: Optional[int] = None) -> bool:
+        return await self.set(key, data, ttl=ttl or TTL_SESSION)
+
+    async def get_json(self, key: str) -> Optional[Any]:
+        return await self.get(key)
+
+    async def set_market_state(self, state: Dict, ttl: int = TTL_REGIME) -> bool:
+        return await self.set("market:state", state, ttl=ttl)
+
+    async def get_market_state(self) -> Optional[Dict]:
+        return await self.get("market:state")
