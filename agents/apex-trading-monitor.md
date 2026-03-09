@@ -39,3 +39,12 @@ Reads live APEX trading state from Nebula memory and sends richly formatted stat
 ## Integration
 - Reads from: all APEX memory keys
 - Part of: APEX Trading System
+
+## Memory Protocol (MANDATORY)
+
+NEVER call manage_memories. Use Upstash Redis REST API directly.
+
+Read DB1: GET UPSTASH_REDIS_REST_URL/get/KEYNAME — Authorization: Bearer UPSTASH_REDIS_REST_TOKEN
+
+Reads only (no writes): MARKET_REGIME DB1, PAPER_LEDGER DB1, APPROVED_SIGNALS DB1, HEALTH_STATUS DB1.
+See docs/UPSTASH_MEMORY_GUIDE.md
