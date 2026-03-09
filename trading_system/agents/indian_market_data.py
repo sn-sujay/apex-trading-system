@@ -1,1 +1,225 @@
-IiIiCkFQRVggQWdlbnQgMTogSW5kaWFuTWFya2V0RGF0YUFnZW50CkluZ2VzdHMgcmVhbC10aW1lIE5TRS9CU0UgZGF0YSB2aWEgWmVyb2RoYSBLaXRlIFdlYlNvY2tldC4KUHJvZHVjZXMgc2lnbmFscyBiYXNlZCBvbiBwcmljZSBhY3Rpb24sIHZvbHVtZSwgYnJlYWR0aCwgYW5kIG1hcmtldCBpbnRlcm5hbHMuCiIiIgpmcm9tIF9fZnV0dXJlX18gaW1wb3J0IGFubm90YXRpb25zCmltcG9ydCBsb2dnaW5nCmZyb20gZGF0ZXRpbWUgaW1wb3J0IGRhdGV0aW1lLCB0aW1lem9uZQpmcm9tIHR5cGluZyBpbXBvcnQgRGljdCwgQW55LCBPcHRpb25hbAoKCmltcG9ydCBwYW5kYXMgYXMgcGQKaW1wb3J0IG51bXB5IGFzIG5wCgpmcm9tIC4uY29yZS5iYXNlX2FnZW50IGltcG9ydCBBUEVYQmFzZUFnZW50CmZyb20gLi5jb3JlLnNpZ25hbF9zY2hlbWEgaW1wb3J0ICgKICAgIEFnZW50U2lnbmFsLCBTaWduYWxEaXJlY3Rpb24sIFNpZ25hbFRpbWVmcmFtZSwKICAgIEFzc2V0Q2xhc3MKKQpmcm9tIC4uY29yZS5jb25zdGFudHMgaW1wb3J0ICgKICAgIE5JRlRZNTBfU1lNQk9MLCBUSU1FRkFNRV81TQopCgpsb2dnZXIgPSBsb2dnaW5nLmdldExvZ2dlcihfX25hbWVfXykKCgpjbGFzcyBJbmRpYW5NYXJrZXREYXRhQWdlbnQoQVBFWEJhc2VBZ2VudCk6CiAgICAiIiIKICAgIE1vbml0b3JzIE5TRS9CU0UgcmVhbC10aW1lIHByaWNlIGFjdGlvbi4KICAgIFNpZ25hbHMgYmFzZWQgb246CiAgICAtIE5pZXN0eTUwIC8gQmFua05pZnR5IHRyZW5kIGFuZCBtb21lbnR1bQogICAgLSBNYXJrZXQgYnJlYWR0aCAoYWR2YW5jZS9kZWNsaW5lIHJhdGlvKQogICAgLSBWb2x1bWUgYW5hbHlzaXMgKHVudXN1YWwgc3Bpa2VzLCBWV0FQIGRldmlhdGlvbikKICAgIC0gT3BlbmluZyByYW5nZSBicmVha291dCAvIHByZS1tYXJrZXQgZ2FwCiAgICAiIiIKCiAgICBkZWYgX19pbml0X18oc2VsZiwgY29uZmlnPU5vbmUpOgogICAgICAgIHN1cGVyKCkuX19pbml0X18oIkluZGlhbk1hcmtldERhdGFBZ2VudCIsICIxLjAuMCIsIGNvbmZpZykKICAgICAgICBzZWxmLl9uaWZ0eV9kYXRhOiBPcHRpb25hbFtwZC5EYXRhRnJhbWVdID0gTm9uZQogICAgICAgIHNlbGYuX2Jhbmtuaey5kYXRhOiBPcHRpb25hbFtwZC5EYXRhRnJhbWVdID0gTm9uZQogICAgICAgIHNlbGYuX21hcmtldF9icmVhZHRoOiBEaWN0W3N0ciwgZmxvYXRdID0ge30KCiAgICBhc3luYyBkZWYgX2ZldGNoX2RhdGEoc2VsZikgLT4gRGljdFtzdHIsIEFueV06CiAgICAgICAgIiIiRmV0Y2ggT0hMQ1YgZGF0YSBmcm9tIEtpdGUgUkVTVCBBUEkuIiIiCiAgICAgICAgdHJ5OgogICAgICAgICAgICBmcm9tIGtpdGVjb25uZWN0IGltcG9ydCBLaXRlQ29ubmVjdAogICAgICAgICAgICBraXRlID0gS2l0ZUNvbm5lY3QoYXBpX2tleT1zZWxmLmNvbmZpZy5raXRlX2FwaV9rZXkpCiAgICAgICAgICAgIGtpdGUuc2V0X2FjY2Vzc190b2tlbihzZWxmLmNvbmZpZy5raXRlX2FjY2Vzc190b2tlbikKCiAgICAgICAgICAgICMgRmV0Y2ggNS1taW4gT0hMQ1YgZm9yIE5pZnR5IGFuZCBCYW5rTmlmdHkKICAgICAgICAgICAgdG9kYXkgPSBkYXRldGltZS5ub3codGltZXpvbmUudXRjKS5zdHJmdGltZSgiJVktJW0tJWQiKQogICAgICAgICAgICBuaWZ0eV9oaXN0ID0ga2l0ZS5oaXN0b3JpY2FsX2RhdGEoCiAgICAgICAgICAgICAgICAyNTYyNjUsIHRvZGF5LCB0b2RheSwgVElNRUZSQU1FXzVNCiAgICAgICAgICAgICkKICAgICAgICAgICAgYmFua25pZnR5X2hpc3QgPSBraXRlLmhpc3RvcmljYWxfZGF0YSgKICAgICAgICAgICAgICAgIDI2MDEwNSwgdG9kYXksIHRvZGF5LCBUSU1FRlJBTUVfNU0KICAgICAgICAgICAgKQogICAgICAgICAgICByZXR1cm4gewogICAgICAgICAgICAgICAgIm5pZnR5IjogcGQuRGF0YUZyYW1lKG5pZnR5X2hpc3QpLAogICAgICAgICAgICAgICAgImJhbmtuaWZ0eSI6IHBkLkRhdGFGcmFtZShiYW5rbmlmdHlfaGlzdCksCiAgICAgICAgICAgICAgICAidGltZXN0YW1wIjogZGF0ZXRpbWUubm93KHRpbWV6b25lLnV0YykuaXNvZm9ybWF0KCksCiAgICAgICAgICAgIH0KICAgICAgICBleGNlcHQgRXhjZXB0aW9uIGFzIGU6CiAgICAgICAgICAgIHNlbGYubG9nZ2VyLndhcm5pbmcoZiJLaXRlIGZldGNoIGZhaWxlZCwgdXNpbmcgZmFsbGJhY2s6IHtlfSIpCiAgICAgICAgICAgIHJldHVybiBhd2FpdCBzZWxmLl9mZXRjaF95YWhvb19mYWxsYmFjaygpCgogICAgYXN5bmMgZGVmIF9mZXRjaF95YWhvb19mYWxsYmFjayhzZWxmKSAtPiBEaWN0W3N0ciwgQW55XToKICAgICAgICAiIiJZYWhvbyBGaW5hbmNlIGZhbGxiYWNrIGZvciBOaWZ0eSBkYXRhLiIiIgogICAgICAgIGltcG9ydCB5ZmluYW5jZSBhcyB5ZgogICAgICAgIG5pZnR5ID0geWYuZG93bmxvYWQoCiAgICAgICAgICAgICJeTlNFSSIsCiAgICAgICAgICAgcGVyaW9kPSIxZCIsCiAgICAgICAgICAgIGludGVydmFsPSI1bSIsCiAgICAgICAgICAgIHByb2dyZXNzPUZhbHNlKQogICAgICAgIGJhbmtuaWZ0eSA9IHlmLmRvd25sb2FkKAogICAgICAgICAgICAiXk5TRUJBTksiLAogICAgICAgICAgICBwZXJpb2Q9IjFkIiwKICAgICAgICAgICAgaW50ZXJ2YWw9IjVtIiwKICAgICAgICAgICAgcHJvZ3Jlc3M9RmFsc2UpCiAgICAgICAgcmV0dXJuIHsKICAgICAgICAgICAgIm5pZnR5IjogbmlmdHksCiAgICAgICAgICAgICJiYW5rbmlmdHkiOiBiYW5rbmlmdHksCiAgICAgICAgICAgICJ0aW1lc3RhbXAiOiBkYXRldGltZS5ub3codGltZXpvbmUudXRjKS5pc29mb3JtYXQoKSwKICAgICAgICB9CgogICAgZGVmIF9jb21wdXRlX21hcmtldF9icmVhZHRoKHNlbGYsIGRmOiBwZC5EYXRhRnJhbWUpIC0+IERpY3Rbc3RyLCBmbG9hdF06CiAgICAgICAgIiIiQ29tcHV0ZSBhZHZhbmNlL2RlY2xpbmUgYW5kIG1vbWVudHVtIGJyZWFkdGguIiIiCiAgICAgICAgaWYgZGYgaXMgTm9uZSBvciBkZi5lbXB0eToKICAgICAgICAgICAgcmV0dXJuIHt9CiAgICAgICAgY2xvc2VzID0gZGZbJ2Nsb3NlJ10KICAgICAgICBkZWx0YXMgPSBjbG9zZXMuZGlmZigpCiAgICAgICAgYWR2YW5jZXMgPSAoZGVsdGFzID4gMCkuc3VtKCkKICAgICAgICBkZWNsaW5lcyA9IChkZWx0YXMgPCAwKS5zdW0oKQogICAgICAgIHJldHVybiB7CiAgICAgICAgICAgICJhZHZhbmNlcyI6IGludChhZHZhbmNlcyksCiAgICAgICAgICAgICJkZWNsaW5lcyI6IGludChkZWNsaW5lcyksCiAgICAgICAgICAgICJhZF9yYXRpbyI6IGZsb2F0KGFkdmFuY2VzIC8gbWF4KGRlY2xpbmVzLCAxKSksCiAgICAgICAgfQoKICAgIGRlZiBfY29tcHV0ZV92d2FwKHNlbGYsIGRmOiBwZC5EYXRhRnJhbWUpIC0+IGZsb2F0OgogICAgICAgICIiIkNvbXB1dGUgVldBUCBmcm9tIE9ITENWIGRhdGEuIiIiCiAgICAgICAgaWYgZGYgaXMgTm9uZSBvciBkZi5lbXB0eToKICAgICAgICAgICAgcmV0dXJuIDAuMAogICAgICAgIHR5cGljYWxfcHJpY2UgPSAoZGZbJ2hpZ2gnXSArIGRmWydsb3cnXSArIGRmWydjbG9zZSddKSAvIDMKICAgICAgICByZXR1cm4gZmxvYXQoKCh0eXBpY2FsX3ByaWNlICogZGZbJ3ZvbHVtZSddKS5zdW0oKSkgLyBkZlsndm9sdW1lJ10uc3VtKCkpCgogICAgYXN5bmMgZGVmIGdlbmVyYXRlX3NpZ25hbChzZWxmKSAtPiBBZ2VudFNpZ25hbDoKICAgICAgICAiIiJNYWluIHNpZ25hbCBnZW5lcmF0aW9uIGxvZ2ljLiIiIgogICAgICAgIGRhdGEgPSBhd2FpdCBzZWxmLl9mZXRjaF9kYXRhKCkKICAgICAgICBuaWZ0eV9kZiA9IGRhdGEuZ2V0KCJuaWZ0eSIpCiAgICAgICAgYmFua25pZnR5X2RmID0gZGF0YS5nZXQoImJhbmtuaWZ0eSIpCgogICAgICAgICMgVldBUCBkZXZpYXRpb24KICAgICAgICBuaWZ0eV92d2FwID0gc2VsZi5fY29tcHV0ZV92d2FwKG5pZnR5X2RmKQogICAgICAgIGJhbmtuaWZ0eV92d2FwID0gc2VsZi5fY29tcHV0ZV92d2FwKGJhbmtuaWZ0eV9kZikKCiAgICAgICAgIyBNYXJrZXQgYnJlYWR0aAogICAgICAgIGJyZWFkdGggPSBzZWxmLl9jb21wdXRlX21hcmtldF9icmVhZHRoKG5pZnR5X2RmKQoKICAgICAgICAjIExhdGVzdCBwcmljZXMKICAgICAgICBuaWZ0eV9wcmljZSA9IGZsb2F0KG5pZnR5X2RmWydjbG9zZSddLmlsb2NbLTFdKSBpZiBuaWZ0eV9kZiBpcyBub3QgTm9uZSBhbmQgbm90IG5pZnR5X2RmLmVtcHR5IGVsc2UgMC4wCiAgICAgICAgYmFua25pZnR5X3ByaWNlID0gZmxvYXQoYmFua25pZnR5X2RmWydjbG9zZSddLmlsb2NbLTFdKSBpZiBiYW5rbmlmdHlfZGYgaXMgbm90IE5vbmUgYW5kIG5vdCBiYW5rbmlmdHlfZGYuZW1wdHkgZWxzZSAwLjAKCiAgICAgICAgIyBTaW1wbGUgc2lnbmFsIGxvZ2ljOiBwcmljZSB2cyBWV0FQCiAgICAgICAgaWYgbmlmdHlfcHJpY2UgPiBuaWZ0eV92d2FwICogMS4wMDIgYW5kIGJyZWFkdGguZ2V0KCJhZF9yYXRpbyIsIDEpID4gMS4yOgogICAgICAgICAgICBkaXJlY3Rpb24gPSBTaWduYWxEaXJlY3Rpb24uQlVZCiAgICAgICAgICAgIGNvbmZpZGVuY2UgPSAwLjY1CiAgICAgICAgZWxpZiBuaWZ0eV9wcmljZSA8IG5pZnR5X3Z3YXAgKiAwLjk5OCBhbmQgYnJlYWR0aC5nZXQoImFkX3JhdGlvIiwgMSkgPCAwLjg6CiAgICAgICAgICAgIGRpcmVjdGlvbiA9IFNpZ25hbERpcmVjdGlvbi5TRUxMCiAgICAgICAgICAgIGNvbmZpZGVuY2UgPSAwLjY1CiAgICAgICAgZWxzZToKICAgICAgICAgICAgZGlyZWN0aW9uID0gU2lnbmFsRGlyZWN0aW9uLk5FVVRSQUwKICAgICAgICAgICAgY29uZmlkZW5jZSA9IDAuNTAKCiAgICAgICAgcmV0dXJuIEFnZW50U2lnbmFsKAogICAgICAgICAgICBhZ2VudF9pZD1zZWxmLmFnZW50X2lkLAogICAgICAgICAgICBzaWduYWw9ZGlyZWN0aW9uLAogICAgICAgICAgICBjb25maWRlbmNlPWNvbmZpZGVuY2UsCiAgICAgICAgICAgIGFzc2V0X2NsYXNzPUFzc2V0Q2xhc3MuRVFVSVRZLAogICAgICAgICAgICB0aW1lZnJhbWU9U2lnbmFsVGltZWZyYW1lLklOVFJBREFZLAogICAgICAgICAgICBtZXRhZGF0YT17CiAgICAgICAgICAgICAgICAibmlmdHlfcHJpY2UiOiBuaWZ0eV9wcmljZSwKICAgICAgICAgICAgICAgICJiYW5rbmlmdHlfcHJpY2UiOiBiYW5rbmlmdHlfcHJpY2UsCiAgICAgICAgICAgICAgICAibmlmdHlfdndhcCI6IG5pZnR5X3Z3YXAsCiAgICAgICAgICAgICAgICAiYmFua25pZnR5X3Z3YXAiOiBiYW5rbmlmdHlfdndhcCwKICAgICAgICAgICAgICAgICJicmVhZHRoIjogYnJlYWR0aCwKICAgICAgICAgICAgICAgICJ0aW1lc3RhbXAiOiBkYXRhLmdldCgidGltZXN0YW1wIiksCiAgICAgICAgICAgIH0sCiAgICAgICAgKQo=
+"""
+APEX Agent 1: IndianMarketDataAgent
+Ingests real-time NSE/BSE data via Zerodha Kite WebSocket.
+Produces signals based on price action, volume, breadth, and market internals.
+"""
+from __future__ import annotations
+import asyncio
+import logging
+from datetime import datetime, time as dtime, timezone
+from zoneinfo import ZoneInfo
+from typing import Dict, Any, Optional, List
+
+import httpx
+import pandas as pd
+import numpy as np
+
+from ..core.base_agent import APEXBaseAgent
+from ..core.signal_schema import (
+    AgentSignal, SignalDirection, SignalTimeframe,
+    AssetClass, MarketRegime
+)
+from ..core.constants import (
+    NSE_OPEN_TIME, NSE_CLOSE_TIME, NIFTY50_SYMBOL,
+    BANKNIFTY_SYMBOL, TIMEFRAME_5M, TIMEFRAME_15M
+)
+
+logger = logging.getLogger(__name__)
+
+
+class IndianMarketDataAgent(APEXBaseAgent):
+    """
+    Monitors NSE/BSE real-time price action.
+    Signals based on:
+    - Nifty50 / BankNifty trend and momentum
+    - Market breadth (advance/decline ratio)
+    - Volume analysis (unusual spikes, VWAP deviation)
+    - Opening range breakout / pre-market gap
+    """
+
+    def __init__(self, config=None):
+        super().__init__("IndianMarketDataAgent", "1.0.0", config)
+        self._nifty_data: Optional[pd.DataFrame] = None
+        self._banknifty_data: Optional[pd.DataFrame] = None
+        self._market_breadth: Dict[str, float] = {}
+
+    async def _fetch_data(self) -> Dict[str, Any]:
+        """Fetch OHLCV data from Kite REST API."""
+        try:
+            from kiteconnect import KiteConnect
+            kite = KiteConnect(api_key=self.config.kite_api_key)
+            kite.set_access_token(self.config.kite_access_token)
+
+            # Fetch 5-min OHLCV for Nifty and BankNifty
+            today = datetime.now(ZoneInfo("Asia/Kolkata")).strftime("%Y-%m-%d")
+            nifty_hist = kite.historical_data(
+                256265, today, today, TIMEFRAME_5M
+            )
+            banknifty_hist = kite.historical_data(
+                260105, today, today, TIMEFRAME_5M
+            )
+            return {
+                "nifty": pd.DataFrame(nifty_hist),
+                "banknifty": pd.DataFrame(banknifty_hist),
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+            }
+        except Exception as e:
+            self.logger.warning(f"Kite fetch failed, using fallback: {e}")
+            return await self._fetch_yahoo_fallback()
+
+    async def _fetch_yahoo_fallback(self) -> Dict[str, Any]:
+        """Yahoo Finance fallback for Nifty data."""
+        import yfinance as yf
+        nifty = yf.download("^NSEI", period="1d", interval="5m", progress=False)
+        banknifty = yf.download("^NSEBANK", period="1d", interval="5m", progress=False)
+        return {
+            "nifty": nifty,
+            "banknifty": banknifty,
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+        }
+
+    def _compute_market_breadth(self, df: pd.DataFrame) -> Dict[str, float]:
+        """Compute advance/decline and momentum breadth."""
+        if df is None or df.empty:
+            return {}
+        close = df["close"] if "close" in df.columns else df["Close"]
+        returns = close.pct_change()
+        advancing = (returns > 0).sum()
+        declining = (returns < 0).sum()
+        total = len(returns.dropna())
+        adr = advancing / declining if declining > 0 else float("inf")
+        return {
+            "advance_decline_ratio": float(adr),
+            "advancing_pct": float(advancing / total) if total else 0.5,
+            "momentum_5": float(close.pct_change(5).iloc[-1]) if len(close) > 5 else 0.0,
+        }
+
+    def _compute_vwap(self, df: pd.DataFrame) -> float:
+        """Compute VWAP."""
+        if df is None or df.empty or len(df) < 2:
+            return 0.0
+        try:
+            close = df["close"] if "close" in df.columns else df["Close"]
+            volume = df["volume"] if "volume" in df.columns else df["Volume"]
+            high = df["high"] if "high" in df.columns else df["High"]
+            low = df["low"] if "low" in df.columns else df["Low"]
+            tp = (high + low + close) / 3
+            vwap = (tp * volume).cumsum() / volume.cumsum()
+            return float(vwap.iloc[-1])
+        except Exception:
+            return 0.0
+
+    def _score_price_action(self, df: pd.DataFrame, symbol: str) -> tuple[SignalDirection, float, str]:
+        """Score price action using EMA crossover + VWAP + RSI."""
+        if df is None or df.empty or len(df) < 20:
+            return SignalDirection.NO_SIGNAL, 0.0, "Insufficient data"
+
+        close = df["close"] if "close" in df.columns else df["Close"]
+        ema9 = close.ewm(span=9).mean()
+        ema21 = close.ewm(span=21).mean()
+
+        # RSI
+        delta = close.diff()
+        gain = delta.clip(lower=0).rolling(14).mean()
+        loss = (-delta.clip(upper=0)).rolling(14).mean()
+        rs = gain / loss.replace(0, np.nan)
+        rsi = 100 - (100 / (1 + rs))
+        current_rsi = float(rsi.iloc[-1]) if not rsi.empty else 50
+
+        # Current price vs VWAP
+        vwap = self._compute_vwap(df)
+        current_price = float(close.iloc[-1])
+        vwap_deviation = (current_price - vwap) / vwap if vwap else 0.0
+
+        # EMA crossover
+        ema_bullish = float(ema9.iloc[-1]) > float(ema21.iloc[-1])
+        ema_prev_bullish = float(ema9.iloc[-2]) > float(ema21.iloc[-2]) if len(ema9) > 1 else ema_bullish
+
+        # Scoring
+        score = 0.0
+        factors = []
+
+        if ema_bullish and not ema_prev_bullish:
+            score += 0.35
+            factors.append("EMA9 crossed above EMA21 (bullish)")
+        elif not ema_bullish and ema_prev_bullish:
+            score -= 0.35
+            factors.append("EMA9 crossed below EMA21 (bearish)")
+        elif ema_bullish:
+            score += 0.15
+            factors.append("EMA9 > EMA21 (uptrend)")
+        else:
+            score -= 0.15
+            factors.append("EMA9 < EMA21 (downtrend)")
+
+        if current_rsi > 60:
+            score += 0.20
+            factors.append(f"RSI={current_rsi:.1f} bullish")
+        elif current_rsi < 40:
+            score -= 0.20
+            factors.append(f"RSI={current_rsi:.1f} bearish")
+        elif current_rsi > 70:
+            score -= 0.10
+            factors.append(f"RSI={current_rsi:.1f} overbought")
+        elif current_rsi < 30:
+            score += 0.10
+            factors.append(f"RSI={current_rsi:.1f} oversold")
+
+        if vwap_deviation > 0.003:
+            score += 0.15
+            factors.append(f"Price above VWAP by {vwap_deviation*100:.2f}%")
+        elif vwap_deviation < -0.003:
+            score -= 0.15
+            factors.append(f"Price below VWAP by {abs(vwap_deviation)*100:.2f}%")
+
+        reasoning = f"{symbol} analysis: " + "; ".join(factors)
+        if score >= 0.45:
+            return SignalDirection.STRONG_BUY, min(score, 0.95), reasoning
+        elif score >= 0.25:
+            return SignalDirection.BUY, score, reasoning
+        elif score <= -0.45:
+            return SignalDirection.STRONG_SELL, min(abs(score), 0.95), reasoning
+        elif score <= -0.25:
+            return SignalDirection.SELL, abs(score), reasoning
+        else:
+            return SignalDirection.NEUTRAL, abs(score), reasoning
+
+    async def analyze(self) -> AgentSignal:
+        data = await self._fetch_data()
+        nifty_df = data.get("nifty")
+        banknifty_df = data.get("banknifty")
+
+        nifty_dir, nifty_conf, nifty_reason = self._score_price_action(nifty_df, "NIFTY50")
+        bank_dir, bank_conf, bank_reason = self._score_price_action(banknifty_df, "BANKNIFTY")
+        breadth = self._compute_market_breadth(nifty_df)
+
+        # Combine: if both agree, boost confidence
+        if nifty_dir == bank_dir:
+            final_conf = min((nifty_conf + bank_conf) / 2 + 0.1, 0.95)
+            final_dir = nifty_dir
+        else:
+            # Disagreement: neutral
+            final_dir = SignalDirection.NEUTRAL
+            final_conf = 0.3
+
+        current_price = None
+        if nifty_df is not None and not nifty_df.empty:
+            close_col = "close" if "close" in nifty_df.columns else "Close"
+            current_price = float(nifty_df[close_col].iloc[-1])
+
+        return self._make_signal(
+            direction=final_dir,
+            confidence=final_conf,
+            symbol=NIFTY50_SYMBOL,
+            reasoning=f"Nifty: {nifty_reason} | BankNifty: {bank_reason}",
+            key_factors=[
+                nifty_reason, bank_reason,
+                f"ADR={breadth.get('advance_decline_ratio', 0):.2f}",
+                f"Breadth={breadth.get('advancing_pct', 0.5)*100:.1f}%",
+            ],
+            current_price=current_price,
+            timeframe=SignalTimeframe.INTRADAY,
+            asset_class=AssetClass.INDEX,
+            exchange="NSE",
+            supporting_data=breadth,
+        )
