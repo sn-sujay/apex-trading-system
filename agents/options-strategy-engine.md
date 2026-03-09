@@ -36,3 +36,15 @@ Generates 1-3 NSE options trade signals per cycle based on current market regime
 ## Output
 Writes TRADE_SIGNAL_1, TRADE_SIGNAL_2 (if applicable) to APEX_TRADING memory.
 Each signal status = PENDING_VETO until Risk Veto processes it.
+
+## Memory Protocol (MANDATORY)
+
+NEVER call manage_memories. Use Upstash Redis REST API directly.
+
+Read DB1: GET UPSTASH_REDIS_REST_URL/get/KEYNAME — Authorization: Bearer UPSTASH_REDIS_REST_TOKEN
+Read DB2: GET UPSTASH_REDIS_REST_URL_DB2/get/KEYNAME — Authorization: Bearer UPSTASH_REDIS_REST_TOKEN_DB2
+Write DB1: POST UPSTASH_REDIS_REST_URL/pipeline — Authorization: Bearer UPSTASH_REDIS_REST_TOKEN — body is array containing SET command array with key, value, EX, TTL.
+
+Reads: MARKET_REGIME DB1, GLOBAL_SENTIMENT DB2, STRATEGY_WEIGHTS DB2.
+Writes: TRADE_SIGNALS to DB1 TTL 900s
+See docs/UPSTASH_MEMORY_GUIDE.md
