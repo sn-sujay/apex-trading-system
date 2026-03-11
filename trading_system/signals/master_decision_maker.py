@@ -42,6 +42,52 @@ class MasterDecisionMakerAgent:
         self.tradable_symbols = ["NIFTY BANK", "BSE BANKEX"]
         self._decision_history: list = []
 
+    async def monitor_open_positions(self, positions: Dict[str, Any], market_data: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """
+        Scans open positions and flags those that are 'unsafe' due to consensus reversal.
+        Returns a list of symbols to exit immediately.
+        """
+        exits = []
+        signals = self.bus.get_all_signals()
+        if not signals or not positions:
+            return []
+
+        # Calculate current consensus direction
+        consensus = await self.decide(market_data)
+        
+        for pos_id, pos in positions.items():
+            symbol = pos.symbol
+            direction = pos.direction # LONG or SHORT
+            
+            # CONSENSUS REVERSAL: If we are LONG but consensus is strongly BEARISH
+            if direction == "LONG" and consensus.final_direction == SignalDirection.BEARISH:
+                if consensus.consensus_score > STRONG_THRESHOLD:
+                    exits.append({
+                        "symbol": symbol,
+                        "position_id": pos_id,
+                        "reason": f"UNSAFE: Strong Bearish Reversal ({consensus.consensus_score:.2f})"
+                    })
+            
+            # If we are SHORT but consensus is strongly BULLISH
+            elif direction == "SHORT" and consensus.final_direction == SignalDirection.BULLISH:
+                if consensus.consensus_score > STRONG_THRESHOLD:
+                    exits.append({
+                        "symbol": symbol,
+                        "position_id": pos_id,
+                        "reason": f"UNSAFE: Strong Bullish Reversal ({consensus.consensus_score:.2f})"
+                    })
+                    
+            # VOLATILITY EXIT: If Kill Switch triggered
+            halted, halt_reason = self.kill_switch.check(market_data)
+            if halted:
+                exits.append({
+                    "symbol": symbol, 
+                    "position_id": pos_id,
+                    "reason": f"KILL SWITCH: {halt_reason}"
+                })
+
+        return exits
+
     async def decide(self, market_data: Dict[str, Any]) -> ConsensusDecision:
         # 1. Kill switch check first
         halted, halt_reason = self.kill_switch.check(market_data)
@@ -54,7 +100,7 @@ class MasterDecisionMakerAgent:
             return self._make_hold_decision("No agent signals available")
 
         # 3. Conflict analysis
-        conflict_analysis = self.conflict.analyse_conflicts(signals)
+        conflict_analysis = self.conflict.analyze_conflicts(signals)
 
         # 4. Weighted vote
         bull_score = 0.0
@@ -116,6 +162,7 @@ class MasterDecisionMakerAgent:
         decision = ConsensusDecision(
             final_direction=direction,
             consensus_score=confidence,
+            symbol=consensus_symbol,
             timeframe=SignalTimeframe.INTRADAY,
             asset_class=AssetClass.INDEX,
             reasoning=reasoning,

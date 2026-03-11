@@ -166,9 +166,9 @@ class RiskManagementAgent:
         if "BANK" in trade.get("symbol", "").upper():
             # If Kelly suggests anything > 0, we give at least 1 lot, but CAP at 2 lots (as you requested)
             if calculated_qty >= (lot_size * 2):
-                quantity = lot_size * 2 # Max 2 lots
+                quantity = lot_size * 2 # Max 2 lots (units)
             elif calculated_qty >= lot_size:
-                quantity = lot_size     # At least 1 lot
+                quantity = lot_size     # Exactly 1 lot (units)
             elif calculated_qty > 0:
                 quantity = lot_size     # Round up to 1 lot if Kelly gives any signal
             else:

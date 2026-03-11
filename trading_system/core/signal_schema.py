@@ -14,6 +14,8 @@ import uuid
 
 
 class SignalDirection(str, Enum):
+    BULLISH = "BULLISH"
+    BEARISH = "BEARISH"
     STRONG_BUY = "STRONG_BUY"
     BUY = "BUY"
     NEUTRAL = "NEUTRAL"

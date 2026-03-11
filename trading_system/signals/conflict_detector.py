@@ -21,7 +21,7 @@ class ConflictDetectionEngine:
         "sentiment": ["IndianNewsEventsAgent", "GlobalNewsAgent", "SentimentPositioningAgent"],
     }
 
-    def analyse_conflicts(
+    def analyze_conflicts(
         self, signals: Dict[str, AgentSignal]
     ) -> Dict[str, Any]:
         """
