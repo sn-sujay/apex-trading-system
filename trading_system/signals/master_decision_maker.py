@@ -126,6 +126,20 @@ class MasterDecisionMakerAgent:
             "confidence": confidence,
         })
 
+        # 6. DTE Check for Options
+        if decision.asset_class == AssetClass.OPTIONS:
+            min_dte = 7
+            if self.learning_engine and self.learning_engine.redis:
+                from ..core.apex_redis import read_state
+                val = read_state("APEX:MIN_DTE_NEW_ENTRIES")
+                if val:
+                    min_dte = int(val)
+            
+            # Simulated DTE check (in real life would pull from feed)
+            current_dte = market_data.get("dte", 30) 
+            if current_dte < min_dte:
+                return self._make_hold_decision(f"Filtered: DTE {current_dte} < MIN_DTE {min_dte}")
+
         return decision
 
     def _make_hold_decision(self, reason: str) -> ConsensusDecision:

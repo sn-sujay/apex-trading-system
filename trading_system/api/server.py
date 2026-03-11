@@ -8,7 +8,7 @@ import json
 from datetime import datetime, timezone
 from typing import Dict, List, Optional
 
-from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
@@ -75,30 +75,56 @@ def create_app() -> FastAPI:
             timezone.utc).isoformat()}
 
     @app.get("/api/v1/system/status")
-    async def system_status():
+    async def system_status(request: Request):
+        orch = getattr(request.app.state, "orchestrator", None)
         return {
             "system": "APEX",
-            "status": "RUNNING",
-            "kill_switch_active": False,
-            "agents_online": 20,
+            "status": "RUNNING" if orch and orch.running else "STOPPED",
+            "kill_switch_active": orch.kill_switch.is_active if orch else False,
+            "agents_online": len(orch.agents) if orch else 0,
             "timestamp": datetime.now(timezone.utc).isoformat(),
         }
 
     @app.get("/api/v1/signals/latest")
-    async def get_latest_signals():
+    async def get_latest_signals(request: Request):
+        orch = getattr(request.app.state, "orchestrator", None)
+        if not orch:
+            return {"signals": [], "summary": {"bullish": 0, "bearish": 0, "neutral": 0}}
+        
+        signals = orch.signal_bus.get_all_signals()
+        signal_list = [
+            {
+                "agent": name,
+                "direction": s.direction.value,
+                "confidence": s.confidence,
+                "reason": s.reason,
+                "timestamp": s.timestamp
+            } for name, s in signals.items()
+        ]
+        
+        bullish = len([s for s in signals.values() if s.direction.value == "BULLISH"])
+        bearish = len([s for s in signals.values() if s.direction.value == "BEARISH"])
+        neutral = len([s for s in signals.values() if s.direction.value in ["NEUTRAL", "NO_SIGNAL", "FLAT"]])
+
         return {
-            "signals": [],
-            "summary": {"bullish": 0, "bearish": 0, "neutral": 0},
+            "signals": signal_list,
+            "summary": {"bullish": bullish, "bearish": bearish, "neutral": neutral},
             "timestamp": datetime.now(timezone.utc).isoformat(),
         }
 
     @app.get("/api/v1/portfolio")
-    async def get_portfolio():
+    async def get_portfolio(request: Request):
+        orch = getattr(request.app.state, "orchestrator", None)
+        if not orch:
+            return {"capital": 0, "open_positions": [], "daily_pnl": 0}
+            
+        summary = orch.portfolio_manager.get_portfolio_summary()
         return {
-            "capital": 1_000_000,
-            "open_positions": [],
-            "daily_pnl": 0,
-            "unrealised_pnl": 0,
+            "capital": summary["capital"],
+            "open_positions": summary["positions"],
+            "daily_pnl": summary["realised_pnl"] + summary["total_unrealised_pnl"],
+            "unrealised_pnl": summary["total_unrealised_pnl"],
+            "realised_pnl": summary["realised_pnl"],
         }
 
     @app.get("/api/v1/risk/status")
@@ -148,6 +174,13 @@ def create_app() -> FastAPI:
     @app.get("/api/v1/performance/history")
     async def performance_history(days: int = 30):
         return {"days": days, "equity_curve": [], "daily_pnl": []}
+
+    @app.get("/api/v1/agents/learning")
+    async def get_learning_stats(request: Request):
+        orch = getattr(request.app.state, "orchestrator", None)
+        if not orch:
+            return {"agent_accuracy": {}}
+        return orch.learning_engine.get_agent_accuracy()
 
     @app.websocket("/ws/signals")
     async def ws_signals(websocket: WebSocket):

@@ -67,7 +67,7 @@ class APEXOrchestrator:
         self.conflict_detector = ConflictDetector()
         self.learning_engine = LearningEngine(redis_client=self.redis)
 
-        self.risk_manager = RiskManager(config=self.config)
+        self.risk_manager = RiskManager(config=self.config, redis_client=self.redis)
         self.kill_switch = VolatilityKillSwitch(config=self.config)
 
         self.master_decision = MasterDecisionMaker(

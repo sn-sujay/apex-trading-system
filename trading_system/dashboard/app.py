@@ -45,7 +45,7 @@ def main():
     auto_refresh = st.sidebar.checkbox("Auto-refresh (5s)", value=True)
     page = st.sidebar.selectbox(
         "View", ["Dashboard", "Signals", "Portfolio",
-                 "Risk", "Performance", "Agents"]
+                 "Risk", "Performance", "Agents", "Intelligence"]
     )
 
     if page == "Dashboard":
@@ -60,6 +60,8 @@ def main():
         _render_performance()
     elif page == "Agents":
         _render_agents()
+    elif page == "Intelligence":
+        _render_intelligence()
 
     if auto_refresh:
         time.sleep(5)
@@ -157,6 +159,19 @@ def _render_agents():
         st.dataframe(df, use_container_width=True)
     else:
         st.info("No agent data.")
+
+
+def _render_intelligence():
+    st.title("APEX Intelligence (Self-Evolution)")
+    data = fetch("/api/v1/agents/learning", {})
+    if data:
+        st.subheader("Agent Accuracy & Weighted Adjustment")
+        df = pd.DataFrame.from_dict(data, orient='index')
+        st.dataframe(df, use_container_width=True)
+        
+        st.info("The system automatically adjusts agent influence based on its accuracy in the current market regime.")
+    else:
+        st.info("Learning engine is gathering first signal outcomes...")
 
 
 if __name__ == "__main__":

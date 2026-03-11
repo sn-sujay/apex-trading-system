@@ -20,15 +20,15 @@ class APEXConfig:
 
     # --- Upstash Redis DB1 (Live State) ---
     UPSTASH_LIVE_STATE_URL: str = field(
-        default_factory=lambda: os.getenv("UPSTASH_LIVE_STATE_URL", ""))
+        default_factory=lambda: os.getenv("UPSTASH_REDIS_REST_URL", ""))
     UPSTASH_LIVE_STATE_TOKEN: str = field(
-        default_factory=lambda: os.getenv("UPSTASH_LIVE_STATE_TOKEN", ""))
+        default_factory=lambda: os.getenv("UPSTASH_REDIS_REST_TOKEN", ""))
 
     # --- Upstash Redis DB2 (Intelligence) ---
     UPSTASH_INTELLIGENCE_URL: str = field(
-        default_factory=lambda: os.getenv("UPSTASH_INTELLIGENCE_URL", ""))
+        default_factory=lambda: os.getenv("UPSTASH_REDIS_REST_URL_DB2", ""))
     UPSTASH_INTELLIGENCE_TOKEN: str = field(
-        default_factory=lambda: os.getenv("UPSTASH_INTELLIGENCE_TOKEN", ""))
+        default_factory=lambda: os.getenv("UPSTASH_REDIS_REST_TOKEN_DB2", ""))
 
     # --- Legacy Redis (kept for backward compat, not used by ApexRedis) ---
     REDIS_HOST: str = field(
@@ -60,6 +60,11 @@ class APEXConfig:
         default_factory=lambda: os.getenv("DEFAULT_EXCHANGE", "NSE_FNO"))
 
     # --- LLM ---
+    OPENROUTER_API_KEY: str = field(
+        default_factory=lambda: os.getenv("OPENROUTER_API_KEY", ""))
+    OPENROUTER_MODEL: str = field(
+        default_factory=lambda: os.getenv("OPENROUTER_MODEL", "google/gemini-2.0-flash-lite-preview-02-05:free"))
+
     OPENAI_API_KEY: str = field(
         default_factory=lambda: os.getenv("OPENAI_API_KEY", ""))
     ANTHROPIC_API_KEY: str = field(
@@ -105,3 +110,7 @@ class APEXConfig:
     @property
     def upstash_db2_url(self) -> str:
         return self.UPSTASH_INTELLIGENCE_URL
+
+
+settings = APEXConfig()
+Config = APEXConfig

@@ -57,7 +57,29 @@ class PortfolioManagementAgent:
         self.closed_trades: List[Dict] = []
         self.realised_pnl: float = 0.0
 
+        self.last_reset_date = datetime.now(timezone.utc).date()
+
+    def _reset_if_needed(self):
+        """Reset paper portfolio if configured in Redis."""
+        if not self.redis:
+            return
+        from ..core.apex_redis import read_state
+        mode_data = read_state("CONFIG:TRADING_MODE")
+        if mode_data:
+            try:
+                config = json.loads(mode_data)
+                if config.get("mode") == "paper" and config.get("paper_reset_daily"):
+                    today = datetime.now(timezone.utc).date()
+                    if today != self.last_reset_date:
+                        self.positions = {}
+                        self.realised_pnl = 0.0
+                        self.last_reset_date = today
+                        print("[Portfolio] Daily paper reset performed.")
+            except:
+                pass
+
     def add_position(self, pos: Position) -> Tuple[bool, str]:
+        self._reset_if_needed()
         if len(self.positions) >= 6:
             return False, "Max position count reached"
         sector_check = self._check_sector_concentration(pos)

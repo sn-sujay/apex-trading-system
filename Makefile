@@ -60,7 +60,7 @@ infra-clean:
 
 db-init:
 	@echo "[APEX] Initializing TimescaleDB schema..."
-	$(PYTHON) -c "from data.db_init import init_db; init_db()"
+	$(PYTHON) -c "from trading_system.data.db_init import init_db; init_db()"
 	@echo "[APEX] Database initialized."
 
 kafka-topics:
@@ -93,7 +93,7 @@ paper-trade:
 	@echo "[APEX] Starting APEX in PAPER TRADING mode..."
 	@echo "[APEX] No real money will be used."
 	PAPER_TRADE_MODE=true ENABLE_LIVE_TRADING=false \
-		$(PYTHON) -m core.main
+		$(PYTHON) -m trading_system.main
 	
 live-trade:
 	@echo ""
@@ -107,7 +107,7 @@ live-trade:
 	@read -p "  Type CONFIRM to proceed: " confirm; \
 		[ "$$confirm" = "CONFIRM" ] || (echo "Aborted." && exit 1)
 	PAPER_TRADE_MODE=false ENABLE_LIVE_TRADING=true \
-		$(PYTHON) -m core.main
+		$(PYTHON) -m trading_system.main
 
 dashboard:
 	@echo "[APEX] Starting dashboard..."

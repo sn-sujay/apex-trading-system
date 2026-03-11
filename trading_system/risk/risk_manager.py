@@ -1,1 +1,192 @@
-IiIiClJpc2tNYW5hZ2VtZW50QWdlbnQg4oCUIGVuZm9yY2VzIHBvc2l0aW9uIHNpemluZywgZHJhd2Rvd24gbGltaXRzLAptYXggbG9zcyBwZXIgdHJhZGUsIGRhaWx5IGxvc3MgbGltaXRzLCBhbmQgY29ycmVsYXRpb24gY29uc3RyYWludHMuCiIiIgpmcm9tIF9fZnV0dXJlX18gaW1wb3J0IGFubm90YXRpb25zCmZyb20gZGF0YWNsYXNzZXMgaW1wb3J0IGRhdGFjbGFzcywgZmllbGQKZnJvbSBkYXRldGltZSBpbXBvcnQgZGF0ZSwgZGF0ZXRpbWUKZnJvbSB6b25laW5mbyBpbXBvcnQgWm9uZUluZm8KZnJvbSB0eXBpbmcgaW1wb3J0IEFueSwgRGljdCwgTGlzdCwgT3B0aW9uYWwsIFR1cGxlCmltcG9ydCBtYXRoCgoKZGVmIF9pc3RfdG9kYXkoKSAtPiBkYXRlOgogICAgIiIiUmV0dXJuIHRoZSBjdXJyZW50IGRhdGUgaW4gSVNUIChBc2lhL0tvbGthdGEpLiIiIgogICAgcmV0dXJuIGRhdGV0aW1lLm5vdyhab25lSW5mbygiQXNpYS9Lb2xrYXRhIikpLmRhdGUoKQoKCkBkYXRhY2xhc3MKY2xhc3MgUmlza0xpbWl0czoKICAgIG1heF9wb3J0Zm9saW9fcmlza19wY3Q6IGZsb2F0ID0gMi4wICAgICAgICMgTWF4ICUgb2YgY2FwaXRhbCBhdCByaXNrIGF0IG9uY2UKICAgIG1heF9zaW5nbGVfdHJhZGVfcmlza19wY3Q6IGZsb2F0ID0gMC41ICAgICMgTWF4ICUgcmlzayBwZXIgdHJhZGUKICAgIG1heF9kYWlseV9sb3NzX3BjdDogZmxvYXQgPSAxLjUgICAgICAgICAgICMgRGFpbHkgc3RvcC1sb3NzIG9uIHRvdGFsIGNhcGl0YWwKICAgIG1heF93ZWVrbHlfbG9zc19wY3Q6IGZsb2F0ID0gMy4wICAgICAgICAgICMgV2Vla2x5IGRyYXdkb3duIGxpbWl0CiAgICBtYXhfZHJhd2Rvd25fcGN0OiBmbG9hdCA9IDguMCAgICAgICAgICAgICAjIFJvbGxpbmcgbWF4IGRyYXdkb3duIHRocmVzaG9sZAogICAgbWF4X3Bvc2l0aW9uX2NvdW50OiBpbnQgPSA2ICAgICAgICAgICAgICAgIyBNYXggY29uY3VycmVudCBwb3NpdGlvbnMKICAgIG1heF9jb3JyZWxhdGlvbl9leHBvc3VyZTogZmxvYXQgPSAwLjYwICAgICMgTWF4IGNvcnJlbGF0ZWQgZXhwb3N1cmUKICAgIG1pbl9yZXdhcmRfcmlza19yYXRpbzogZmxvYXQgPSAxLjUgICAgICAgICMgTWluaW11bSBSOlIgdG8gYWNjZXB0IGEgdHJhZGUKICAgIG1heF9sZXZlcmFnZTogZmxvYXQgPSAzLjAgICAgICAgICAgICAgICAgICMgTWF4IGxldmVyYWdlIG11bHRpcGxpZXIKCgpAZGF0YWNsYXNzCmNsYXNzIFBvcnRmb2xpb1N0YXRlOgogICAgY2FwaXRhbDogZmxvYXQgPSAxXzAwMF8wMDAuMAogICAgZGFpbHlfcG5sOiBmbG9hdCA9IDAuMAogICAgd2Vla2x5X3BubDogZmxvYXQgPSAwLjAKICAgIHBlYWtfY2FwaXRhbDogZmxvYXQgPSAxXzAwMF8wMDAuMAogICAgb3Blbl9wb3NpdGlvbnM6IExpc3RbRGljdF0gPSBmaWVsZChkZWZhdWx0X2ZhY3Rvcnk9bGlzdCkKICAgIGRhaWx5X3RyYWRlczogaW50ID0gMAogICAgbGFzdF9yZXNldF9kYXRlOiBkYXRlID0gZmllbGQoZGVmYXVsdF9mYWN0b3J5PV9pc3RfdG9kYXkpCgoKY2xhc3MgUmlza01hbmFnZW1lbnRBZ2VudDoKICAgICIiIgogICAgQ2VudHJhbGlzZWQgcmlzayBjb250cm9sbGVyLiBBbGwgdHJhZGUgc2lnbmFscyBwYXNzIHRocm91Z2ggdGhpcwogICAgYmVmb3JlIGJlaW5nIGZvcndhcmRlZCB0byB0aGUgZXhlY3V0aW9uIGxheWVyLgogICAgIiIiCgogICAgZGVmIF9faW5pdF9fKHNlbGYsIGxpbWl0czogT3B0aW9uYWxbUmlza0xpbWl0c10gPSBOb25lLCAqKmt3YXJncyk6CiAgICAgICAgc2VsZi5jb25maWcgPSBrd2FyZ3MuZ2V0KCJjb25maWciKQogICAgICAgIHNlbGYubGltaXRzID0gbGltaXRzIG9yIFJpc2tMaW1pdHMoKQogICAgICAgIHNlbGYuc3RhdGUgPSBQb3J0Zm9saW9TdGF0ZSgpCgogICAgZGVmIHZhbGlkYXRlX3NpZ25hbCgKICAgICAgICBzZWxmLCBzaWduYWw6IERpY3Rbc3RyLCBBbnldLCBwcm9wb3NlZF90cmFkZTogRGljdFtzdHIsIEFueV0KICAgICkgLT4gVHVwbGVbYm9vbCwgc3RyLCBEaWN0W3N0ciwgQW55XV06CiAgICAgICAgIiIiCiAgICAgICAgVmFsaWRhdGUgYSBwcm9wb3NlZCB0cmFkZSBhZ2FpbnN0IGFsbCByaXNrIGxpbWl0cy4KICAgICAgICBSZXR1cm5zIChhcHByb3ZlZCwgcmVhc29uLCBhZGp1c3RlZF90cmFkZSkuCiAgICAgICAgIiIiCiAgICAgICAgc2VsZi5fcmVzZXRfZGFpbHlfaWZfbmVlZGVkKCkKCiAgICAgICAgY2hlY2tzID0gWwogICAgICAgICAgICBzZWxmLl9jaGVja19kYWlseV9sb3NzX2xpbWl0KCksCiAgICAgICAgICAgIHNlbGYuX2NoZWNrX3dlZWtseV9sb3NzX2xpbWl0KCksCiAgICAgICAgICAgIHNlbGYuX2NoZWNrX21heF9kcmF3ZG93bigpLAogICAgICAgICAgICBzZWxmLl9jaGVja19wb3NpdGlvbl9jb3VudCgpLAogICAgICAgICAgICBzZWxmLl9jaGVja19yZXdhcmRfcmlza19yYXRpbyhwcm9wb3NlZF90cmFkZSksCiAgICAgICAgICAgIHNlbGYuX2NoZWNrX2NvcnJlbGF0aW9uKHByb3Bvc2VkX3RyYWRlKSwKICAgICAgICBdCgogICAgICAgIGZvciBwYXNzZWQsIHJlYXNvbiBpbiBjaGVja3M6CiAgICAgICAgICAgIGlmIG5vdCBwYXNzZWQ6CiAgICAgICAgICAgICAgICByZXR1cm4gRmFsc2UsIHJlYXNvbiwge30KCiAgICAgICAgc2l6ZWRfdHJhZGUgPSBzZWxmLl9zaXplX3Bvc2l0aW9uKHByb3Bvc2VkX3RyYWRlKQogICAgICAgIHJldHVybiBUcnVlLCAiQVBQUk9WRUQiLCBzaXplZF90cmFkZQoKICAgIGRlZiBfY2hlY2tfZGFpbHlfbG9zc19saW1pdChzZWxmKSAtPiBUdXBsZVtib29sLCBzdHJdOgogICAgICAgIGRhaWx5X2xvc3NfcGN0ID0gYWJzKG1pbihzZWxmLnN0YXRlLmRhaWx5X3BubCwgMCkKICAgICAgICAgICAgICAgICAgICAgICAgICAgICApIC8gc2VsZi5zdGF0ZS5jYXBpdGFsICogMTAwCiAgICAgICAgaWYgZGFpbHlfbG9zc19wY3QgPj0gc2VsZi5saW1pdHMubWF4X2RhaWx5X2xvc3NfcGN0OgogICAgICAgICAgICByZXR1cm4gRmFsc2UsIGYiREFJTFlfTE9TU19MSU1JVF9ISVQge2RhaWx5X2xvc3NfcGN0OjEuMWZ9JSA+PSB7c2VsZi5saW1pdHMubWF4X2RhaWx5X2xvc3NfcGN0fSUiCiAgICAgICAgcmV0dXJuIFRydWUsICIiCgogICAgZGVmIF9jaGVja193ZWVrbHlfbG9zc19saW1pdChzZWxmKSAtPiBUdXBsZVtib29sLCBzdHJdOgogICAgICAgIHdlZWtseV9sb3NzX3BjdCA9IGFicyhtaW4oc2VsZi5zdGF0ZS53ZWVrbHlfcG5sLCAwKSkgLyBzZWxmLnN0YXRlLmNhcGl0YWwgKiAxMDAKICAgICAgICBpZiB3ZWVrbHlfbG9zc19wY3QgPj0gc2VsZi5saW1pdHMubWF4X3dlZWtseV9sb3NzX3BjdDoKICAgICAgICAgICAgcmV0dXJuIEZhbHNlLCBmIldFRUtMWV9MT1NTX0xJTUlUX0hJVCB7d2Vla2x5X2xvc3NfcGN0OjEuMWZ9JSA+PSB7c2VsZi5saW1pdHMubWF4X3dlZWtseV9sb3NzX3BjdH0lIgogICAgICAgIHJldHVybiBUcnVlLCAiIgoKICAgIGRlZiBfY2hlY2tfbWF4X2RyYXdkb3duKHNlbGYpIC0+IFR1cGxlW2Jvb2wsIHN0cl06CiAgICAgICAgZHJhd2Rvd24gPSAoc2VsZi5zdGF0ZS5wZWFrX2NhcGl0YWwgLSBzZWxmLnN0YXRlLmNhcGl0YWwpIC8gc2VsZi5zdGF0ZS5wZWFrX2NhcGl0YWwgKiAxMDAKICAgICAgICBpZiBkcmF3ZG93biA+PSBzZWxmLmxpbWl0cy5tYXhfZHJhd2Rvd25fcGN0OgogICAgICAgICAgICByZXR1cm4gRmFsc2UsIGYiTUFYX0RSQVdET1dOX0hJVCB7ZHJhd2Rvd246MS4xZn0lID49IHtzZWxmLmxpbWl0cy5tYXhfZHJhd2Rvd25fcGN0fSUiCiAgICAgICAgcmV0dXJuIFRydWUsICIiCgogICAgZGVmIF9jaGVja19wb3NpdGlvbl9jb3VudChzZWxmKSAtPiBUdXBsZVtib29sLCBzdHJdOgogICAgICAgIGlmIGxlbihzZWxmLnN0YXRlLm9wZW5fcG9zaXRpb25zKSA+PSBzZWxmLmxpbWl0cy5tYXhfcG9zaXRpb25fY291bnQ6CiAgICAgICAgICAgIHJldHVybiBGYWxzZSwgZiJNQVhfUE9TSVRJT05fQ09VTlRfSElUIHtsZW4oc2VsZi5zdGF0ZS5vcGVuX3Bvc2l0aW9ucyl9ID49IHtzZWxmLmxpbWl0cy5tYXhfcG9zaXRpb25fY291bnR9IgogICAgICAgIHJldHVybiBUcnVlLCAiIgoKICAgIGRlZiBfY2hlY2tfcmV3YXJkX3Jpc2tfcmF0aW8oCiAgICAgICAgc2VsZiwgdHJhZGU6IERpY3Rbc3RyLCBBbnldCiAgICApIC0+IFR1cGxlW2Jvb2wsIHN0cl06CiAgICAgICAgc2wgPSBhYnModHJhZGUuZ2V0KCJzdG9wX2xvc3MiLCAwKSAtIHRyYWRlLmdldCgiZW50cnlfcHJpY2UiLCAxKSkKICAgICAgICB0cCA9IGFicyh0cmFkZS5nZXQoInRhcmdldF9wcmljZSIsIDApIC0gdHJhZGUuZ2V0KCJlbnRyeV9wcmljZSIsIDEpKQogICAgICAgIGlmIHNsID09IDA6CiAgICAgICAgICAgIHJldHVybiBGYWxzZSwgIlNUT1BfTE9TU19OT1RfU0VUIgogICAgICAgIHJyID0gdHAgLyBzbAogICAgICAgIGlmIHJyIDwgc2VsZi5saW1pdHMubWluX3Jld2FyZF9yaXNrX3JhdGlvOgogICAgICAgICAgICByZXR1cm4gRmFsc2UsIGYiUkVXQVJEX1JJU0tfVE9PX0xPVyB7cnI6LjJmfSA8IHtzZWxmLmxpbWl0cy5taW5fcmV3YXJkX3Jpc2tfcmF0aW99IgogICAgICAgIHJldHVybiBUcnVlLCAiIgoKICAgIGRlZiBfY2hlY2tfY29ycmVsYXRpb24oc2VsZiwgdHJhZGU6IERpY3Rbc3RyLCBBbnldKSAtPiBUdXBsZVtib29sLCBzdHJdOgogICAgICAgICMgUGxhY2Vob2xkZXI6IHJlYWwgaW1wbGVtZW50YXRpb24gd291bGQgY29tcHV0ZSBjb3JyZWxhdGlvbiB3aXRoIG9wZW4gcG9zaXRpb25zCiAgICAgICAgcmV0dXJuIFRydWUsICIiCgogICAgZGVmIF9zaXplX3Bvc2l0aW9uKHNlbGYsIHRyYWRlOiBEaWN0W3N0ciwgQW55XSkgLT4gRGljdFtzdHIsIEFueV06CiAgICAgICAgIiIiS2VsbHkgZnJhY3Rpb24tcG93ZXJlZCBwb3NpdGlvbiBzaXppbmcgd2l0aCBjYXBzLiIiIgogICAgICAgIGNhcGl0YWwgPSBzZWxmLnN0YXRlLmNhcGl0YWwKICAgICAgICByaXNrX3BjdCA9IG1pbigKICAgICAgICAgICAgc2VsZi5saW1pdHMubWF4X3NpbmdsZV90cmFkZV9yaXNrX3BjdCAvIDEwMCwKICAgICAgICAgICAgc2VsZi5saW1pdHMubWF4X3BvcnRmb2xpb19yaXNrX3BjdCAvIDEwMCAvIG1heChsZW4oc2VsZi5zdGF0ZS5vcGVuX3Bvc2l0aW9ucyksIDEpLAogICAgICAgICkKICAgICAgICBzbCA9IGFicyh0cmFkZS5nZXQoImVudHJ5X3ByaWNlIiwgMSkgLSB0cmFkZS5nZXQoInN0b3BfbG9zcyIsIDApKQogICAgICAgIHF0eSA9IGludCgoY2FwaXRhbCAqIHJpc2tfcGN0KSAvIG1heChzbCwgMSkpCiAgICAgICAgcXR5ID0gbWF4KHF0eSwgMSkKICAgICAgICByZXR1cm4geyoqdHJhZGUsICJxdWFudGl0eSI6IHF0eX0KCiAgICBkZWYgX3Jlc2V0X2RhaWx5X2lmX25lZWRlZChzZWxmKSAtPiBOb25lOgogICAgICAgICIiIlJlc2V0IGRhaWx5IHN0YXRzIGF0IHRoZSBzdGFydCBvZiBhIG5ldyBJU1QgYnVzaW5lc3MgZGF5LiIiIgogICAgICAgIHRvZGF5ID0gX2lzdF90b2RheSgpCiAgICAgICAgaWYgdG9kYXkgIT0gc2VsZi5zdGF0ZS5sYXN0X3Jlc2V0X2RhdGU6CiAgICAgICAgICAgIHNlbGYuc3RhdGUuZGFpbHlfcG5sID0gMC4wCiAgICAgICAgICAgIHNlbGYuc3RhdGUuZGFpbHlfdHJhZGVzID0gMAogICAgICAgICAgICBzZWxmLnN0YXRlLmxhc3RfcmVzZXRfZGF0ZSA9IHRvZGF5CgogICAgZGVmIGFkZF9yZWFsaXNlZF9wbmwoc2VsZiwgcG5sOiBmbG9hdCkgLT4gTm9uZToKICAgICAgICBzZWxmLnN0YXRlLmRhaWx5X3BubCArPSBwbmwKICAgICAgICBzZWxmLnN0YXRlLndlZWtseV9wbmwgKz0gcG5sCiAgICAgICAgc2VsZi5zdGF0ZS5jYXBpdGFsICs9IHBubAogICAgICAgIGlmIHNlbGYuc3RhdGUuY2FwaXRhbCA+IHNlbGYuc3RhdGUucGVha19jYXBpdGFsOgogICAgICAgICAgICBzZWxmLnN0YXRlLnBlYWtfY2FwaXRhbCA9IHNlbGYuc3RhdGUuY2FwaXRhbAoKICAgIGRlZiBnZXRfc3RhdHVzKHNlbGYpIC0+IERpY3Rbc3RyLCBBbnldOgogICAgICAgIHNlbGYuX3Jlc2V0X2RhaWx5X2lmX25lZWRlZCgpCiAgICAgICAgcmV0dXJuIHsKICAgICAgICAgICAgImNhcGl0YWwiOiBzZWxmLnN0YXRlLmNhcGl0YWwsCiAgICAgICAgICAgICJkYWlseV9wbmwiOiBzZWxmLnN0YXRlLmRhaWx5X3BubCwKICAgICAgICAgICAgIndlZWtseV9wbmwiOiBzZWxmLnN0YXRlLndlZWtseV9wbmwsCiAgICAgICAgICAgICJvcGVuX3Bvc2l0aW9ucyI6IGxlbihzZWxmLnN0YXRlLm9wZW5fcG9zaXRpb25zKSwKICAgICAgICAgICAgImRhaWx5X3RyYWRlcyI6IHNlbGYuc3RhdGUuZGFpbHlfdHJhZGVzLAogICAgICAgICAgICAiZHJhd2Rvd25fcGN0IjogKHNlbGYuc3RhdGUucGVha19jYXBpdGFsIC0gc2VsZi5zdGF0ZS5jYXBpdGFsKSAvIHNlbGYuc3RhdGUucGVha19jYXBpdGFsICogMTAwLAogICAgICAgICAgICAibGFzdF9yZXNldCI6IHN0cihzZWxmLnN0YXRlLmxhc3RfcmVzZXRfZGF0ZSksCiAgICAgICAgfQo=
+"""
+RiskManagementAgent — enforces position sizing, drawdown limits,
+max loss per trade, daily loss limits, and correlation constraints.
+"""
+from __future__ import annotations
+from dataclasses import dataclass, field
+from datetime import date, datetime
+from zoneinfo import ZoneInfo
+from typing import Any, Dict, List, Optional, Tuple
+import math
+
+
+def _ist_today() -> date:
+    """Return the current date in IST (Asia/Kolkata)."""
+    return datetime.now(ZoneInfo("Asia/Kolkata")).date()
+
+
+@dataclass
+class RiskLimits:
+    max_portfolio_risk_pct: float = 2.0       # Max % of capital at risk at once
+    max_single_trade_risk_pct: float = 0.5    # Max % risk per trade
+    max_daily_loss_pct: float = 1.5           # Daily stop-loss on total capital
+    max_weekly_loss_pct: float = 3.0          # Weekly drawdown limit
+    max_drawdown_pct: float = 8.0             # Rolling max drawdown threshold
+    max_position_count: int = 6               # Max concurrent positions
+    max_correlation_exposure: float = 0.60    # Max correlated exposure
+    min_reward_risk_ratio: float = 1.5        # Minimum R:R to accept a trade
+    max_leverage: float = 3.0                 # Max leverage multiplier
+
+
+@dataclass
+class PortfolioState:
+    capital: float = 1_000_000.0
+    daily_pnl: float = 0.0
+    weekly_pnl: float = 0.0
+    peak_capital: float = 1_000_000.0
+    open_positions: List[Dict] = field(default_factory=list)
+    daily_trades: int = 0
+    last_reset_date: date = field(default_factory=_ist_today)
+
+
+class RiskManagementAgent:
+    """
+    Centralised risk controller. All trade signals pass through this
+    before being forwarded to the execution layer.
+    """
+
+    def __init__(self, limits: Optional[RiskLimits] = None, **kwargs):
+        self.config = kwargs.get("config")
+        self.limits = limits or RiskLimits()
+        self.state = PortfolioState()
+        self.redis = kwargs.get("redis_client")
+
+    def validate_signal(
+        self, signal: Dict[str, Any], proposed_trade: Dict[str, Any]
+    ) -> Tuple[bool, str, Dict[str, Any]]:
+        """
+        Validate a proposed trade against all risk limits.
+        Returns (approved, reason, adjusted_trade).
+        """
+        self._reset_daily_if_needed()
+
+        checks = [
+            self._check_daily_loss_limit(),
+            self._check_weekly_loss_limit(),
+            self._check_max_drawdown(),
+            self._check_position_count(),
+            self._check_reward_risk_ratio(proposed_trade),
+            self._check_correlation(proposed_trade),
+        ]
+
+        for passed, reason in checks:
+            if not passed:
+                return False, reason, {}
+
+        sized_trade = self._size_position(proposed_trade)
+        return True, "APPROVED", sized_trade
+
+    def _check_daily_loss_limit(self) -> Tuple[bool, str]:
+        daily_loss_pct = abs(min(self.state.daily_pnl, 0)
+                             ) / self.state.capital * 100
+        if daily_loss_pct >= self.limits.max_daily_loss_pct:
+            return False, f"DAILY_LOSS_LIMIT_HIT {daily_loss_pct:1.1f}% >= {self.limits.max_daily_loss_pct}%"
+        return True, ""
+
+    def _check_weekly_loss_limit(self) -> Tuple[bool, str]:
+        weekly_loss_pct = abs(min(self.state.weekly_pnl, 0)) / self.state.capital * 100
+        if weekly_loss_pct >= self.limits.max_weekly_loss_pct:
+            return False, f"WEEKLY_LOSS_LIMIT_HIT {weekly_loss_pct:1.1f}% >= {self.limits.max_weekly_loss_pct}%"
+        return True, ""
+
+    def _check_max_drawdown(self) -> Tuple[bool, str]:
+        drawdown = (self.state.peak_capital - self.state.capital) / self.state.peak_capital * 100
+        if drawdown >= self.limits.max_drawdown_pct:
+            return False, f"MAX_DRAWDOWN_HIT {drawdown:1.1f}% >= {self.limits.max_drawdown_pct}%"
+        return True, ""
+
+    def _check_position_count(self) -> Tuple[bool, str]:
+        if len(self.state.open_positions) >= self.limits.max_position_count:
+            return False, f"MAX_POSITION_COUNT_HIT {len(self.state.open_positions)} >= {self.limits.max_position_count}"
+        return True, ""
+
+    def _check_reward_risk_ratio(
+        self, trade: Dict[str, Any]
+    ) -> Tuple[bool, str]:
+        sl = abs(trade.get("stop_loss", 0) - trade.get("entry_price", 1))
+        tp = abs(trade.get("target_price", 0) - trade.get("entry_price", 1))
+        if sl == 0:
+            return False, "STOP_LOSS_NOT_SET"
+        rr = tp / sl
+        if rr < self.limits.min_reward_risk_ratio:
+            return False, f"REWARD_RISK_TOO_LOW {rr:.2f} < {self.limits.min_reward_risk_ratio}"
+        return True, ""
+
+    def _check_correlation(self, trade: Dict[str, Any]) -> Tuple[bool, str]:
+        # Placeholder: real implementation would compute correlation with open positions
+        return True, ""
+
+    def _get_lot_size(self, symbol: str) -> int:
+        """Fetch lot size from Redis CONFIG:LOT_SIZES."""
+        if not self.redis:
+            return 1
+        from ..core.apex_redis import read_state
+        lot_data = read_state("CONFIG:LOT_SIZES")
+        if lot_data:
+            try:
+                mapping = json.loads(lot_data)
+                for k, v in mapping.items():
+                    if k in symbol.upper():
+                        return v
+            except:
+                pass
+        return 1
+
+    def _size_position(self, trade: Dict[str, Any]) -> Dict[str, Any]:
+        """Kelly fraction-powered position sizing with caps and lot-size awareness."""
+        capital = self.state.capital
+        
+        # Pull dynamic Kelly from Redis
+        kelly_fraction = 0.5 # default
+        if self.redis:
+            from ..core.apex_redis import read_state
+            val = read_state("APEX:KELLY_FRACTION")
+            if val:
+                kelly_fraction = float(val)
+        
+        risk_pct = min(
+            (self.limits.max_single_trade_risk_pct * kelly_fraction) / 100,
+            self.limits.max_portfolio_risk_pct / 100 / max(len(self.state.open_positions), 1),
+        )
+        
+        sl = abs(trade.get("entry_price", 1) - trade.get("stop_loss", 0))
+        qty = int((capital * risk_pct) / max(sl, 1))
+        
+        # Lot Size Adjustment
+        lot_size = self._get_lot_size(trade.get("symbol", ""))
+        if qty > lot_size:
+            qty = (qty // lot_size) * lot_size
+        else:
+            qty = lot_size # Min 1 lot
+            
+        return {**trade, "quantity": qty}
+
+    def _reset_daily_if_needed(self) -> None:
+        """Reset daily stats at the start of a new IST business day."""
+        today = _ist_today()
+        if today != self.state.last_reset_date:
+            self.state.daily_pnl = 0.0
+            self.state.daily_trades = 0
+            self.state.last_reset_date = today
+
+    def add_realised_pnl(self, pnl: float) -> None:
+        self.state.daily_pnl += pnl
+        self.state.weekly_pnl += pnl
+        self.state.capital += pnl
+        if self.state.capital > self.state.peak_capital:
+            self.state.peak_capital = self.state.capital
+
+    def get_status(self) -> Dict[str, Any]:
+        self._reset_daily_if_needed()
+        return {
+            "capital": self.state.capital,
+            "daily_pnl": self.state.daily_pnl,
+            "weekly_pnl": self.state.weekly_pnl,
+            "open_positions": len(self.state.open_positions),
+            "daily_trades": self.state.daily_trades,
+            "drawdown_pct": (self.state.peak_capital - self.state.capital) / self.state.peak_capital * 100,
+            "last_reset": str(self.state.last_reset_date),
+        }
+
+
+RiskManager = RiskManagementAgent

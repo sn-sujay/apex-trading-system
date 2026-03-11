@@ -184,7 +184,7 @@ class IndianMarketDataAgent(APEXBaseAgent):
         else:
             return SignalDirection.NEUTRAL, abs(score), reasoning
 
-    async def analyze(self) -> AgentSignal:
+    async def analyze(self, market_data: Dict[str, Any]) -> AgentSignal:
         data = await self._fetch_data()
         nifty_df = data.get("nifty")
         banknifty_df = data.get("banknifty")

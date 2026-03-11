@@ -1,3 +1,4 @@
+
 """
 LearningEngine — tracks decision outcomes, updates agent weight adjustments,
 and provides performance attribution for continuous improvement.
@@ -5,8 +6,9 @@ and provides performance attribution for continuous improvement.
 from __future__ import annotations
 from collections import defaultdict
 from datetime import datetime, timezone
-from typing import Dict, List
+from typing import Dict, List, Any
 import json
+from ..core.memory import ExperienceMemory
 
 
 class LearningEngine:
@@ -27,24 +29,38 @@ class LearningEngine:
         })
         self._decision_log: List[Dict] = []
 
-    def record_outcome(
+    async def record_outcome(
         self, decision_id: str, actual_direction: str,
-        agent_signals: Dict[str, str], predicted_direction: str
+        agent_signals: Dict[str, Dict[str, Any]], predicted_direction: str,
+        regime: str = "SIDEWAYS"
     ):
         """Called after a trade closes to record which agents were right."""
         was_correct = actual_direction == predicted_direction
-        for agent_name, signal_dir in agent_signals.items():
+        
+        for agent_name, signal_data in agent_signals.items():
             stats = self._agent_stats[agent_name]
             stats["total"] += 1
+            
+            signal_dir = signal_data.get("direction")
             if signal_dir == actual_direction:
                 stats["correct"] += 1
                 stats["dynamic_weight_adj"] += self.WEIGHT_LEARNING_RATE
             else:
                 stats["incorrect"] += 1
                 stats["dynamic_weight_adj"] -= self.WEIGHT_LEARNING_RATE
+            
+            # Store in Memory Bank
+            memory = ExperienceMemory(agent_name)
+            await memory.store_experience(regime, {
+                "factors": signal_data.get("key_factors", []),
+                "reasoning": signal_data.get("reasoning", "No reasoning provided"),
+                "outcome": "SUCCESS" if (signal_dir == actual_direction) else "FAILURE"
+            })
+            
             stats["dynamic_weight_adj"] = max(
                 -0.10, min(0.10, stats["dynamic_weight_adj"])
             )
+            
         self._decision_log.append({
             "decision_id": decision_id,
             "predicted": predicted_direction,

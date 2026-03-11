@@ -1,1 +1,231 @@
-IiIiCkFQRVggVHJhZGluZyBJbnRlbGxpZ2VuY2UgU3lzdGVtIOKAlCBCYXNlIEFnZW50CkFsbCAyMCBhZ2VudHMgaW5oZXJpdCBmcm9tIEFQRVhCYXNlQWdlbnQuClByb3ZpZGVzOiBzaWduYWwgcHVibGlzaGluZywgUmVkaXMgcHViL3N1Yiwgc3RydWN0dXJlZCBsb2dnaW5nLCBoZWFsdGggY2hlY2tzLgoiIiIKZnJvbSBfX2Z1dHVyZV9fIGltcG9ydCBhbm5vdGF0aW9ucwppbXBvcnQgYXN5bmNpbwppbXBvcnQgbG9nZ2luZwppbXBvcnQgdGltZQpmcm9tIGFiYyBpbXBvcnQgQUJDCmZyb20gZGF0ZXRpbWUgaW1wb3J0IGRhdGV0aW1lLCB0aW1lem9uZQpmcm9tIHpvbmVpbmZvIGltcG9ydCBab25lSW5mbwpmcm9tIHR5cGluZyBpbXBvcnQgT3B0aW9uYWwsIERpY3QsIEFueSwgTGlzdAoKZnJvbSAuc2lnbmFsX3NjaGVtYSBpbXBvcnQgQWdlbnRTaWduYWwsIFNpZ25hbERpcmVjdGlvbgpmcm9tIC5jb25maWcgaW1wb3J0IEFQRVhDb25maWcKZnJvbSAuY29uc3RhbnRzIGltcG9ydCAoCiAgICBLQUZLQV9TSUdOQUxfVE9QSUMsIFJFRElTX1NJR05BTF9QUkVGSVgsCiAgICBXRUFLX1NJR05BTF9USFJFU0hPTEQKKQoKIyBJU1QgdGltZXpvbmUgY29uc3RhbnQg4oCUIHVzZWQgZXZlcnl3aGVyZSBpbiB0aGlzIG1vZHVsZQpJU1QgPSBab25lSW5mbygiQXNpYS9Lb2xrYXRhIikKCgpsb2dnZXIgPSBsb2dnaW5nLmdldExvZ2dlcihfX25hbWVfXykKCgpjbGFzcyBBUEVYQmFzZUFnZW50KEFCQyk6CiAgICAiIiIKICAgIEJhc2UgY2xhc3MgZm9yIGFsbCBBUEVYIFRyYWRpbmcgSW50ZWxsaWdlbmNlIGFnZW50cy4KCiAgICBTdWJjbGFzc2VzIGltcGxlbWVudDoKICAgICAgICAtIGFuYWx5emUoKSAtPiBBZ2VudFNpZ25hbCAgIChjb3JlIGFuYWx5c2lzIGxvZ2ljKQogICAgICAgIC0gX2ZldGNoX2RhdGEoKSAtPiBkaWN0ICAgICAgKGRhdGEgZmV0Y2hpbmcpCiAgICAiIiIKCiAgICBkZWYgX19pbml0X18oCiAgICAgICAgc2VsZiwKICAgICAgICBhZ2VudF9uYW1lOiBPcHRpb25hbFtzdHJdID0gTm9uZSwKICAgICAgICB2ZXJzaW9uOiBzdHIgPSAiMS4wLjAiLAogICAgICAgIGNvbmZpZzogT3B0aW9uYWxbQVBFWENvbmZpZ10gPSBOb25lLAogICAgICAgICoqa3dhcmdzCiAgICApOgogICAgICAgIHNlbGYuYWdlbnRfbmFtZSA9IGFnZW50X25hbWUgb3Igc2VsZi5fX2NsYXNzX18uX19uYW1lX18KICAgICAgICBzZWxmLnZlcnNpb24gPSB2ZXJzaW9uCiAgICAgICAgc2VsZi5jb25maWcgPSBjb25maWcgb3IgQVBFWENvbmZpZygpCiAgICAgICAgc2VsZi5fcmVkaXMgPSBrd2FyZ3MuZ2V0KCJyZWRpc19jbGllbnQiKQoKICAgICAgICAjIFN0YXRlCiAgICAgICAgc2VsZi5fbGFzdF9zaWduYWw6IE9wdGlvbmFsW0FnZW50U2lnbmFsXSA9IE5vbmUKICAgICAgICBzZWxmLl9zaWduYWxfaGlzdG9yeTogTGlzdFtBZ2VudFNpZ25hbF0gPSBbXQogICAgICAgIHNlbGYuX3J1bl9jb3VudDogaW50ID0gMAogICAgICAgIHNlbGYuX2Vycm9yX2NvdW50OiBpbnQgPSAwCiAgICAgICAgc2VsZi5fbGFzdF9ydW5fdHM6IE9wdGlvbmFsW2Zsb2F0XSA9IE5vbmUKICAgICAgICBzZWxmLl9pc19oZWFsdGh5OiBib29sID0gVHJ1ZQogICAgICAgIHNlbGYuX3N0YXJ0X3RpbWUgPSB0aW1lLnRpbWUoKQoKICAgICAgICAjIENvbm5lY3Rpb25zIChsYXp5IGluaXQpCiAgICAgICAgc2VsZi5fcmVkaXMgPSBOb25lCiAgICAgICAgc2VsZi5fa2Fma2FfcHJvZHVjZXIgPSBOb25lCiAgICAgICAgc2VsZi5fZGJfcG9vbCA9IE5vbmUKCiAgICAgICAgc2VsZi5fc2V0dXBfbG9nZ2luZygpCgogICAgZGVmIF9zZXR1cF9sb2dnaW5nKHNlbGYpOgogICAgICAgIHNlbGYubG9nZ2VyID0gbG9nZ2luZy5nZXRMb2dnZXIoZiJhcGV4LmFnZW50LntzZWxmLmFnZW50X25hbWV9IikKICAgICAgICBoYW5kbGVyID0gbG9nZ2luZy5TdHJlYW1IYW5kbGVyKCkKICAgICAgICBmb3JtYXR0ZXIgPSBsb2dnaW5nLkZvcm1hdHRlcigKICAgICAgICAgICAgZiIlKGFzY3RpbWUpcyB8IHtzZWxmLmFnZW50X25hbWV9IHwgJShsZXZlbG5hbWUpcyB8ICUobWVzc2FnZSlzIgogICAgICAgICkKICAgICAgICBoYW5kbGVyLnNldEZvcm1hdHRlcihmb3JtYXR0ZXIpCiAgICAgICAgaWYgbm90IHNlbGYubG9nZ2VyLmhhbmRsZXJzOgogICAgICAgICAgICBzZWxmLmxvZ2dlci5hZGRIYW5kbGVyKGhhbmRsZXIpCiAgICAgICAgc2VsZi5sb2dnZXIuc2V0TGV2ZWwoCiAgICAgICAgICAgIGdldGF0dHIoCiAgICAgICAgICAgICAgICBsb2dnaW5nLAogICAgICAgICAgICAgICAgc2VsZi5jb25maWcuTE9HX0xFVkVMLAogICAgICAgICAgICAgICAgbG9nZ2luZy5JTkZPKSkKCiAgICAjIOKUgOKUgCBBYnN0cmFjdCBJbnRlcmZhY2Ug4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSACgogICAgYXN5bmMgZGVmIGFuYWx5emUoc2VsZiwgKiprd2FyZ3MpIC0+IEFnZW50U2lnbmFsOgogICAgICAgICIiIgogICAgICAgIENvcmUgYW5hbHlzaXMgbG9naWMuIE11c3QgcmV0dXJuIGEgcG9wdWxhdGVkIEFnZW50U2lnbmFsLgogICAgICAgIENhbGxlZCBieSBydW5fY3ljbGUoKSBvbiBldmVyeSB0aWNrL2ludGVydmFsLgogICAgICAgICIiIgogICAgICAgIGF3YWl0IHNlbGYuX2ZldGNoX2RhdGEoKQogICAgICAgIHJldHVybiBzZWxmLl9ub19zaWduYWwoIk1ldGhvZCBub3QgaW1wbGVtZW50ZWQiKQoKICAgIGFzeW5jIGRlZiBfZmV0Y2hfZGF0YShzZWxmKSAtPiBEaWN0W3N0ciwgQW55XToKICAgICAgICAiIiIKICAgICAgICBGZXRjaCByYXcgZGF0YSByZXF1aXJlZCBmb3IgYW5hbHlzaXMgKHByaWNlcywgbmV3cywgbWFjcm8gZGF0YSwgZXRjLikKICAgICAgICAiIiIKICAgICAgICByZXR1cm4ge30KCiAgICAjIOKUgOKUgCBSdW4gQ3ljbGUg4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSACgogICAgYXN5bmMgZGVmIHJ1bl9jeWNsZShzZWxmLCAqKmFrd2FyZ3MpIC0+IE9wdGlvbmFsW0FnZW50U2lnbmFsXToKICAgICAgICAiIiIKICAgICAgICBPcmNoZXN0cmF0ZXMgb25lIGZ1bGwgcnVuIGN5Y2xlLgogICAgICAgIEF1dG9tYXRpY2FsbHk6CiAgICAgICAgICAgIC0gQ2hlY2tzIG1hcmtldCBob3VycwogICAgICAgICAgICAtIENhbGxzIGFuYWx5emUoKQogICAgICAgICAgICAtIFB1Ymxpc2hlcyBzaWduYWwKICAgICAgICAgICAgLSBVcGRhdGVzIGhlYWx0aAogICAgICAgICIiIgogICAgICAgIHNlbGYuX3J1bl9jb3VudCArPSAxCiAgICAgICAgc2VsZi5fbGFzdF9ydW5fdHMgPSB0aW1lLnRpbWUoKQoKICAgICAgICBpZiBub3Qgc2VsZi5faXNfbWFya2V0X2hvdXJzKCk6CiAgICAgICAgICAgIHNlbGYubG9nZ2VyLmluZm8oIk1hcmtldCBjbG9zZWQgLSBza2lwcGluZyBjeWNsZSIpCiAgICAgICAgICAgIHJldHVybiBOb25lCgogICAgICAgIHRyeToKICAgICAgICAgICAgc2lnbmFsID0gYXdhaXQgc2VsZi5hbmFseXplKCoqa3dhcmdzKQogICAgICAgICAgICBzaWduYWwgPSBzZWxmLl92YWxpZGF0ZV9zaWduYWwoc2lnbmFsKQogICAgICAgICAgICBhd2FpdCBzZWxmLl9wdWJsaXNoX3NpZ25hbChzaWduYWwpCiAgICAgICAgICAgIHNlbGYuX2xhc3Rfc2lnbmFsID0gc2lnbmFsCiAgICAgICAgICAgIHNlbGYuX3NpZ25hbF9oaXN0b3J5LmFwcGVuZChzaWduYWwpCiAgICAgICAgICAgIHNlbGYuX2lzX2hlYWx0aHkgPSBUcnVlCiAgICAgICAgICAgIHJldHVybiBzaWduYWwKICAgICAgICBleGNlcHQgRXhjZXB0aW9uIGFzIGU6CiAgICAgICAgICAgIHNlbGYuX2Vycm9yX2NvdW50ICs9IDEKICAgICAgICAgICAgc2VsZi5faXNfaGVhbHRoeSA9IEZhbHNlCiAgICAgICAgICAgIHNlbGYubG9nZ2VyLmVycm9yKGYiQ3ljbGUgZXJyb3I6IHtlfSIpCiAgICAgICAgICAgIHJldHVybiBOb25lCgogICAgIyDilIDilIAgTWFya2V0IEhvdXJzIOKUgOKUgOKAoiBJU1QtYXdhcmUg4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSACgogICAgZGVmIF9pc19tYXJrZXRfaG91cnMoc2VsZikgLT4gYm9vbDoKICAgICAgICAiIiJDaGVjayBpZiBjdXJyZW50IHRpbWUgaXMgd2l0aGluIE5TRSBtYXJrZXQgaG91cnMgKDA5OjE1IC0gMTU6MzAgSVNUKS4iIiIKICAgICAgICBmcm9tIGRhdGV0aW1lIGltcG9ydCB0aW1lIGFzIGR0X3RpbWUKICAgICAgICBub3cgPSBkYXRldGltZS5ub3coSVNUKSAgIyBmaXg6IElTVC1hd2FyZSwgd2FzIG5haXZlIGRhdGV0aW1lLm5vdygpCiAgICAgICAgY3VycmVudF90aW1lID0gbm93LnRpbWUoKQogICAgICAgIG1hcmtldF9vcGVuID0gZHRfdGltZSg5LCAxNSkKICAgICAgICBtYXJrZXRfY2xvc2UgPSBkdF90aW1lKDE1LCAzMCkKICAgICAgICBpZiBub3cud2Vla2RheSgpID49IDU6ICAjIFNhdC9TdW4gaW4gSVNUCiAgICAgICAgICAgIHJldHVybiBGYWxzZQogICAgICAgIHJldHVybiBtYXJrZXRfb3BlbiA8PSBjdXJyZW50X3RpbWUgPD0gbWFya2V0X2Nsb3NlCgogICAgZGVmIF9ub19zaWduYWwoc2VsZiwgcmVhc29uOiBzdHIgPSAiIikgLT4gQWdlbnRTaWduYWw6CiAgICAgICAgIiIiUmV0dXJuIGEgbm8gb3BpbmlvbiBzaWduYWwuIiIiCiAgICAgICAgcmV0dXJuIEFnZW50U2lnbmFsKAogICAgICAgICAgICB0aW1lc3RhbXA9ZGF0ZXRpbWUubm93KElTVCkuaXNvZm9ybWF0KCksICAjIGZpeDogSVNULWF3YXJlLCB3YXMgbmFpdmUgZGF0ZXRpbWUubm93KCkKICAgICAgICAgICAgYWdlbnRfbmFtZT1zZWxmLmFnZW50X25hbWUsCiAgICAgICAgICAgIGRpcmVjdGlvbj1TaWduYWxEaXJlY3Rpb24uRkxBVCwKICAgICAgICAgICAgY29uZmlkZW5jZT0wLjAsCiAgICAgICAgICAgIHJlYXNvbj1yZWFzb24sCiAgICAgICAgKQoKICAgIGRlZiBfdmFsaWRhdGVfc2lnbmFsKHNlbGYsIHNpZ25hbDogQWdlbnRTaWduYWwpIC0+IEFnZW50U2lnbmFsOgogICAgICAgICIiIlZhbGlkYXRlIGFuZCBub3JtYWxpemUgc2lnbmFsIHZhbHVlcy4iIiIKICAgICAgICBpZiBzaWduYWwuY29uZmlkZW5jZSA8IFdFQUtfU0lHTkFMX1RIUkVTSE9MRDoKICAgICAgICAgICAgc2lnbmFsLmRpcmVjdGlvbiA9IFNpZ25hbERpcmVjdGlvbi5GTEFUCiAgICAgICAgcmV0dXJuIHNpZ25hbAoKICAgICMg4pSA4pSAIFNpZ25hbCBQdWJsaXNoaW5nIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgAoKICAgIGFzeW5jIGRlZiBfcHVibGlzaF9zaWduYWwoc2VsZiwgc2lnbmFsOiBBZ2VudFNpZ25hbCk6CiAgICAgICAgIiIiUHVibGlzaCBzaWduYWwgdG8gUmVkaXMgYW5kIChvcHRpb25hbGx5KSBLYWZrYS4iIiIKICAgICAgICBpZiBzZWxmLl9yZWRpczoKICAgICAgICAgICAga2V5ID0gZiJ7UkVESVNfU0lHTkFMX1BSRUZJWH06e3NlbGYuYWdlbnRfbmFtZX0iCiAgICAgICAgICAgIGF3YWl0IHNlbGYuX3JlZGlzLnNldChrZXksIHNpZ25hbC5qc29uKCksIGV4PTMwMCkKCiAgICBhc3luYyBkZWYgX3B1Ymxpc2hfdG9fa2Fma2Eoc2VsZiwgc2lnbmFsOiBBZ2VudFNpZ25hbCk6CiAgICAgICAgIiIiUHVibGlzaCBzaWduYWwgdG8gS2Fma2EgdG9waWMuIiIiCiAgICAgICAgaWYgc2VsZi5fa2Fma2FfcHJvZHVjZXI6CiAgICAgICAgICAgIHNlbGYuX2thZmthX3Byb2R1Y2VyLnNlbmQoCiAgICAgICAgICAgICAgICBLQUZLQV9TSUdOQUxfVE9QSUMsCiAgICAgICAgICAgICAgICB2YWx1ZT1zaWduYWwuZGljdCgpCiAgICAgICAgICAgICkKCiAgICAjIOKUgOKUgCBIZWFsdGggJiBTdGF0dXMg4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSACgogICAgZGVmIGdldF9oZWFsdGgoc2VsZikgLT4gRGljdFtzdHIsIEFueV06CiAgICAgICAgIiIiUmV0dXJuIGFnZW50IGhlYWx0aCBzdGF0dXMgc25hcHNob3QuIiIiCiAgICAgICAgcmV0dXJuIHsKICAgICAgICAgICAgImFnZW50Ijogc2VsZi5hZ2VudF9uYW1lLAogICAgICAgICAgICAidmVyc2lvbiI6IHNlbGYudmVyc2lvbiwKICAgICAgICAgICAgImhlYWx0aHkiOiBzZWxmLl9pc19oZWFsdGh5LAogICAgICAgICAgICAicnVuX2NvdW50Ijogc2VsZi5fcnVuX2NvdW50LAogICAgICAgICAgICAiZXJyb3JfY291bnQiOiBzZWxmLl9lcnJvcl9jb3VudCwKICAgICAgICAgICAgInVwdGltZV9zZWNzKCI6IHRpbWUudGltZSgpIC0gc2VsZi5fc3RhcnRfdGltZSwKICAgICAgICAgICAgImxhc3RfcnVuX3RzIjogc2VsZi5fbGFzdF9ydW5fdHMsCiAgICAgICAgICAgICJ0aW1lc3RhbXAiOiBkYXRldGltZS5ub3coSVNUKS5pc29mb3JtYXQoKSwgICMgZml4OiBJU1QtYXdhcmUsIHdhcyBuYWl2ZSBkYXRldGltZS5ub3coKQogICAgICAgIH0KCiAgICBkZWYgaXNfaGVhbHRoeShzZWxmKSAtPiBib29sOgogICAgICAgIHJldHVybiBzZWxmLl9pc19oZWFsdGh5CgogICAgZGVmIHJlc2V0X3N0YXRlKHNlbGYpOgogICAgICAgICIiIlJlc2V0IGFnZW50IHN0YXRlIGZvciB0ZXN0aW5nLiIiIgogICAgICAgIHNlbGYuX3J1bl9jb3VudCA9IDAKICAgICAgICBzZWxmLl9lcnJvcl9jb3VudCA9IDAKICAgICAgICBzZWxmLl9sYXN0X3NpZ25hbCA9IE5vbmUKICAgICAgICBzZWxmLl9zaWduYWxfaGlzdG9yeSA9IFtdCiAgICAgICAgc2VsZi5faXNfaGVhbHRoeSA9IFRydWUKICAgICAgICBzZWxmLl9zdGFydF90aW1lID0gdGltZS50aW1lKCkK
+"""
+APEX Trading Intelligence System — Base Agent
+All 20 agents inherit from APEXBaseAgent.
+Provides: signal publishing, Redis pub/sub, structured logging, health checks.
+"""
+from __future__ import annotations
+import asyncio
+import logging
+import time
+from abc import ABC
+from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
+from typing import Optional, Dict, Any, List, Union
+
+from .signal_schema import AgentSignal, SignalDirection, SignalTimeframe, AssetClass
+from .config import APEXConfig
+from .memory import ExperienceMemory
+from .constants import (
+    KAFKA_SIGNAL_TOPIC, REDIS_SIGNAL_PREFIX,
+    WEAK_SIGNAL_THRESHOLD
+)
+
+# IST timezone constant — used everywhere in this module
+IST = ZoneInfo("Asia/Kolkata")
+
+
+logger = logging.getLogger(__name__)
+
+
+class APEXBaseAgent(ABC):
+    """
+    Base class for all APEX Trading Intelligence agents.
+
+    Subclasses implement:
+        - analyze() -> AgentSignal   (core analysis logic)
+        - _fetch_data() -> dict      (data fetching)
+    """
+
+    def __init__(
+        self,
+        agent_name: Optional[str] = None,
+        version: str = "1.0.0",
+        config: Optional[APEXConfig] = None,
+        **kwargs
+    ):
+        self.agent_name = agent_name or self.__class__.__name__
+        self.version = version
+        self.config = config or APEXConfig()
+        self._redis = kwargs.get("redis_client")
+
+        # State
+        self._last_signal: Optional[AgentSignal] = None
+        self._signal_history: List[AgentSignal] = []
+        self._run_count: int = 0
+        self._error_count: int = 0
+        self._last_run_ts: Optional[float] = None
+        self._is_healthy: bool = True
+        self._start_time = time.time()
+
+        # Connections (lazy init)
+        self._redis = None
+        self._memory = ExperienceMemory(self.agent_name)
+        self._kafka_producer = None
+        self._db_pool = None
+
+        self._setup_logging()
+
+    def _setup_logging(self):
+        self.logger = logging.getLogger(f"apex.agent.{self.agent_name}")
+        handler = logging.StreamHandler()
+        formatter = logging.Formatter(
+            f"%(asctime)s | {self.agent_name} | %(levelname)s | %(message)s"
+        )
+        handler.setFormatter(formatter)
+        if not self.logger.handlers:
+            self.logger.addHandler(handler)
+        self.logger.setLevel(
+            getattr(
+                logging,
+                self.config.LOG_LEVEL,
+                logging.INFO))
+
+    # ── Abstract Interface ──────────────────────────────────────────────────
+
+    async def analyze(self, market_data: Dict[str, Any]) -> AgentSignal:
+        """
+        Core analysis logic. Must return a populated AgentSignal.
+        Called by run_cycle() on every tick/interval.
+        """
+        await self._fetch_data()
+        return self._no_signal("Method not implemented")
+
+    async def _fetch_data(self) -> Dict[str, Any]:
+        """
+        Fetch raw data required for analysis (prices, news, macro data, etc.)
+        """
+        return {}
+
+    def on_tick(self, tick_data: Dict[str, Any]):
+        """
+        Hook for processing real-time market ticks.
+        Overridden by agents that need per-tick responsiveness.
+        """
+        pass
+
+    # ── Run Cycle ─────────────────────────────────────────────────
+
+    async def run_cycle(self, **akwargs) -> Optional[AgentSignal]:
+        """
+        Orchestrates one full run cycle.
+        Automatically:
+            - Checks market hours
+            - Calls analyze()
+            - Publishes signal
+            - Updates health
+        """
+        self._run_count += 1
+        self._last_run_ts = time.time()
+
+        if not self._is_market_hours():
+            self.logger.info("Market closed - skipping cycle")
+            return None
+
+        try:
+            # If market_data is provided in akwargs, use it; otherwise fetch.
+            market_data = akwargs.get("market_data")
+            if market_data is None:
+                market_data = await self._fetch_data()
+            
+            signal = await self.analyze(market_data=market_data)
+            signal = self._validate_signal(signal)
+            await self._publish_signal(signal)
+            self._last_signal = signal
+            self._signal_history.append(signal)
+            self._is_healthy = True
+            return signal
+        except Exception as e:
+            self._error_count += 1
+            self._is_healthy = False
+            self.logger.error(f"Cycle error: {e}")
+            return None
+
+    # ── Market Hours ──• IST-aware ───────────────────────────────────────
+
+    def _is_market_hours(self) -> bool:
+        """Check if current time is within NSE market hours (09:15 - 15:30 IST)."""
+        from datetime import time as dt_time
+        now = datetime.now(IST)  # fix: IST-aware, was naive datetime.now()
+        current_time = now.time()
+        market_open = dt_time(9, 15)
+        market_close = dt_time(15, 30)
+        if now.weekday() >= 5:  # Sat/Sun in IST
+            return False
+        return market_open <= current_time <= market_close
+
+    def _no_signal(self, reason: str = "") -> AgentSignal:
+        """Return a no opinion signal."""
+        return AgentSignal(
+            timestamp=datetime.now(IST).isoformat(),  # fix: IST-aware, was naive datetime.now()
+            agent_name=self.agent_name,
+            direction=SignalDirection.NO_SIGNAL,
+            confidence=0.0,
+            reason=reason,
+        )
+
+    async def get_long_term_memory(self, market_data: Dict[str, Any]) -> str:
+        """
+        Retrieves relevant past experiences based on current market regime.
+        """
+        regime = market_data.get("regime", "SIDEWAYS")
+        experiences = await self._memory.retrieve_relevant_experiences(regime)
+        return self._memory.format_experiences_for_prompt(experiences)
+
+    def _validate_signal(self, signal: AgentSignal) -> AgentSignal:
+        """Validate and normalize signal values."""
+        if signal.confidence < WEAK_SIGNAL_THRESHOLD:
+            signal.direction = SignalDirection.NO_SIGNAL
+        return signal
+
+    async def run_forever(self, interval: int = 60):
+        """Infinite loop for the agent, running every `interval` seconds."""
+        self.logger.info(f"Starting {self.agent_name} loop (interval={interval}s)")
+        while True:
+            try:
+                await self.run_cycle()
+            except Exception as e:
+                self.logger.error(f"Error in run_forever: {e}")
+            await asyncio.sleep(interval)
+
+    # ── Signal Publishing ──────────────────────────────────────────────
+
+    async def _publish_signal(self, signal: AgentSignal):
+        """Publish signal to Redis and (optionally) Kafka."""
+        if self._redis:
+            key = f"{REDIS_SIGNAL_PREFIX}:{self.agent_name}"
+            await self._redis.set(key, signal.json(), ex=300)
+
+    async def _publish_to_kafka(self, signal: AgentSignal):
+        """Publish signal to Kafka topic."""
+        if self._kafka_producer:
+            self._kafka_producer.send(
+                KAFKA_SIGNAL_TOPIC,
+                value=signal.dict()
+            )
+
+    # ── Health & Status ────────────────────────────────────────────────
+
+    def get_health(self) -> Dict[str, Any]:
+        """Return agent health status snapshot."""
+        return {
+            "agent": self.agent_name,
+            "version": self.version,
+            "healthy": self._is_healthy,
+            "run_count": self._run_count,
+            "error_count": self._error_count,
+            "uptime_secs(": time.time() - self._start_time,
+            "last_run_ts": self._last_run_ts,
+            "timestamp": datetime.now(IST).isoformat(),  # fix: IST-aware, was naive datetime.now()
+        }
+
+    def is_healthy(self) -> bool:
+        return self._is_healthy
+
+    def reset_state(self):
+        """Reset agent state for testing."""
+        self._run_count = 0
+        self._error_count = 0
+        self._last_signal = None
+        self._signal_history = []
+        self._is_healthy = True
+        self._start_time = time.time()

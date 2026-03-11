@@ -36,32 +36,49 @@ class GlobalNewsAgent(APEXBaseAgent):
         geopolitical_risk = market_data.get("geopolitical_risk_index", 50)
         vix_level = market_data.get("vix_us", 20)
 
+        # 1. Traditional scoring (Fast Path)
         headline_score = self._score_headlines(global_headlines)
         geo_score = self._score_geopolitical_risk(geopolitical_risk)
         vix_score = self._score_vix(vix_level)
+        total_score = headline_score * 0.50 + geo_score * 0.30 + vix_score * 0.20
 
-        total = headline_score * 0.50 + geo_score * 0.30 + vix_score * 0.20
+        # 2. Memory-Augmented Reasoning (Deep Path)
+        mem_str = await self.get_long_term_memory(market_data)
+        context = {
+            "headlines": [h.get("title") for h in global_headlines[:5]],
+            "geopolitical_risk": geopolitical_risk,
+            "vix": vix_level,
+            "fast_score": total_score
+        }
+        
+        from ..core.llm import get_llm
+        llm = get_llm(self.config)
+        ai_analysis = await llm.analyze_with_memory(
+            self.AGENT_NAME, 
+            json.dumps(context), 
+            mem_str
+        )
+
+        direction_val = ai_analysis.get("direction", "NEUTRAL")
         direction = (
-            SignalDirection.BULLISH if total > 10
-            else SignalDirection.BEARISH if total < -10
+            SignalDirection.BULLISH if direction_val == "BULLISH"
+            else SignalDirection.BEARISH if direction_val == "BEARISH"
             else SignalDirection.NEUTRAL
         )
+        
+        confidence = ai_analysis.get("confidence", abs(total_score) / 40)
 
         return AgentSignal(
             agent_name=self.AGENT_NAME,
             direction=direction,
-            confidence=min(abs(total) / 40, 1.0),
+            confidence=min(confidence, 1.0),
             timeframe=SignalTimeframe.SHORT_TERM,
             asset_class=AssetClass.INDEX,
-            reasoning=(
-                f"Headlines: {headline_score:.1f} | Geo-risk: {geo_score:.1f} | VIX: {vix_score:.1f}"
-            ),
+            reasoning=ai_analysis.get("reasoning", f"Fast Score: {total_score:.1f}"),
             metadata={
-                "headline_score": headline_score,
-                "geo_score": geo_score,
-                "vix_score": vix_score,
-                "vix_level": vix_level,
-                "geopolitical_risk": geopolitical_risk,
+                "fast_score": total_score,
+                "ai_factors": ai_analysis.get("key_factors", []),
+                "memory_utilised": "No prior experience" not in mem_str
             },
         )
 
