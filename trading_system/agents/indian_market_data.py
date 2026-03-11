@@ -52,15 +52,13 @@ class IndianMarketDataAgent(APEXBaseAgent):
 
             # Fetch 5-min OHLCV for Nifty and BankNifty
             today = datetime.now(ZoneInfo("Asia/Kolkata")).strftime("%Y-%m-%d")
-            nifty_hist = kite.historical_data(
-                256265, today, today, TIMEFRAME_5M
-            )
-            banknifty_hist = kite.historical_data(
-                260105, today, today, TIMEFRAME_5M
-            )
+            nifty_hist = kite.historical_data(256265, today, today, TIMEFRAME_5M)
+            banknifty_hist = kite.historical_data(260105, today, today, TIMEFRAME_5M)
+            bankex_hist = kite.historical_data(101633, today, today, TIMEFRAME_5M)
             return {
                 "nifty": pd.DataFrame(nifty_hist),
                 "banknifty": pd.DataFrame(banknifty_hist),
+                "bankex": pd.DataFrame(bankex_hist),
                 "timestamp": datetime.now(timezone.utc).isoformat(),
             }
         except Exception as e:
@@ -68,13 +66,15 @@ class IndianMarketDataAgent(APEXBaseAgent):
             return await self._fetch_yahoo_fallback()
 
     async def _fetch_yahoo_fallback(self) -> Dict[str, Any]:
-        """Yahoo Finance fallback for Nifty data."""
+        """Yahoo Finance fallback for Nifty and banking benchmarks."""
         import yfinance as yf
         nifty = yf.download("^NSEI", period="1d", interval="5m", progress=False)
         banknifty = yf.download("^NSEBANK", period="1d", interval="5m", progress=False)
+        bankex = yf.download("^BSEBANK", period="1d", interval="5m", progress=False)
         return {
             "nifty": nifty,
             "banknifty": banknifty,
+            "bankex": bankex,
             "timestamp": datetime.now(timezone.utc).isoformat(),
         }
 
@@ -188,34 +188,34 @@ class IndianMarketDataAgent(APEXBaseAgent):
         data = await self._fetch_data()
         nifty_df = data.get("nifty")
         banknifty_df = data.get("banknifty")
+        bankex_df = data.get("bankex")
 
         nifty_dir, nifty_conf, nifty_reason = self._score_price_action(nifty_df, "NIFTY50")
         bank_dir, bank_conf, bank_reason = self._score_price_action(banknifty_df, "BANKNIFTY")
-        breadth = self._compute_market_breadth(nifty_df)
+        bankex_dir, bankex_conf, bankex_reason = self._score_price_action(bankex_df, "BANKEX")
+        
+        breadth = self._compute_market_breadth(banknifty_df)
 
-        # Combine: if both agree, boost confidence
-        if nifty_dir == bank_dir:
-            final_conf = min((nifty_conf + bank_conf) / 2 + 0.1, 0.95)
-            final_dir = nifty_dir
+        # Pick the strongest banking signal
+        if bankex_conf > bank_conf:
+            final_dir, final_conf, final_reason, final_symbol = bankex_dir, bankex_conf, bankex_reason, "BSE BANKEX"
         else:
-            # Disagreement: neutral
-            final_dir = SignalDirection.NEUTRAL
-            final_conf = 0.3
+            final_dir, final_conf, final_reason, final_symbol = bank_dir, bank_conf, bank_reason, "NIFTY BANK"
 
         current_price = None
-        if nifty_df is not None and not nifty_df.empty:
-            close_col = "close" if "close" in nifty_df.columns else "Close"
-            current_price = float(nifty_df[close_col].iloc[-1])
+        target_df = bankex_df if final_symbol == "BSE BANKEX" else banknifty_df
+        if target_df is not None and not target_df.empty:
+            close_col = "close" if "close" in target_df.columns else "Close"
+            current_price = float(target_df[close_col].iloc[-1])
 
         return self._make_signal(
             direction=final_dir,
             confidence=final_conf,
-            symbol=NIFTY50_SYMBOL,
-            reasoning=f"Nifty: {nifty_reason} | BankNifty: {bank_reason}",
+            symbol=final_symbol,
+            reasoning=f"Banking Sector focus: {final_reason} ({final_symbol}) | Nifty context: {nifty_reason}",
             key_factors=[
-                nifty_reason, bank_reason,
-                f"ADR={breadth.get('advance_decline_ratio', 0):.2f}",
-                f"Breadth={breadth.get('advancing_pct', 0.5)*100:.1f}%",
+                final_reason, nifty_reason,
+                f"Banking Breadth={breadth.get('advancing_pct', 0.5)*100:.1f}%",
             ],
             current_price=current_price,
             timeframe=SignalTimeframe.INTRADAY,

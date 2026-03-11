@@ -50,6 +50,7 @@ class RiskManagementAgent:
         self.limits = limits or RiskLimits()
         self.state = PortfolioState()
         self.redis = kwargs.get("redis_client")
+        self.executor = kwargs.get("executor")
 
     def validate_signal(
         self, signal: Dict[str, Any], proposed_trade: Dict[str, Any]
@@ -152,14 +153,25 @@ class RiskManagementAgent:
         sl = abs(trade.get("entry_price", 1) - trade.get("stop_loss", 0))
         qty = int((capital * risk_pct) / max(sl, 1))
         
-        # Lot Size Adjustment
-        lot_size = self._get_lot_size(trade.get("symbol", ""))
-        if qty > lot_size:
-            qty = (qty // lot_size) * lot_size
-        else:
-            qty = lot_size # Min 1 lot
-            
-        return {**trade, "quantity": qty}
+        quantity = max(qty, lot_size) # Default to at least 1 lot
+        
+        # MANDATORY 1-LOT CAP (User Request: "trade only 1 lot... 30 qty")
+        if "BANK" in trade.get("symbol", "").upper():
+            quantity = lot_size # Force exactly 1 lot
+        
+        # Smart Funds Check
+        if self.executor:
+            funds = self.executor.get_fund_limits()
+            available = float(funds.get("equity", {}).get("net", 0))
+            estimated_margin = trade.get("entry_price", 0) * quantity
+            if estimated_margin > available:
+                # Scale down if funds insufficient
+                if available > (trade.get("entry_price", 0) * lot_size):
+                    quantity = lot_size # drop to min 1 lot
+                else:
+                    quantity = 0 # Cannot afford even 1 lot
+                    
+        return {**trade, "quantity": quantity}
 
     def _reset_daily_if_needed(self) -> None:
         """Reset daily stats at the start of a new IST business day."""

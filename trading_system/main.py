@@ -67,7 +67,11 @@ class APEXOrchestrator:
         self.conflict_detector = ConflictDetector()
         self.learning_engine = LearningEngine(redis_client=self.redis)
 
-        self.risk_manager = RiskManager(config=self.config, redis_client=self.redis)
+        self.executor = DhanExecutor(
+            client_id=self.config.DHAN_CLIENT_ID,
+            access_token=self.config.DHAN_ACCESS_TOKEN,
+        )
+        self.risk_manager = RiskManager(config=self.config, redis_client=self.redis, executor=self.executor)
         self.kill_switch = VolatilityKillSwitch(config=self.config)
 
         self.master_decision = MasterDecisionMaker(
@@ -80,10 +84,6 @@ class APEXOrchestrator:
 
         self.portfolio_manager = PortfolioManager(redis_client=self.redis)
 
-        self.executor = DhanExecutor(
-            client_id=self.config.DHAN_CLIENT_ID,
-            access_token=self.config.DHAN_ACCESS_TOKEN,
-        )
         self.oms = OrderManagementSystem(executor=self.executor)
         self.router = SmartOrderRouter(executor=self.executor, oms=self.oms)
 

@@ -141,6 +141,17 @@ class DhanExecutor:
             self.logger.error("failed get_holdings: %s", e)
             return []
 
+    def get_fund_limits(self) -> dict:
+        """Fetch available funds."""
+        try:
+            resp = self.dhan.get_fund_limits()
+            if isinstance(resp, dict):
+                return resp.get("data", {})
+            return {}
+        except Exception as e:
+            self.logger.error("failed get_fund_limits: %s", e)
+            return {}
+
     def get_order_list(self) -> list:
         """Fetch today's order list."""
         try:

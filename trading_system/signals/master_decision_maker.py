@@ -39,6 +39,7 @@ class MasterDecisionMakerAgent:
         self.risk = risk_manager
         self.kill_switch = kill_switch
         self.learning_engine = kwargs.get("learning_engine")
+        self.tradable_symbols = ["NIFTY BANK", "BSE BANKEX"]
         self._decision_history: list = []
 
     async def decide(self, market_data: Dict[str, Any]) -> ConsensusDecision:
@@ -101,6 +102,16 @@ class MasterDecisionMakerAgent:
             return self._make_hold_decision(
                 f"No conviction: bull={net_bull:.2f}, bear={net_bear:.2f}"
             )
+
+        # 6. Tradable Universe Filter (Banking Focus)
+        if direction != SignalDirection.NEUTRAL:
+            # Check if any signal symbol matches tradable list
+            valid_symbols = [s.symbol for s in signals.values() if s.symbol in self.tradable_symbols]
+            if not valid_symbols:
+                return self._make_hold_decision(f"Filtered: Symbol not in Banking whitelist")
+            consensus_symbol = valid_symbols[0]
+        else:
+            consensus_symbol = "NIFTY BANK"
 
         decision = ConsensusDecision(
             final_direction=direction,
