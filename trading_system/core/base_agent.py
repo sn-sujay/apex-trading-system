@@ -143,15 +143,26 @@ class APEXBaseAgent(ABC):
     # ── Market Hours ──• IST-aware ───────────────────────────────────────
 
     def _is_market_hours(self) -> bool:
-        """Check if current time is within NSE market hours (09:15 - 15:30 IST)."""
+        """
+        Check if current time is within actionable hours.
+        Broadened to 08:00 - 23:45 IST to include:
+        - GIFT Nifty / Pre-market (08:00 - 09:15)
+        - Normal NSE/BSE Hours (09:15 - 15:30)
+        - MCX / Commodities (15:30 - 23:45)
+        """
         from datetime import time as dt_time
-        now = datetime.now(IST)  # fix: IST-aware, was naive datetime.now()
+        now = datetime.now(IST)
         current_time = now.time()
-        market_open = dt_time(9, 15)
-        market_close = dt_time(15, 30)
-        if now.weekday() >= 5:  # Sat/Sun in IST
+        
+        # Actionable window for Intelligence
+        window_start = dt_time(8, 0)
+        window_end = dt_time(23, 45)
+        
+        if now.weekday() >= 5:  # Sat/Sun
+            # Some global/crypto agents might want to run, but for now we follow business days
             return False
-        return market_open <= current_time <= market_close
+            
+        return window_start <= current_time <= window_end
 
     def _no_signal(self, reason: str = "") -> AgentSignal:
         """Return a no opinion signal."""
