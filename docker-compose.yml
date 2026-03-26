@@ -91,10 +91,8 @@ services:
     networks:
       - apex-net
     depends_on:
-      redis:
-        condition: service_healthy
-      kafka:
-        condition: service_healthy
+      - redis
+      - kafka
     env_file:
       - .env
     environment:
